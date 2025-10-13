@@ -49,10 +49,10 @@ export interface ButtonProps
 
 /**
  * Button Component
- * 
+ *
  * @description
  * variant, size, theme을 지원하는 범용 버튼 컴포넌트입니다.
- * 
+ *
  * @example
  * ```tsx
  * <Button variant="primary" size="medium" theme="light">
@@ -103,4 +103,3 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export default Button;
-

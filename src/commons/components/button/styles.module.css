@@ -13,26 +13,24 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
+
   /* Box Model */
   box-sizing: border-box;
   border-width: 1px;
   border-style: solid;
   border-radius: 8px;
-  
+
   /* Typography */
-  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
   font-weight: 500;
   text-align: center;
   white-space: nowrap;
-  
+
   /* Interaction */
   cursor: pointer;
   user-select: none;
   outline: none;
-  
-  /* Transition */
-  transition: all 0.2s ease-in-out;
 }
 
 /* ============================================ */
@@ -75,14 +73,14 @@
 
 /* Primary + Light Theme */
 .variant-primary.theme-light {
-  background-color: #0284C7;
-  border-color: #0284C7;
-  color: #FFFFFF;
+  background-color: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
 }
 
 .variant-primary.theme-light:hover:not(.disabled) {
-  background-color: #0369A1;
-  border-color: #0369A1;
+  background-color: #0369a1;
+  border-color: #0369a1;
 }
 
 .variant-primary.theme-light:active:not(.disabled) {
@@ -96,19 +94,19 @@
 
 /* Primary + Dark Theme */
 .variant-primary.theme-dark {
-  background-color: #38BDF8;
-  border-color: #38BDF8;
-  color: #0A0A0A;
+  background-color: #38bdf8;
+  border-color: #38bdf8;
+  color: #0a0a0a;
 }
 
 .variant-primary.theme-dark:hover:not(.disabled) {
-  background-color: #7DD3FC;
-  border-color: #7DD3FC;
+  background-color: #7dd3fc;
+  border-color: #7dd3fc;
 }
 
 .variant-primary.theme-dark:active:not(.disabled) {
-  background-color: #BAE6FD;
-  border-color: #BAE6FD;
+  background-color: #bae6fd;
+  border-color: #bae6fd;
 }
 
 .variant-primary.theme-dark:focus-visible {
@@ -117,31 +115,31 @@
 
 /* Secondary + Light Theme */
 .variant-secondary.theme-light {
-  background-color: #FFFFFF;
-  border-color: #D4D4D4;
+  background-color: #ffffff;
+  border-color: #d4d4d4;
   color: #171717;
 }
 
 .variant-secondary.theme-light:hover:not(.disabled) {
-  background-color: #F5F5F5;
-  border-color: #A3A3A3;
+  background-color: #f5f5f5;
+  border-color: #a3a3a3;
 }
 
 .variant-secondary.theme-light:active:not(.disabled) {
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   border-color: #737373;
 }
 
 .variant-secondary.theme-light:focus-visible {
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
-  border-color: #0EA5E9;
+  border-color: #0ea5e9;
 }
 
 /* Secondary + Dark Theme */
 .variant-secondary.theme-dark {
   background-color: #262626;
   border-color: #404040;
-  color: #FAFAFA;
+  color: #fafafa;
 }
 
 .variant-secondary.theme-dark:hover:not(.disabled) {
@@ -156,23 +154,23 @@
 
 .variant-secondary.theme-dark:focus-visible {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-  border-color: #38BDF8;
+  border-color: #38bdf8;
 }
 
 /* Tertiary + Light Theme */
 .variant-tertiary.theme-light {
   background-color: transparent;
   border-color: transparent;
-  color: #0284C7;
+  color: #0284c7;
 }
 
 .variant-tertiary.theme-light:hover:not(.disabled) {
-  background-color: #F0F9FF;
-  color: #0369A1;
+  background-color: #f0f9ff;
+  color: #0369a1;
 }
 
 .variant-tertiary.theme-light:active:not(.disabled) {
-  background-color: #E0F2FE;
+  background-color: #e0f2fe;
   color: #075985;
 }
 
@@ -184,17 +182,17 @@
 .variant-tertiary.theme-dark {
   background-color: transparent;
   border-color: transparent;
-  color: #38BDF8;
+  color: #38bdf8;
 }
 
 .variant-tertiary.theme-dark:hover:not(.disabled) {
   background-color: rgba(56, 189, 248, 0.1);
-  color: #7DD3FC;
+  color: #7dd3fc;
 }
 
 .variant-tertiary.theme-dark:active:not(.disabled) {
   background-color: rgba(56, 189, 248, 0.2);
-  color: #BAE6FD;
+  color: #bae6fd;
 }
 
 .variant-tertiary.theme-dark:focus-visible {
@@ -218,9 +216,9 @@
 
 /* Primary Disabled */
 .variant-primary.disabled.theme-light {
-  background-color: #E5E5E5;
-  border-color: #E5E5E5;
-  color: #A3A3A3;
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+  color: #a3a3a3;
 }
 
 .variant-primary.disabled.theme-dark {
@@ -231,9 +229,9 @@
 
 /* Secondary Disabled */
 .variant-secondary.disabled.theme-light {
-  background-color: #FAFAFA;
-  border-color: #E5E5E5;
-  color: #D4D4D4;
+  background-color: #fafafa;
+  border-color: #e5e5e5;
+  color: #d4d4d4;
 }
 
 .variant-secondary.disabled.theme-dark {
@@ -246,7 +244,7 @@
 .variant-tertiary.disabled.theme-light {
   background-color: transparent;
   border-color: transparent;
-  color: #D4D4D4;
+  color: #d4d4d4;
 }
 
 .variant-tertiary.disabled.theme-dark {
