@@ -1,112 +1,92 @@
-import React, { ButtonHTMLAttributes, ReactNode } from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
-// ============================================
-// Types
-// ============================================
-
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonTheme = 'light' | 'dark';
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * 버튼 변형 (기본값: 'primary')
+   * 버튼의 시각적 스타일 변형
    */
-  variant?: ButtonVariant;
+  variant?: "primary" | "secondary" | "tertiary";
   
   /**
-   * 버튼 크기 (기본값: 'medium')
+   * 버튼의 크기
    */
-  size?: ButtonSize;
+  size?: "small" | "medium" | "large";
   
   /**
-   * 테마 (기본값: 'light')
+   * 테마 모드
    */
-  theme?: ButtonTheme;
+  theme?: "light" | "dark";
   
   /**
-   * 비활성화 상태
-   */
-  disabled?: boolean;
-  
-  /**
-   * 전체 너비 사용
+   * 버튼의 전체 너비 사용 여부
    */
   fullWidth?: boolean;
   
   /**
-   * 버튼 내용
+   * 버튼의 비활성화 상태
    */
-  children: ReactNode;
+  disabled?: boolean;
   
   /**
-   * 왼쪽 아이콘
+   * 버튼 내부 컨텐츠
    */
-  leftIcon?: ReactNode;
-  
-  /**
-   * 오른쪽 아이콘
-   */
-  rightIcon?: ReactNode;
-  
-  /**
-   * 추가 CSS 클래스명
-   */
-  className?: string;
+  children: React.ReactNode;
 }
 
-// ============================================
-// Component
-// ============================================
-
+/**
+ * Button 컴포넌트
+ * 
+ * 다양한 variant, size, theme를 지원하는 범용 버튼 컴포넌트입니다.
+ * 
+ * @example
+ * ```tsx
+ * <Button variant="primary" size="medium" theme="light">
+ *   클릭하세요
+ * </Button>
+ * ```
+ */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = 'primary',
-      size = 'medium',
-      theme = 'light',
-      disabled = false,
+      variant = "primary",
+      size = "medium",
+      theme = "light",
       fullWidth = false,
+      disabled = false,
       children,
-      leftIcon,
-      rightIcon,
-      className = '',
-      type = 'button',
-      ...props
+      className,
+      ...rest
     },
     ref
   ) => {
-    // 버튼 클래스명 조합
-    const buttonClasses = [
+    // 클래스명 조합
+    const buttonClassName = [
       styles.button,
-      styles[`button--${variant}`],
-      styles[`button--${size}`],
-      styles[`button--${theme}`],
-      fullWidth && styles['button--full-width'],
-      disabled && styles['button--disabled'],
-      className,
+      styles[`variant-${variant}`],
+      styles[`size-${size}`],
+      styles[`theme-${theme}`],
+      fullWidth ? styles.fullWidth : "",
+      disabled ? styles.disabled : "",
+      className || "",
     ]
       .filter(Boolean)
-      .join(' ');
+      .join(" ");
 
     return (
       <button
         ref={ref}
-        type={type}
-        className={buttonClasses}
+        className={buttonClassName}
         disabled={disabled}
-        {...props}
+        {...rest}
       >
-        {leftIcon && <span className={styles.button__icon}>{leftIcon}</span>}
-        <span className={styles.button__content}>{children}</span>
-        {rightIcon && <span className={styles.button__icon}>{rightIcon}</span>}
+        {children}
       </button>
     );
   }
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export default Button;
 
