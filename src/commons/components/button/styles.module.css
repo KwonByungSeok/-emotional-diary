@@ -1,206 +1,300 @@
-/* ============================================
-   Base Button Styles
-   ============================================ */
+/* ============================================ */
+/* Base Button Styles */
+/* ============================================ */
 
 .button {
-  /* Layout */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
-  /* Box Model */
-  box-sizing: border-box;
-  border: none;
-  border-radius: 8px;
-  
-  /* Typography */
-  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-weight: 500;
+  gap: 0.5rem;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 600;
   line-height: 1.5;
   text-align: center;
+  text-decoration: none;
   white-space: nowrap;
-  
-  /* Interaction */
-  cursor: pointer;
+  vertical-align: middle;
   user-select: none;
-  outline: none;
-  
-  /* Transition */
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
   transition: all 0.2s ease-in-out;
+  outline: none;
 }
 
 .button:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid;
   outline-offset: 2px;
 }
 
-/* ============================================
-   Size Variants
-   ============================================ */
-
-.size-small {
-  padding: 8px 16px;
-  font-size: 0.875rem;
-  min-height: 32px;
-  gap: 4px;
-}
-
-.size-medium {
-  padding: 12px 24px;
-  font-size: 1rem;
-  min-height: 44px;
-  gap: 6px;
-}
-
-.size-large {
-  padding: 16px 32px;
-  font-size: 1.125rem;
-  min-height: 52px;
-  gap: 8px;
-}
-
-/* ============================================
-   Variant Styles - Light Theme
-   ============================================ */
-
-/* Primary Variant - Light */
-.variant-primary.theme-light {
-  background-color: #0284C7;
-  color: #FFFFFF;
-}
-
-.variant-primary.theme-light:hover:not(:disabled) {
-  background-color: #0369A1;
-}
-
-.variant-primary.theme-light:active:not(:disabled) {
-  background-color: #075985;
-}
-
-/* Secondary Variant - Light */
-.variant-secondary.theme-light {
-  background-color: #F5F5F5;
-  color: #171717;
-  border: 1px solid #D4D4D4;
-}
-
-.variant-secondary.theme-light:hover:not(:disabled) {
-  background-color: #E5E5E5;
-  border-color: #A3A3A3;
-}
-
-.variant-secondary.theme-light:active:not(:disabled) {
-  background-color: #D4D4D4;
-  border-color: #737373;
-}
-
-/* Tertiary Variant - Light */
-.variant-tertiary.theme-light {
-  background-color: transparent;
-  color: #0284C7;
-}
-
-.variant-tertiary.theme-light:hover:not(:disabled) {
-  background-color: #F0F9FF;
-}
-
-.variant-tertiary.theme-light:active:not(:disabled) {
-  background-color: #E0F2FE;
-}
-
-/* ============================================
-   Variant Styles - Dark Theme
-   ============================================ */
-
-/* Primary Variant - Dark */
-.variant-primary.theme-dark {
-  background-color: #38BDF8;
-  color: #0A0A0A;
-}
-
-.variant-primary.theme-dark:hover:not(:disabled) {
-  background-color: #7DD3FC;
-}
-
-.variant-primary.theme-dark:active:not(:disabled) {
-  background-color: #BAE6FD;
-}
-
-/* Secondary Variant - Dark */
-.variant-secondary.theme-dark {
-  background-color: #262626;
-  color: #FAFAFA;
-  border: 1px solid #525252;
-}
-
-.variant-secondary.theme-dark:hover:not(:disabled) {
-  background-color: #404040;
-  border-color: #737373;
-}
-
-.variant-secondary.theme-dark:active:not(:disabled) {
-  background-color: #525252;
-  border-color: #A3A3A3;
-}
-
-/* Tertiary Variant - Dark */
-.variant-tertiary.theme-dark {
-  background-color: transparent;
-  color: #38BDF8;
-}
-
-.variant-tertiary.theme-dark:hover:not(:disabled) {
-  background-color: #082F49;
-}
-
-.variant-tertiary.theme-dark:active:not(:disabled) {
-  background-color: #0C4A6E;
-}
-
-/* ============================================
-   State Styles
-   ============================================ */
-
-.button.disabled,
-.button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.button.disabled:hover,
-.button:disabled:hover {
-  transform: none;
-}
-
-/* ============================================
-   Layout Modifiers
-   ============================================ */
+/* ============================================ */
+/* Full Width */
+/* ============================================ */
 
 .fullWidth {
   width: 100%;
 }
 
-/* ============================================
-   Responsive Design
-   ============================================ */
+/* ============================================ */
+/* Icon Styles */
+/* ============================================ */
+
+.leftIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================ */
+/* Size Variants */
+/* ============================================ */
+
+.size-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 2rem;
+}
+
+.size-medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  min-height: 2.75rem;
+}
+
+.size-large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  min-height: 3.5rem;
+}
+
+/* ============================================ */
+/* Light Theme - Primary Variant */
+/* ============================================ */
+
+.theme-light.variant-primary {
+  background-color: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.theme-light.variant-primary:hover:not(.disabled) {
+  background-color: #0369a1;
+  border-color: #0369a1;
+}
+
+.theme-light.variant-primary:active:not(.disabled) {
+  background-color: #075985;
+  border-color: #075985;
+}
+
+.theme-light.variant-primary:focus-visible {
+  outline-color: #0ea5e9;
+}
+
+.theme-light.variant-primary.disabled {
+  background-color: #e5e5e5;
+  color: #a3a3a3;
+  border-color: #e5e5e5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Light Theme - Secondary Variant */
+/* ============================================ */
+
+.theme-light.variant-secondary {
+  background-color: #ffffff;
+  color: #0284c7;
+  border-color: #0284c7;
+}
+
+.theme-light.variant-secondary:hover:not(.disabled) {
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border-color: #0369a1;
+}
+
+.theme-light.variant-secondary:active:not(.disabled) {
+  background-color: #e0f2fe;
+  color: #075985;
+  border-color: #075985;
+}
+
+.theme-light.variant-secondary:focus-visible {
+  outline-color: #0ea5e9;
+}
+
+.theme-light.variant-secondary.disabled {
+  background-color: #f5f5f5;
+  color: #a3a3a3;
+  border-color: #d4d4d4;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Light Theme - Tertiary Variant */
+/* ============================================ */
+
+.theme-light.variant-tertiary {
+  background-color: transparent;
+  color: #0284c7;
+  border-color: transparent;
+}
+
+.theme-light.variant-tertiary:hover:not(.disabled) {
+  background-color: #f0f9ff;
+  color: #0369a1;
+}
+
+.theme-light.variant-tertiary:active:not(.disabled) {
+  background-color: #e0f2fe;
+  color: #075985;
+}
+
+.theme-light.variant-tertiary:focus-visible {
+  outline-color: #0ea5e9;
+}
+
+.theme-light.variant-tertiary.disabled {
+  background-color: transparent;
+  color: #a3a3a3;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Dark Theme - Primary Variant */
+/* ============================================ */
+
+.theme-dark.variant-primary {
+  background-color: #38bdf8;
+  color: #0a0a0a;
+  border-color: #38bdf8;
+}
+
+.theme-dark.variant-primary:hover:not(.disabled) {
+  background-color: #7dd3fc;
+  border-color: #7dd3fc;
+}
+
+.theme-dark.variant-primary:active:not(.disabled) {
+  background-color: #bae6fd;
+  border-color: #bae6fd;
+}
+
+.theme-dark.variant-primary:focus-visible {
+  outline-color: #38bdf8;
+}
+
+.theme-dark.variant-primary.disabled {
+  background-color: #404040;
+  color: #737373;
+  border-color: #404040;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Dark Theme - Secondary Variant */
+/* ============================================ */
+
+.theme-dark.variant-secondary {
+  background-color: #0a0a0a;
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.theme-dark.variant-secondary:hover:not(.disabled) {
+  background-color: #171717;
+  color: #7dd3fc;
+  border-color: #7dd3fc;
+}
+
+.theme-dark.variant-secondary:active:not(.disabled) {
+  background-color: #262626;
+  color: #bae6fd;
+  border-color: #bae6fd;
+}
+
+.theme-dark.variant-secondary:focus-visible {
+  outline-color: #38bdf8;
+}
+
+.theme-dark.variant-secondary.disabled {
+  background-color: #171717;
+  color: #737373;
+  border-color: #525252;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Dark Theme - Tertiary Variant */
+/* ============================================ */
+
+.theme-dark.variant-tertiary {
+  background-color: transparent;
+  color: #38bdf8;
+  border-color: transparent;
+}
+
+.theme-dark.variant-tertiary:hover:not(.disabled) {
+  background-color: #171717;
+  color: #7dd3fc;
+}
+
+.theme-dark.variant-tertiary:active:not(.disabled) {
+  background-color: #262626;
+  color: #bae6fd;
+}
+
+.theme-dark.variant-tertiary:focus-visible {
+  outline-color: #38bdf8;
+}
+
+.theme-dark.variant-tertiary.disabled {
+  background-color: transparent;
+  color: #737373;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* Responsive Adjustments */
+/* ============================================ */
 
 @media (max-width: 768px) {
   .size-small {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-    min-height: 28px;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+    min-height: 1.875rem;
   }
 
   .size-medium {
-    padding: 10px 20px;
-    font-size: 0.875rem;
-    min-height: 40px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    min-height: 2.5rem;
   }
 
   .size-large {
-    padding: 14px 28px;
-    font-size: 1rem;
-    min-height: 48px;
+    padding: 0.875rem 1.75rem;
+    font-size: 1.0625rem;
+    min-height: 3.25rem;
   }
 }
 
