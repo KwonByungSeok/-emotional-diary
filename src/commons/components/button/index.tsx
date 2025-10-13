@@ -1,90 +1,94 @@
-"use client";
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
+import styles from './styles.module.css';
 
-import React from "react";
-import styles from "./styles.module.css";
+// ============================================
+// Types
+// ============================================
 
-/**
- * Button Component Props
- */
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonTheme = 'light' | 'dark';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * 버튼 variant 타입
-   * - primary: 주요 액션
-   * - secondary: 보조 액션
-   * - tertiary: 3순위 액션
+   * 버튼 변형 (기본값: 'primary')
    */
-  variant?: "primary" | "secondary" | "tertiary";
-
+  variant?: ButtonVariant;
+  
   /**
-   * 버튼 사이즈
-   * - small: 작은 크기
-   * - medium: 중간 크기 (기본값)
-   * - large: 큰 크기
+   * 버튼 크기 (기본값: 'medium')
    */
-  size?: "small" | "medium" | "large";
-
+  size?: ButtonSize;
+  
   /**
-   * 테마 모드
-   * - light: 라이트 모드
-   * - dark: 다크 모드
+   * 테마 (기본값: 'light')
    */
-  theme?: "light" | "dark";
-
+  theme?: ButtonTheme;
+  
   /**
-   * 버튼 비활성화 여부
+   * 비활성화 상태
    */
   disabled?: boolean;
-
+  
   /**
-   * 버튼 내부 콘텐츠
+   * 전체 너비 사용
    */
-  children: React.ReactNode;
-
+  fullWidth?: boolean;
+  
+  /**
+   * 버튼 내용
+   */
+  children: ReactNode;
+  
+  /**
+   * 왼쪽 아이콘
+   */
+  leftIcon?: ReactNode;
+  
+  /**
+   * 오른쪽 아이콘
+   */
+  rightIcon?: ReactNode;
+  
   /**
    * 추가 CSS 클래스명
    */
   className?: string;
 }
 
-/**
- * Button Component
- *
- * @description
- * variant, size, theme을 지원하는 범용 버튼 컴포넌트입니다.
- *
- * @example
- * ```tsx
- * <Button variant="primary" size="medium" theme="light">
- *   클릭하세요
- * </Button>
- * ```
- */
+// ============================================
+// Component
+// ============================================
+
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = "primary",
-      size = "medium",
-      theme = "light",
+      variant = 'primary',
+      size = 'medium',
+      theme = 'light',
       disabled = false,
+      fullWidth = false,
       children,
-      className = "",
-      type = "button",
-      ...restProps
+      leftIcon,
+      rightIcon,
+      className = '',
+      type = 'button',
+      ...props
     },
     ref
   ) => {
-    // 클래스명 조합
+    // 버튼 클래스명 조합
     const buttonClasses = [
       styles.button,
-      styles[`variant-${variant}`],
-      styles[`size-${size}`],
-      styles[`theme-${theme}`],
-      disabled && styles.disabled,
+      styles[`button--${variant}`],
+      styles[`button--${size}`],
+      styles[`button--${theme}`],
+      fullWidth && styles['button--full-width'],
+      disabled && styles['button--disabled'],
       className,
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     return (
       <button
@@ -92,14 +96,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         className={buttonClasses}
         disabled={disabled}
-        {...restProps}
+        {...props}
       >
-        {children}
+        {leftIcon && <span className={styles.button__icon}>{leftIcon}</span>}
+        <span className={styles.button__content}>{children}</span>
+        {rightIcon && <span className={styles.button__icon}>{rightIcon}</span>}
       </button>
     );
   }
 );
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 export default Button;
+

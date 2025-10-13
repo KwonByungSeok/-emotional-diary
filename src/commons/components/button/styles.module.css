@@ -1,36 +1,34 @@
-/**
- * Button Component Styles
- * CSS Module을 사용한 버튼 컴포넌트 스타일링
- */
-
 /* ============================================ */
 /* Base Button Styles */
 /* ============================================ */
 
 .button {
-  /* Layout */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-
-  /* Box Model */
-  box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
+  gap: 8px;
+  
+  border: none;
   border-radius: 8px;
-
-  /* Typography */
-  font-family: "Pretendard Variable", "Pretendard", -apple-system,
-    BlinkMacSystemFont, system-ui, sans-serif;
+  
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-weight: 500;
   text-align: center;
+  text-decoration: none;
   white-space: nowrap;
-
-  /* Interaction */
+  
   cursor: pointer;
   user-select: none;
+  
+  transition: all 0.2s ease-in-out;
+  
   outline: none;
+  box-sizing: border-box;
+}
+
+.button:focus-visible {
+  outline: 2px solid;
+  outline-offset: 2px;
 }
 
 /* ============================================ */
@@ -38,33 +36,27 @@
 /* ============================================ */
 
 /* Small Size */
-.size-small {
+.button--small {
   height: 32px;
-  padding: 6px 16px;
-  font-size: 0.875rem;
+  padding: 0 12px;
+  font-size: 0.875rem; /* 14px */
   line-height: 1.5;
-  letter-spacing: 0;
-  gap: 6px;
 }
 
 /* Medium Size */
-.size-medium {
+.button--medium {
   height: 40px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 0 16px;
+  font-size: 1rem; /* 16px */
   line-height: 1.5;
-  letter-spacing: 0;
-  gap: 8px;
 }
 
 /* Large Size */
-.size-large {
+.button--large {
   height: 48px;
-  padding: 14px 24px;
-  font-size: 1.125rem;
+  padding: 0 24px;
+  font-size: 1.125rem; /* 18px */
   line-height: 1.5;
-  letter-spacing: 0;
-  gap: 10px;
 }
 
 /* ============================================ */
@@ -72,184 +64,216 @@
 /* ============================================ */
 
 /* Primary + Light Theme */
-.variant-primary.theme-light {
-  background-color: #0284c7;
-  border-color: #0284c7;
-  color: #ffffff;
+.button--primary.button--light {
+  background-color: #0284C7; /* primary.600 */
+  color: #FFFFFF;
+  border: 1px solid #0284C7;
 }
 
-.variant-primary.theme-light:hover:not(.disabled) {
-  background-color: #0369a1;
-  border-color: #0369a1;
+.button--primary.button--light:hover:not(:disabled) {
+  background-color: #0369A1; /* primary.700 */
+  border-color: #0369A1;
 }
 
-.variant-primary.theme-light:active:not(.disabled) {
-  background-color: #075985;
+.button--primary.button--light:active:not(:disabled) {
+  background-color: #075985; /* primary.800 */
   border-color: #075985;
 }
 
-.variant-primary.theme-light:focus-visible {
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+.button--primary.button--light:focus-visible {
+  outline-color: #0284C7;
 }
 
 /* Primary + Dark Theme */
-.variant-primary.theme-dark {
-  background-color: #38bdf8;
-  border-color: #38bdf8;
-  color: #0a0a0a;
+.button--primary.button--dark {
+  background-color: #38BDF8; /* primary.400 */
+  color: #0A0A0A; /* gray.950 */
+  border: 1px solid #38BDF8;
 }
 
-.variant-primary.theme-dark:hover:not(.disabled) {
-  background-color: #7dd3fc;
-  border-color: #7dd3fc;
+.button--primary.button--dark:hover:not(:disabled) {
+  background-color: #7DD3FC; /* primary.300 */
+  border-color: #7DD3FC;
 }
 
-.variant-primary.theme-dark:active:not(.disabled) {
-  background-color: #bae6fd;
-  border-color: #bae6fd;
+.button--primary.button--dark:active:not(:disabled) {
+  background-color: #BAE6FD; /* primary.200 */
+  border-color: #BAE6FD;
 }
 
-.variant-primary.theme-dark:focus-visible {
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+.button--primary.button--dark:focus-visible {
+  outline-color: #38BDF8;
 }
 
 /* Secondary + Light Theme */
-.variant-secondary.theme-light {
-  background-color: #ffffff;
-  border-color: #d4d4d4;
-  color: #171717;
+.button--secondary.button--light {
+  background-color: #FFFFFF;
+  color: #0284C7; /* primary.600 */
+  border: 1px solid #0284C7;
 }
 
-.variant-secondary.theme-light:hover:not(.disabled) {
-  background-color: #f5f5f5;
-  border-color: #a3a3a3;
+.button--secondary.button--light:hover:not(:disabled) {
+  background-color: #F0F9FF; /* primary.50 */
+  border-color: #0369A1; /* primary.700 */
+  color: #0369A1;
 }
 
-.variant-secondary.theme-light:active:not(.disabled) {
-  background-color: #e5e5e5;
-  border-color: #737373;
-}
-
-.variant-secondary.theme-light:focus-visible {
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
-  border-color: #0ea5e9;
-}
-
-/* Secondary + Dark Theme */
-.variant-secondary.theme-dark {
-  background-color: #262626;
-  border-color: #404040;
-  color: #fafafa;
-}
-
-.variant-secondary.theme-dark:hover:not(.disabled) {
-  background-color: #404040;
-  border-color: #525252;
-}
-
-.variant-secondary.theme-dark:active:not(.disabled) {
-  background-color: #525252;
-  border-color: #737373;
-}
-
-.variant-secondary.theme-dark:focus-visible {
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-  border-color: #38bdf8;
-}
-
-/* Tertiary + Light Theme */
-.variant-tertiary.theme-light {
-  background-color: transparent;
-  border-color: transparent;
-  color: #0284c7;
-}
-
-.variant-tertiary.theme-light:hover:not(.disabled) {
-  background-color: #f0f9ff;
-  color: #0369a1;
-}
-
-.variant-tertiary.theme-light:active:not(.disabled) {
-  background-color: #e0f2fe;
+.button--secondary.button--light:active:not(:disabled) {
+  background-color: #E0F2FE; /* primary.100 */
+  border-color: #075985; /* primary.800 */
   color: #075985;
 }
 
-.variant-tertiary.theme-light:focus-visible {
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+.button--secondary.button--light:focus-visible {
+  outline-color: #0284C7;
+}
+
+/* Secondary + Dark Theme */
+.button--secondary.button--dark {
+  background-color: transparent;
+  color: #38BDF8; /* primary.400 */
+  border: 1px solid #38BDF8;
+}
+
+.button--secondary.button--dark:hover:not(:disabled) {
+  background-color: #082F49; /* primary.950 */
+  border-color: #7DD3FC; /* primary.300 */
+  color: #7DD3FC;
+}
+
+.button--secondary.button--dark:active:not(:disabled) {
+  background-color: #0C4A6E; /* primary.900 */
+  border-color: #BAE6FD; /* primary.200 */
+  color: #BAE6FD;
+}
+
+.button--secondary.button--dark:focus-visible {
+  outline-color: #38BDF8;
+}
+
+/* Tertiary + Light Theme */
+.button--tertiary.button--light {
+  background-color: transparent;
+  color: #0284C7; /* primary.600 */
+  border: 1px solid transparent;
+}
+
+.button--tertiary.button--light:hover:not(:disabled) {
+  background-color: #F0F9FF; /* primary.50 */
+  color: #0369A1; /* primary.700 */
+}
+
+.button--tertiary.button--light:active:not(:disabled) {
+  background-color: #E0F2FE; /* primary.100 */
+  color: #075985; /* primary.800 */
+}
+
+.button--tertiary.button--light:focus-visible {
+  outline-color: #0284C7;
 }
 
 /* Tertiary + Dark Theme */
-.variant-tertiary.theme-dark {
+.button--tertiary.button--dark {
   background-color: transparent;
-  border-color: transparent;
-  color: #38bdf8;
+  color: #38BDF8; /* primary.400 */
+  border: 1px solid transparent;
 }
 
-.variant-tertiary.theme-dark:hover:not(.disabled) {
-  background-color: rgba(56, 189, 248, 0.1);
-  color: #7dd3fc;
+.button--tertiary.button--dark:hover:not(:disabled) {
+  background-color: #082F49; /* primary.950 */
+  color: #7DD3FC; /* primary.300 */
 }
 
-.variant-tertiary.theme-dark:active:not(.disabled) {
-  background-color: rgba(56, 189, 248, 0.2);
-  color: #bae6fd;
+.button--tertiary.button--dark:active:not(:disabled) {
+  background-color: #0C4A6E; /* primary.900 */
+  color: #BAE6FD; /* primary.200 */
 }
 
-.variant-tertiary.theme-dark:focus-visible {
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+.button--tertiary.button--dark:focus-visible {
+  outline-color: #38BDF8;
 }
 
 /* ============================================ */
 /* Disabled State */
 /* ============================================ */
 
-.button.disabled {
+.button--disabled,
+.button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.button.disabled:hover,
-.button.disabled:active,
-.button.disabled:focus-visible {
-  box-shadow: none;
+/* Light Theme Disabled */
+.button--disabled.button--light,
+.button:disabled.button--light {
+  background-color: #E5E5E5; /* gray.200 */
+  color: #A3A3A3; /* gray.400 */
+  border-color: #E5E5E5;
 }
 
-/* Primary Disabled */
-.variant-primary.disabled.theme-light {
-  background-color: #e5e5e5;
-  border-color: #e5e5e5;
-  color: #a3a3a3;
-}
-
-.variant-primary.disabled.theme-dark {
-  background-color: #404040;
+/* Dark Theme Disabled */
+.button--disabled.button--dark,
+.button:disabled.button--dark {
+  background-color: #404040; /* gray.700 */
+  color: #737373; /* gray.500 */
   border-color: #404040;
-  color: #737373;
 }
 
-/* Secondary Disabled */
-.variant-secondary.disabled.theme-light {
-  background-color: #fafafa;
-  border-color: #e5e5e5;
-  color: #d4d4d4;
+/* ============================================ */
+/* Full Width */
+/* ============================================ */
+
+.button--full-width {
+  width: 100%;
 }
 
-.variant-secondary.disabled.theme-dark {
-  background-color: #171717;
-  border-color: #262626;
-  color: #525252;
+/* ============================================ */
+/* Icon Styles */
+/* ============================================ */
+
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-/* Tertiary Disabled */
-.variant-tertiary.disabled.theme-light {
-  background-color: transparent;
-  border-color: transparent;
-  color: #d4d4d4;
+.button__icon svg {
+  display: block;
+  width: 1em;
+  height: 1em;
 }
 
-.variant-tertiary.disabled.theme-dark {
-  background-color: transparent;
-  border-color: transparent;
-  color: #525252;
+.button__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================ */
+/* Responsive Styles */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  /* Small Size (Mobile) */
+  .button--small {
+    height: 28px;
+    padding: 0 10px;
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  /* Medium Size (Mobile) */
+  .button--medium {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 0.875rem; /* 14px */
+  }
+  
+  /* Large Size (Mobile) */
+  .button--large {
+    height: 44px;
+    padding: 0 20px;
+    font-size: 1rem; /* 16px */
+  }
 }
 
