@@ -49,6 +49,105 @@
   --interactive-active: #075985;
   --interactive-disabled: #d4d4d4;
 
+  /* Typography - Font Family */
+  --font-family-korean: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family-english: "Inter Variable", "Inter", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family-default: "Pretendard Variable", "Pretendard", "Inter Variable",
+    "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family-mono: "D2Coding", "Courier New", monospace;
+
+  /* Typography - Display (Mobile) */
+  --display-display1-font-size: 2.25rem;
+  --display-display1-line-height: 1.25;
+  --display-display1-font-weight: 700;
+  --display-display1-letter-spacing: -0.025em;
+
+  --display-display2-font-size: 1.875rem;
+  --display-display2-line-height: 1.25;
+  --display-display2-font-weight: 700;
+  --display-display2-letter-spacing: -0.025em;
+
+  --display-display3-font-size: 1.5rem;
+  --display-display3-line-height: 1.375;
+  --display-display3-font-weight: 700;
+  --display-display3-letter-spacing: -0.025em;
+
+  /* Typography - Heading (Mobile) */
+  --heading-h1-font-size: 1.5rem;
+  --heading-h1-line-height: 1.375;
+  --heading-h1-font-weight: 700;
+  --heading-h1-letter-spacing: -0.025em;
+
+  --heading-h2-font-size: 1.25rem;
+  --heading-h2-line-height: 1.375;
+  --heading-h2-font-weight: 700;
+  --heading-h2-letter-spacing: -0.025em;
+
+  --heading-h3-font-size: 1.125rem;
+  --heading-h3-line-height: 1.375;
+  --heading-h3-font-weight: 600;
+  --heading-h3-letter-spacing: 0;
+
+  --heading-h4-font-size: 1rem;
+  --heading-h4-line-height: 1.375;
+  --heading-h4-font-weight: 600;
+  --heading-h4-letter-spacing: 0;
+
+  --heading-h5-font-size: 0.875rem;
+  --heading-h5-line-height: 1.5;
+  --heading-h5-font-weight: 600;
+  --heading-h5-letter-spacing: 0;
+
+  --heading-h6-font-size: 0.75rem;
+  --heading-h6-line-height: 1.5;
+  --heading-h6-font-weight: 600;
+  --heading-h6-letter-spacing: 0;
+
+  /* Typography - Body (Mobile) */
+  --body-large-font-size: 1rem;
+  --body-large-line-height: 1.625;
+  --body-large-font-weight: 400;
+  --body-large-letter-spacing: 0;
+
+  --body-medium-font-size: 0.875rem;
+  --body-medium-line-height: 1.5;
+  --body-medium-font-weight: 400;
+  --body-medium-letter-spacing: 0;
+
+  --body-small-font-size: 0.75rem;
+  --body-small-line-height: 1.5;
+  --body-small-font-weight: 400;
+  --body-small-letter-spacing: 0;
+
+  /* Typography - Label (Mobile) */
+  --label-large-font-size: 1rem;
+  --label-large-line-height: 1.5;
+  --label-large-font-weight: 500;
+  --label-large-letter-spacing: 0;
+
+  --label-medium-font-size: 0.875rem;
+  --label-medium-line-height: 1.5;
+  --label-medium-font-weight: 500;
+  --label-medium-letter-spacing: 0;
+
+  --label-small-font-size: 0.75rem;
+  --label-small-line-height: 1.5;
+  --label-small-font-weight: 500;
+  --label-small-letter-spacing: 0.025em;
+
+  /* Typography - Caption (Mobile) */
+  --caption-large-font-size: 0.875rem;
+  --caption-large-line-height: 1.5;
+  --caption-large-font-weight: 400;
+  --caption-large-letter-spacing: 0;
+
+  --caption-medium-font-size: 0.75rem;
+  --caption-medium-line-height: 1.5;
+  --caption-medium-font-weight: 400;
+  --caption-medium-letter-spacing: 0;
+
   /* Legacy (하위 호환성) */
   --background: #ffffff;
   --foreground: #171717;
@@ -109,13 +208,42 @@
 }
 
 /* ============================================ */
+/* Desktop Typography (데스크톱 타이포그래피)    */
+/* ============================================ */
+
+@media (min-width: 768px) {
+  :root {
+    /* Typography - Display (Desktop) */
+    --display-display1-font-size: 3.75rem;
+    --display-display2-font-size: 3rem;
+    --display-display3-font-size: 2.25rem;
+
+    /* Typography - Heading (Desktop) */
+    --heading-h1-font-size: 1.875rem;
+    --heading-h2-font-size: 1.5rem;
+    --heading-h3-font-size: 1.25rem;
+    --heading-h4-font-size: 1.125rem;
+    --heading-h5-font-size: 1rem;
+    --heading-h6-font-size: 0.875rem;
+
+    /* Typography - Body (Desktop) */
+    --body-large-font-size: 1.125rem;
+    --body-medium-font-size: 1rem;
+    --body-small-font-size: 0.875rem;
+
+    /* Typography - Label (Desktop) - Same as mobile */
+    /* Typography - Caption (Desktop) - Same as mobile */
+  }
+}
+
+/* ============================================ */
 /* Base Styles                                  */
 /* ============================================ */
 
 body {
   color: var(--foreground-primary);
   background: var(--background-primary);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-default);
 }
 
 /* ============================================ */
@@ -198,5 +326,142 @@ body {
 
   .bg-info {
     background-color: var(--status-info-bg);
+  }
+
+  /* Typography - Display */
+  .text-display-1 {
+    font-size: var(--display-display1-font-size);
+    line-height: var(--display-display1-line-height);
+    font-weight: var(--display-display1-font-weight);
+    letter-spacing: var(--display-display1-letter-spacing);
+  }
+
+  .text-display-2 {
+    font-size: var(--display-display2-font-size);
+    line-height: var(--display-display2-line-height);
+    font-weight: var(--display-display2-font-weight);
+    letter-spacing: var(--display-display2-letter-spacing);
+  }
+
+  .text-display-3 {
+    font-size: var(--display-display3-font-size);
+    line-height: var(--display-display3-line-height);
+    font-weight: var(--display-display3-font-weight);
+    letter-spacing: var(--display-display3-letter-spacing);
+  }
+
+  /* Typography - Heading */
+  .text-h1 {
+    font-size: var(--heading-h1-font-size);
+    line-height: var(--heading-h1-line-height);
+    font-weight: var(--heading-h1-font-weight);
+    letter-spacing: var(--heading-h1-letter-spacing);
+  }
+
+  .text-h2 {
+    font-size: var(--heading-h2-font-size);
+    line-height: var(--heading-h2-line-height);
+    font-weight: var(--heading-h2-font-weight);
+    letter-spacing: var(--heading-h2-letter-spacing);
+  }
+
+  .text-h3 {
+    font-size: var(--heading-h3-font-size);
+    line-height: var(--heading-h3-line-height);
+    font-weight: var(--heading-h3-font-weight);
+    letter-spacing: var(--heading-h3-letter-spacing);
+  }
+
+  .text-h4 {
+    font-size: var(--heading-h4-font-size);
+    line-height: var(--heading-h4-line-height);
+    font-weight: var(--heading-h4-font-weight);
+    letter-spacing: var(--heading-h4-letter-spacing);
+  }
+
+  .text-h5 {
+    font-size: var(--heading-h5-font-size);
+    line-height: var(--heading-h5-line-height);
+    font-weight: var(--heading-h5-font-weight);
+    letter-spacing: var(--heading-h5-letter-spacing);
+  }
+
+  .text-h6 {
+    font-size: var(--heading-h6-font-size);
+    line-height: var(--heading-h6-line-height);
+    font-weight: var(--heading-h6-font-weight);
+    letter-spacing: var(--heading-h6-letter-spacing);
+  }
+
+  /* Typography - Body */
+  .text-body-lg {
+    font-size: var(--body-large-font-size);
+    line-height: var(--body-large-line-height);
+    font-weight: var(--body-large-font-weight);
+    letter-spacing: var(--body-large-letter-spacing);
+  }
+
+  .text-body-md {
+    font-size: var(--body-medium-font-size);
+    line-height: var(--body-medium-line-height);
+    font-weight: var(--body-medium-font-weight);
+    letter-spacing: var(--body-medium-letter-spacing);
+  }
+
+  .text-body-sm {
+    font-size: var(--body-small-font-size);
+    line-height: var(--body-small-line-height);
+    font-weight: var(--body-small-font-weight);
+    letter-spacing: var(--body-small-letter-spacing);
+  }
+
+  /* Typography - Label */
+  .text-label-lg {
+    font-size: var(--label-large-font-size);
+    line-height: var(--label-large-line-height);
+    font-weight: var(--label-large-font-weight);
+    letter-spacing: var(--label-large-letter-spacing);
+  }
+
+  .text-label-md {
+    font-size: var(--label-medium-font-size);
+    line-height: var(--label-medium-line-height);
+    font-weight: var(--label-medium-font-weight);
+    letter-spacing: var(--label-medium-letter-spacing);
+  }
+
+  .text-label-sm {
+    font-size: var(--label-small-font-size);
+    line-height: var(--label-small-line-height);
+    font-weight: var(--label-small-font-weight);
+    letter-spacing: var(--label-small-letter-spacing);
+  }
+
+  /* Typography - Caption */
+  .text-caption-lg {
+    font-size: var(--caption-large-font-size);
+    line-height: var(--caption-large-line-height);
+    font-weight: var(--caption-large-font-weight);
+    letter-spacing: var(--caption-large-letter-spacing);
+  }
+
+  .text-caption-md {
+    font-size: var(--caption-medium-font-size);
+    line-height: var(--caption-medium-line-height);
+    font-weight: var(--caption-medium-font-weight);
+    letter-spacing: var(--caption-medium-letter-spacing);
+  }
+
+  /* Typography - Font Family */
+  .font-korean {
+    font-family: var(--font-family-korean);
+  }
+
+  .font-english {
+    font-family: var(--font-family-english);
+  }
+
+  .font-mono {
+    font-family: var(--font-family-mono);
   }
 }
