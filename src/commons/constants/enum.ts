@@ -6,6 +6,33 @@
 import { ColorPrimitives } from "./color";
 
 // ============================================
+// Access Level Enum
+// ============================================
+
+/**
+ * 페이지 접근 권한 타입 정의
+ */
+export enum AccessLevel {
+  PUBLIC = "PUBLIC",
+  MEMBER_ONLY = "MEMBER_ONLY",
+}
+
+/**
+ * 접근 권한 라벨 맵
+ */
+export const AccessLevelLabelMap: Record<AccessLevel, string> = {
+  [AccessLevel.PUBLIC]: "누구나",
+  [AccessLevel.MEMBER_ONLY]: "회원전용",
+} as const;
+
+/**
+ * 접근 권한으로 라벨 조회
+ */
+export const getAccessLevelLabel = (level: AccessLevel): string => {
+  return AccessLevelLabelMap[level];
+};
+
+// ============================================
 // Emotion Enum
 // ============================================
 
@@ -126,6 +153,12 @@ export const getEmotionImage = (
 // Export All
 // ============================================
 
+export const Access = {
+  Level: AccessLevel,
+  LabelMap: AccessLevelLabelMap,
+  getLabel: getAccessLevelLabel,
+} as const;
+
 export const Emotion = {
   Type: EmotionType,
   Map: EmotionMap,
@@ -137,4 +170,3 @@ export const Emotion = {
 } as const;
 
 export default Emotion;
-

@@ -2,8 +2,7 @@
  * URL 경로 상수 및 메타데이터 관리
  */
 
-// 접근 권한 타입
-export type AccessLevel = "public" | "member-only";
+import { AccessLevel } from "./enum";
 
 // 페이지 레이아웃 설정 타입
 export interface PageLayout {
@@ -58,7 +57,7 @@ export const URL_METADATA: Record<string, UrlMetadata> = {
   // 로그인
   "/auth/login": {
     path: "/auth/login",
-    accessLevel: "public",
+    accessLevel: AccessLevel.PUBLIC,
     layout: {
       header: {
         visible: false,
@@ -74,7 +73,7 @@ export const URL_METADATA: Record<string, UrlMetadata> = {
   // 회원가입
   "/auth/signup": {
     path: "/auth/signup",
-    accessLevel: "public",
+    accessLevel: AccessLevel.PUBLIC,
     layout: {
       header: {
         visible: false,
@@ -90,7 +89,7 @@ export const URL_METADATA: Record<string, UrlMetadata> = {
   // 일기목록
   "/diaries": {
     path: "/diaries",
-    accessLevel: "public",
+    accessLevel: AccessLevel.PUBLIC,
     layout: {
       header: {
         visible: true,
@@ -106,7 +105,7 @@ export const URL_METADATA: Record<string, UrlMetadata> = {
   // 일기상세 (다이나믹 라우팅)
   "/diaries/[id]": {
     path: "/diaries/[id]",
-    accessLevel: "member-only",
+    accessLevel: AccessLevel.MEMBER_ONLY,
     layout: {
       header: {
         visible: true,
@@ -122,7 +121,7 @@ export const URL_METADATA: Record<string, UrlMetadata> = {
   // 사진목록
   "/pictures": {
     path: "/pictures",
-    accessLevel: "public",
+    accessLevel: AccessLevel.PUBLIC,
     layout: {
       header: {
         visible: true,
@@ -168,7 +167,7 @@ export const checkAccess = (pathname: string, isLoggedIn: boolean): boolean => {
     return true; // 메타데이터가 없으면 기본적으로 허용
   }
 
-  if (metadata.accessLevel === "member-only") {
+  if (metadata.accessLevel === AccessLevel.MEMBER_ONLY) {
     return isLoggedIn;
   }
 
