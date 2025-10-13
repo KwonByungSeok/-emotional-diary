@@ -1,0 +1,257 @@
+/**
+ * Button Component Styles
+ * CSS Module을 사용한 버튼 컴포넌트 스타일링
+ */
+
+/* ============================================ */
+/* Base Button Styles */
+/* ============================================ */
+
+.button {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  /* Box Model */
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  
+  /* Typography */
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  
+  /* Transition */
+  transition: all 0.2s ease-in-out;
+}
+
+/* ============================================ */
+/* Size Variants */
+/* ============================================ */
+
+/* Small Size */
+.size-small {
+  height: 32px;
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  gap: 6px;
+}
+
+/* Medium Size */
+.size-medium {
+  height: 40px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  gap: 8px;
+}
+
+/* Large Size */
+.size-large {
+  height: 48px;
+  padding: 14px 24px;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  gap: 10px;
+}
+
+/* ============================================ */
+/* Variant + Theme Combinations */
+/* ============================================ */
+
+/* Primary + Light Theme */
+.variant-primary.theme-light {
+  background-color: #0284C7;
+  border-color: #0284C7;
+  color: #FFFFFF;
+}
+
+.variant-primary.theme-light:hover:not(.disabled) {
+  background-color: #0369A1;
+  border-color: #0369A1;
+}
+
+.variant-primary.theme-light:active:not(.disabled) {
+  background-color: #075985;
+  border-color: #075985;
+}
+
+.variant-primary.theme-light:focus-visible {
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+
+/* Primary + Dark Theme */
+.variant-primary.theme-dark {
+  background-color: #38BDF8;
+  border-color: #38BDF8;
+  color: #0A0A0A;
+}
+
+.variant-primary.theme-dark:hover:not(.disabled) {
+  background-color: #7DD3FC;
+  border-color: #7DD3FC;
+}
+
+.variant-primary.theme-dark:active:not(.disabled) {
+  background-color: #BAE6FD;
+  border-color: #BAE6FD;
+}
+
+.variant-primary.theme-dark:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Secondary + Light Theme */
+.variant-secondary.theme-light {
+  background-color: #FFFFFF;
+  border-color: #D4D4D4;
+  color: #171717;
+}
+
+.variant-secondary.theme-light:hover:not(.disabled) {
+  background-color: #F5F5F5;
+  border-color: #A3A3A3;
+}
+
+.variant-secondary.theme-light:active:not(.disabled) {
+  background-color: #E5E5E5;
+  border-color: #737373;
+}
+
+.variant-secondary.theme-light:focus-visible {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+  border-color: #0EA5E9;
+}
+
+/* Secondary + Dark Theme */
+.variant-secondary.theme-dark {
+  background-color: #262626;
+  border-color: #404040;
+  color: #FAFAFA;
+}
+
+.variant-secondary.theme-dark:hover:not(.disabled) {
+  background-color: #404040;
+  border-color: #525252;
+}
+
+.variant-secondary.theme-dark:active:not(.disabled) {
+  background-color: #525252;
+  border-color: #737373;
+}
+
+.variant-secondary.theme-dark:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  border-color: #38BDF8;
+}
+
+/* Tertiary + Light Theme */
+.variant-tertiary.theme-light {
+  background-color: transparent;
+  border-color: transparent;
+  color: #0284C7;
+}
+
+.variant-tertiary.theme-light:hover:not(.disabled) {
+  background-color: #F0F9FF;
+  color: #0369A1;
+}
+
+.variant-tertiary.theme-light:active:not(.disabled) {
+  background-color: #E0F2FE;
+  color: #075985;
+}
+
+.variant-tertiary.theme-light:focus-visible {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+/* Tertiary + Dark Theme */
+.variant-tertiary.theme-dark {
+  background-color: transparent;
+  border-color: transparent;
+  color: #38BDF8;
+}
+
+.variant-tertiary.theme-dark:hover:not(.disabled) {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: #7DD3FC;
+}
+
+.variant-tertiary.theme-dark:active:not(.disabled) {
+  background-color: rgba(56, 189, 248, 0.2);
+  color: #BAE6FD;
+}
+
+.variant-tertiary.theme-dark:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* ============================================ */
+/* Disabled State */
+/* ============================================ */
+
+.button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button.disabled:hover,
+.button.disabled:active,
+.button.disabled:focus-visible {
+  box-shadow: none;
+}
+
+/* Primary Disabled */
+.variant-primary.disabled.theme-light {
+  background-color: #E5E5E5;
+  border-color: #E5E5E5;
+  color: #A3A3A3;
+}
+
+.variant-primary.disabled.theme-dark {
+  background-color: #404040;
+  border-color: #404040;
+  color: #737373;
+}
+
+/* Secondary Disabled */
+.variant-secondary.disabled.theme-light {
+  background-color: #FAFAFA;
+  border-color: #E5E5E5;
+  color: #D4D4D4;
+}
+
+.variant-secondary.disabled.theme-dark {
+  background-color: #171717;
+  border-color: #262626;
+  color: #525252;
+}
+
+/* Tertiary Disabled */
+.variant-tertiary.disabled.theme-light {
+  background-color: transparent;
+  border-color: transparent;
+  color: #D4D4D4;
+}
+
+.variant-tertiary.disabled.theme-dark {
+  background-color: transparent;
+  border-color: transparent;
+  color: #525252;
+}
+
