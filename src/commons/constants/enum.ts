@@ -150,6 +150,83 @@ export const getEmotionImage = (
 };
 
 // ============================================
+// Searchbar Enum
+// ============================================
+
+/**
+ * 검색바 variant 타입 정의
+ */
+export enum SearchbarVariant {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  TERTIARY = "tertiary",
+}
+
+/**
+ * 검색바 크기 타입 정의
+ */
+export enum SearchbarSize {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
+
+/**
+ * 검색바 테마 타입 정의
+ */
+export enum SearchbarTheme {
+  LIGHT = "light",
+  DARK = "dark",
+}
+
+/**
+ * 검색바 variant 라벨 맵
+ */
+export const SearchbarVariantLabelMap: Record<SearchbarVariant, string> = {
+  [SearchbarVariant.PRIMARY]: "기본",
+  [SearchbarVariant.SECONDARY]: "보조",
+  [SearchbarVariant.TERTIARY]: "3차",
+} as const;
+
+/**
+ * 검색바 크기 라벨 맵
+ */
+export const SearchbarSizeLabelMap: Record<SearchbarSize, string> = {
+  [SearchbarSize.SMALL]: "작음",
+  [SearchbarSize.MEDIUM]: "보통",
+  [SearchbarSize.LARGE]: "큼",
+} as const;
+
+/**
+ * 검색바 테마 라벨 맵
+ */
+export const SearchbarThemeLabelMap: Record<SearchbarTheme, string> = {
+  [SearchbarTheme.LIGHT]: "밝음",
+  [SearchbarTheme.DARK]: "어둠",
+} as const;
+
+/**
+ * 검색바 variant로 라벨 조회
+ */
+export const getSearchbarVariantLabel = (variant: SearchbarVariant): string => {
+  return SearchbarVariantLabelMap[variant];
+};
+
+/**
+ * 검색바 크기로 라벨 조회
+ */
+export const getSearchbarSizeLabel = (size: SearchbarSize): string => {
+  return SearchbarSizeLabelMap[size];
+};
+
+/**
+ * 검색바 테마로 라벨 조회
+ */
+export const getSearchbarThemeLabel = (theme: SearchbarTheme): string => {
+  return SearchbarThemeLabelMap[theme];
+};
+
+// ============================================
 // Export All
 // ============================================
 
@@ -167,6 +244,18 @@ export const Emotion = {
   getLabel: getEmotionLabel,
   getColor: getEmotionColor,
   getImage: getEmotionImage,
+} as const;
+
+export const Searchbar = {
+  Variant: SearchbarVariant,
+  Size: SearchbarSize,
+  Theme: SearchbarTheme,
+  VariantLabelMap: SearchbarVariantLabelMap,
+  SizeLabelMap: SearchbarSizeLabelMap,
+  ThemeLabelMap: SearchbarThemeLabelMap,
+  getVariantLabel: getSearchbarVariantLabel,
+  getSizeLabel: getSearchbarSizeLabel,
+  getThemeLabel: getSearchbarThemeLabel,
 } as const;
 
 export default Emotion;

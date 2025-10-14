@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { Input } from "@/commons/components/input";
+import { Searchbar } from "@/commons/components/searchbar";
+import { SearchbarVariant, SearchbarSize } from "@/commons/constants/enum";
 
 export default function Home() {
   return (
@@ -13,6 +17,98 @@ export default function Home() {
           height={38}
           priority
         />
+
+        {/* Searchbar Component Test Section */}
+        <div className="w-full max-w-md space-y-6">
+          <h2 className="text-2xl font-bold mb-4">Searchbar Component Test</h2>
+
+          {/* Primary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Primary Variant</h3>
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.SMALL}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.LARGE}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+          </div>
+
+          {/* Secondary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Secondary Variant</h3>
+            <Searchbar
+              variant={SearchbarVariant.SECONDARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+          </div>
+
+          {/* Tertiary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Tertiary Variant</h3>
+            <Searchbar
+              variant={SearchbarVariant.TERTIARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+          </div>
+
+          {/* Without Icons */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Without Icons</h3>
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              showSearchIcon={false}
+              showClearButton={false}
+              onSearch={(value) => console.log("Search:", value)}
+            />
+          </div>
+
+          {/* Full Width */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Full Width</h3>
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              fullWidth={true}
+              onSearch={(value) => console.log("Search:", value)}
+              onClear={() => console.log("Cleared")}
+            />
+          </div>
+
+          {/* Disabled State */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Disabled State</h3>
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.MEDIUM}
+              placeholder="검색어를 입력해 주세요."
+              disabled={true}
+            />
+          </div>
+        </div>
 
         {/* Input Component Test Section */}
         <div className="w-full max-w-md space-y-6">
