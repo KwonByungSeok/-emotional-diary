@@ -1,0 +1,63 @@
+/* Layout Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  height: 60px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+}
+
+/* Gap */
+.gap {
+  height: 24px;
+}
+
+/* Banner */
+.banner {
+  height: 240px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+}
+
+/* Navigation */
+.navigation {
+  height: 48px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+}
+
+/* Children Content */
+.children {
+  flex: 1;
+  min-height: 200px;
+  background-color: #fafafa;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+}
+
+/* Footer */
+.footer {
+  height: 160px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+}
