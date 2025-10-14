@@ -1,101 +1,230 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import Button from "@/commons/components/button";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className={`min-h-screen p-8 ${theme === "dark" ? "bg-gray-950" : "bg-gray-50"}`}>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className={`text-4xl font-bold mb-4 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            Button Component Demo
+          </h1>
+          <p className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            모든 variant, size, theme 조합을 확인할 수 있습니다.
+          </p>
+          
+          {/* Theme Toggle */}
+          <div className="mt-6 flex gap-4">
+            <Button
+              variant="secondary"
+              size="medium"
+              theme={theme}
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Button Grid */}
+        <div className="space-y-12">
+          {/* Light Theme Buttons */}
+          <section>
+            <h2 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+              Light Theme
+            </h2>
+            
+            {/* Primary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Primary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="primary" size="small" theme="light">
+                  Small Button
+                </Button>
+                <Button variant="primary" size="medium" theme="light">
+                  Medium Button
+                </Button>
+                <Button variant="primary" size="large" theme="light">
+                  Large Button
+                </Button>
+                <Button variant="primary" size="medium" theme="light" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+
+            {/* Secondary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Secondary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="secondary" size="small" theme="light">
+                  Small Button
+                </Button>
+                <Button variant="secondary" size="medium" theme="light">
+                  Medium Button
+                </Button>
+                <Button variant="secondary" size="large" theme="light">
+                  Large Button
+                </Button>
+                <Button variant="secondary" size="medium" theme="light" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+
+            {/* Tertiary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Tertiary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="tertiary" size="small" theme="light">
+                  Small Button
+                </Button>
+                <Button variant="tertiary" size="medium" theme="light">
+                  Medium Button
+                </Button>
+                <Button variant="tertiary" size="large" theme="light">
+                  Large Button
+                </Button>
+                <Button variant="tertiary" size="medium" theme="light" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Dark Theme Buttons */}
+          <section>
+            <h2 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+              Dark Theme
+            </h2>
+            
+            {/* Primary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Primary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="primary" size="small" theme="dark">
+                  Small Button
+                </Button>
+                <Button variant="primary" size="medium" theme="dark">
+                  Medium Button
+                </Button>
+                <Button variant="primary" size="large" theme="dark">
+                  Large Button
+                </Button>
+                <Button variant="primary" size="medium" theme="dark" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+
+            {/* Secondary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Secondary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="secondary" size="small" theme="dark">
+                  Small Button
+                </Button>
+                <Button variant="secondary" size="medium" theme="dark">
+                  Medium Button
+                </Button>
+                <Button variant="secondary" size="large" theme="dark">
+                  Large Button
+                </Button>
+                <Button variant="secondary" size="medium" theme="dark" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+
+            {/* Tertiary Variant */}
+            <div className="mb-8">
+              <h3 className={`text-lg font-semibold mb-4 ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                Tertiary
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="tertiary" size="small" theme="dark">
+                  Small Button
+                </Button>
+                <Button variant="tertiary" size="medium" theme="dark">
+                  Medium Button
+                </Button>
+                <Button variant="tertiary" size="large" theme="dark">
+                  Large Button
+                </Button>
+                <Button variant="tertiary" size="medium" theme="dark" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Full Width Example */}
+          <section>
+            <h2 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+              Full Width Example
+            </h2>
+            <div className="space-y-4 max-w-md">
+              <Button variant="primary" size="medium" theme={theme} fullWidth>
+                Full Width Primary
+              </Button>
+              <Button variant="secondary" size="medium" theme={theme} fullWidth>
+                Full Width Secondary
+              </Button>
+              <Button variant="tertiary" size="medium" theme={theme} fullWidth>
+                Full Width Tertiary
+              </Button>
+            </div>
+          </section>
+
+          {/* Interactive Examples */}
+          <section>
+            <h2 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+              Interactive Examples
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <Button
+                variant="primary"
+                size="medium"
+                theme={theme}
+                onClick={() => alert("Primary button clicked!")}
+              >
+                Click Me (Primary)
+              </Button>
+              <Button
+                variant="secondary"
+                size="medium"
+                theme={theme}
+                onClick={() => alert("Secondary button clicked!")}
+              >
+                Click Me (Secondary)
+              </Button>
+              <Button
+                variant="tertiary"
+                size="medium"
+                theme={theme}
+                onClick={() => alert("Tertiary button clicked!")}
+              >
+                Click Me (Tertiary)
+              </Button>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

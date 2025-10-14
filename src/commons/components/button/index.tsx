@@ -1,130 +1,97 @@
 "use client";
 
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
-import { useTheme } from "next-themes";
 import styles from "./styles.module.css";
 
-// ============================================
-// Type Definitions
-// ============================================
-
-export type ButtonVariant = "primary" | "secondary" | "tertiary";
-export type ButtonSize = "small" | "medium" | "large";
-export type ButtonTheme = "light" | "dark";
-
+/**
+ * Button Component Props
+ */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * 버튼의 시각적 스타일 variant
-   * @default 'primary'
-   */
-  variant?: ButtonVariant;
-
-  /**
-   * 버튼의 크기
-   * @default 'medium'
-   */
-  size?: ButtonSize;
-
-  /**
-   * 버튼의 테마 (명시하지 않으면 시스템 테마 사용)
-   */
-  theme?: ButtonTheme;
-
-  /**
-   * 버튼 비활성화 여부
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
-   * 버튼 전체 너비 사용 여부
-   * @default false
-   */
-  fullWidth?: boolean;
-
-  /**
-   * 버튼 내부 컨텐츠
-   */
+  /** 버튼 variant */
+  variant?: "primary" | "secondary" | "tertiary";
+  /** 버튼 크기 */
+  size?: "small" | "medium" | "large";
+  /** 버튼 테마 */
+  theme?: "light" | "dark";
+  /** 버튼 children */
   children: ReactNode;
-
-  /**
-   * 왼쪽 아이콘
-   */
-  leftIcon?: ReactNode;
-
-  /**
-   * 오른쪽 아이콘
-   */
-  rightIcon?: ReactNode;
-
-  /**
-   * 클릭 핸들러
-   */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /** 전체 너비 여부 */
+  fullWidth?: boolean;
+  /** 비활성화 여부 */
+  disabled?: boolean;
+  /** 아이콘 (왼쪽) */
+  iconLeft?: ReactNode;
+  /** 아이콘 (오른쪽) */
+  iconRight?: ReactNode;
+  /** 로딩 상태 */
+  isLoading?: boolean;
 }
 
-// ============================================
-// Button Component
-// ============================================
-
+/**
+ * Button Component
+ * 
+ * @description
+ * 완전한 variant 시스템을 갖춘 버튼 컴포넌트
+ * 
+ * @example
+ * ```tsx
+ * <Button variant="primary" size="medium" theme="light">
+ *   클릭하기
+ * </Button>
+ * ```
+ */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = "primary",
       size = "medium",
-      theme,
-      disabled = false,
-      fullWidth = false,
+      theme = "light",
       children,
-      leftIcon,
-      rightIcon,
+      fullWidth = false,
+      disabled = false,
+      iconLeft,
+      iconRight,
+      isLoading = false,
       className = "",
-      onClick,
-      type = "button",
-      ...rest
+      ...props
     },
     ref
   ) => {
-    const { theme: systemTheme } = useTheme();
-
-    // theme prop이 주어지면 그것을 사용하고, 아니면 시스템 테마 사용
-    const activeTheme = theme || (systemTheme as ButtonTheme) || "light";
-
-    // 클래스명 조합
-    const buttonClassNames = [
+    // 클래스 이름 조합
+    const classNames = [
       styles.button,
-      styles[`variant-${variant}`],
-      styles[`size-${size}`],
-      styles[`theme-${activeTheme}`],
-      fullWidth && styles.fullWidth,
-      disabled && styles.disabled,
+      styles[`button--${variant}`],
+      styles[`button--${size}`],
+      styles[`button--${theme}`],
+      fullWidth && styles["button--full-width"],
+      isLoading && styles["button--loading"],
       className,
     ]
       .filter(Boolean)
       .join(" ");
 
-    // 클릭 핸들러
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) {
-        event.preventDefault();
-        return;
-      }
-      onClick?.(event);
-    };
-
     return (
       <button
         ref={ref}
-        type={type}
-        className={buttonClassNames}
-        disabled={disabled}
-        onClick={handleClick}
-        aria-disabled={disabled}
-        {...rest}
+        className={classNames}
+        disabled={disabled || isLoading}
+        {...props}
       >
-        {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
-        <span className={styles.content}>{children}</span>
-        {rightIcon && <span className={styles.rightIcon}>{rightIcon}</span>}
+        {isLoading ? (
+          <span className={styles.button__loader}>
+            <span className={styles.button__spinner} />
+          </span>
+        ) : (
+          <>
+            {iconLeft && (
+              <span className={styles.button__icon_left}>{iconLeft}</span>
+            )}
+            <span className={styles.button__text}>{children}</span>
+            {iconRight && (
+              <span className={styles.button__icon_right}>{iconRight}</span>
+            )}
+          </>
+        )}
       </button>
     );
   }

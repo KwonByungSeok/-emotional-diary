@@ -1,300 +1,334 @@
-/* ============================================ */
-/* Base Button Styles */
-/* ============================================ */
+/* ============================================
+   Button Component Styles
+   ============================================ */
 
+/* Base Button */
 .button {
+  /* Reset */
+  all: unset;
+  box-sizing: border-box;
+  
+  /* Layout */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-family: "Pretendard Variable", "Pretendard", -apple-system,
-    BlinkMacSystemFont, system-ui, sans-serif;
-  font-weight: 600;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
+  
+  /* Typography */
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
   white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.5rem;
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0;
+  
+  /* Interaction */
   cursor: pointer;
+  user-select: none;
   transition: all 0.2s ease-in-out;
-  outline: none;
+  
+  /* Border */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  
+  /* Position */
+  position: relative;
+  overflow: hidden;
 }
 
+/* Button States */
 .button:focus-visible {
-  outline: 2px solid;
+  outline: 2px solid #0EA5E9;
   outline-offset: 2px;
 }
 
-/* ============================================ */
-/* Full Width */
-/* ============================================ */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
-.fullWidth {
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* ============================================
+   Size Variants
+   ============================================ */
+
+/* Small */
+.button--small {
+  padding: 0.375rem 0.75rem; /* 6px 12px */
+  font-size: 0.75rem; /* 12px */
+  min-height: 2rem; /* 32px */
+  gap: 0.25rem;
+}
+
+/* Medium */
+.button--medium {
+  padding: 0.5rem 1rem; /* 8px 16px */
+  font-size: 0.875rem; /* 14px */
+  min-height: 2.5rem; /* 40px */
+  gap: 0.5rem;
+}
+
+/* Large */
+.button--large {
+  padding: 0.75rem 1.5rem; /* 12px 24px */
+  font-size: 1rem; /* 16px */
+  min-height: 3rem; /* 48px */
+  gap: 0.5rem;
+}
+
+/* ============================================
+   Variant + Theme Combinations
+   ============================================ */
+
+/* Primary - Light Theme */
+.button--primary.button--light {
+  background-color: #0284C7; /* primary.600 */
+  color: #FFFFFF;
+  border-color: #0284C7;
+}
+
+.button--primary.button--light:hover:not(:disabled) {
+  background-color: #0369A1; /* primary.700 */
+  border-color: #0369A1;
+}
+
+.button--primary.button--light:active:not(:disabled) {
+  background-color: #075985; /* primary.800 */
+  border-color: #075985;
+}
+
+/* Primary - Dark Theme */
+.button--primary.button--dark {
+  background-color: #38BDF8; /* primary.400 */
+  color: #0A0A0A; /* gray.950 */
+  border-color: #38BDF8;
+}
+
+.button--primary.button--dark:hover:not(:disabled) {
+  background-color: #7DD3FC; /* primary.300 */
+  border-color: #7DD3FC;
+}
+
+.button--primary.button--dark:active:not(:disabled) {
+  background-color: #BAE6FD; /* primary.200 */
+  border-color: #BAE6FD;
+}
+
+/* Secondary - Light Theme */
+.button--secondary.button--light {
+  background-color: #FFFFFF;
+  color: #171717; /* gray.900 */
+  border-color: #D4D4D4; /* gray.300 */
+}
+
+.button--secondary.button--light:hover:not(:disabled) {
+  background-color: #F5F5F5; /* gray.100 */
+  border-color: #A3A3A3; /* gray.400 */
+}
+
+.button--secondary.button--light:active:not(:disabled) {
+  background-color: #E5E5E5; /* gray.200 */
+  border-color: #737373; /* gray.500 */
+}
+
+/* Secondary - Dark Theme */
+.button--secondary.button--dark {
+  background-color: #262626; /* gray.800 */
+  color: #FAFAFA; /* gray.50 */
+  border-color: #404040; /* gray.700 */
+}
+
+.button--secondary.button--dark:hover:not(:disabled) {
+  background-color: #404040; /* gray.700 */
+  border-color: #525252; /* gray.600 */
+}
+
+.button--secondary.button--dark:active:not(:disabled) {
+  background-color: #525252; /* gray.600 */
+  border-color: #737373; /* gray.500 */
+}
+
+/* Tertiary - Light Theme */
+.button--tertiary.button--light {
+  background-color: transparent;
+  color: #0284C7; /* primary.600 */
+  border-color: transparent;
+}
+
+.button--tertiary.button--light:hover:not(:disabled) {
+  background-color: #F0F9FF; /* primary.50 */
+  color: #0369A1; /* primary.700 */
+}
+
+.button--tertiary.button--light:active:not(:disabled) {
+  background-color: #E0F2FE; /* primary.100 */
+  color: #075985; /* primary.800 */
+}
+
+/* Tertiary - Dark Theme */
+.button--tertiary.button--dark {
+  background-color: transparent;
+  color: #38BDF8; /* primary.400 */
+  border-color: transparent;
+}
+
+.button--tertiary.button--dark:hover:not(:disabled) {
+  background-color: #082F49; /* primary.950 */
+  color: #7DD3FC; /* primary.300 */
+}
+
+.button--tertiary.button--dark:active:not(:disabled) {
+  background-color: #0C4A6E; /* primary.900 */
+  color: #BAE6FD; /* primary.200 */
+}
+
+/* ============================================
+   Full Width Modifier
+   ============================================ */
+
+.button--full-width {
   width: 100%;
 }
 
-/* ============================================ */
-/* Icon Styles */
-/* ============================================ */
+/* ============================================
+   Icon Elements
+   ============================================ */
 
-.leftIcon {
+.button__icon_left,
+.button__icon_right {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.button__icon_left {
+  margin-right: -0.125rem;
+}
+
+.button__icon_right {
+  margin-left: -0.125rem;
+}
+
+/* Small size icons */
+.button--small .button__icon_left,
+.button--small .button__icon_right {
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+}
+
+/* Medium size icons */
+.button--medium .button__icon_left,
+.button--medium .button__icon_right {
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+}
+
+/* Large size icons */
+.button--large .button__icon_left,
+.button--large .button__icon_right {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.button--loading {
+  pointer-events: none;
+}
+
+.button__loader {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.rightIcon {
+.button__spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.button--small .button__spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 2px;
+}
+
+.button--large .button__spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-width: 2.5px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   Text Element
+   ============================================ */
+
+.button__text {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
 }
 
-.content {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ============================================ */
-/* Size Variants */
-/* ============================================ */
-
-.size-small {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  min-height: 2rem;
-}
-
-.size-medium {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  min-height: 2.75rem;
-}
-
-.size-large {
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
-  min-height: 3.5rem;
-}
-
-/* ============================================ */
-/* Light Theme - Primary Variant */
-/* ============================================ */
-
-.theme-light.variant-primary {
-  background-color: #0284c7;
-  color: #ffffff;
-  border-color: #0284c7;
-}
-
-.theme-light.variant-primary:hover:not(.disabled) {
-  background-color: #0369a1;
-  border-color: #0369a1;
-}
-
-.theme-light.variant-primary:active:not(.disabled) {
-  background-color: #075985;
-  border-color: #075985;
-}
-
-.theme-light.variant-primary:focus-visible {
-  outline-color: #0ea5e9;
-}
-
-.theme-light.variant-primary.disabled {
-  background-color: #e5e5e5;
-  color: #a3a3a3;
-  border-color: #e5e5e5;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Light Theme - Secondary Variant */
-/* ============================================ */
-
-.theme-light.variant-secondary {
-  background-color: #ffffff;
-  color: #0284c7;
-  border-color: #0284c7;
-}
-
-.theme-light.variant-secondary:hover:not(.disabled) {
-  background-color: #f0f9ff;
-  color: #0369a1;
-  border-color: #0369a1;
-}
-
-.theme-light.variant-secondary:active:not(.disabled) {
-  background-color: #e0f2fe;
-  color: #075985;
-  border-color: #075985;
-}
-
-.theme-light.variant-secondary:focus-visible {
-  outline-color: #0ea5e9;
-}
-
-.theme-light.variant-secondary.disabled {
-  background-color: #f5f5f5;
-  color: #a3a3a3;
-  border-color: #d4d4d4;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Light Theme - Tertiary Variant */
-/* ============================================ */
-
-.theme-light.variant-tertiary {
-  background-color: transparent;
-  color: #0284c7;
-  border-color: transparent;
-}
-
-.theme-light.variant-tertiary:hover:not(.disabled) {
-  background-color: #f0f9ff;
-  color: #0369a1;
-}
-
-.theme-light.variant-tertiary:active:not(.disabled) {
-  background-color: #e0f2fe;
-  color: #075985;
-}
-
-.theme-light.variant-tertiary:focus-visible {
-  outline-color: #0ea5e9;
-}
-
-.theme-light.variant-tertiary.disabled {
-  background-color: transparent;
-  color: #a3a3a3;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Dark Theme - Primary Variant */
-/* ============================================ */
-
-.theme-dark.variant-primary {
-  background-color: #38bdf8;
-  color: #0a0a0a;
-  border-color: #38bdf8;
-}
-
-.theme-dark.variant-primary:hover:not(.disabled) {
-  background-color: #7dd3fc;
-  border-color: #7dd3fc;
-}
-
-.theme-dark.variant-primary:active:not(.disabled) {
-  background-color: #bae6fd;
-  border-color: #bae6fd;
-}
-
-.theme-dark.variant-primary:focus-visible {
-  outline-color: #38bdf8;
-}
-
-.theme-dark.variant-primary.disabled {
-  background-color: #404040;
-  color: #737373;
-  border-color: #404040;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Dark Theme - Secondary Variant */
-/* ============================================ */
-
-.theme-dark.variant-secondary {
-  background-color: #0a0a0a;
-  color: #38bdf8;
-  border-color: #38bdf8;
-}
-
-.theme-dark.variant-secondary:hover:not(.disabled) {
-  background-color: #171717;
-  color: #7dd3fc;
-  border-color: #7dd3fc;
-}
-
-.theme-dark.variant-secondary:active:not(.disabled) {
-  background-color: #262626;
-  color: #bae6fd;
-  border-color: #bae6fd;
-}
-
-.theme-dark.variant-secondary:focus-visible {
-  outline-color: #38bdf8;
-}
-
-.theme-dark.variant-secondary.disabled {
-  background-color: #171717;
-  color: #737373;
-  border-color: #525252;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Dark Theme - Tertiary Variant */
-/* ============================================ */
-
-.theme-dark.variant-tertiary {
-  background-color: transparent;
-  color: #38bdf8;
-  border-color: transparent;
-}
-
-.theme-dark.variant-tertiary:hover:not(.disabled) {
-  background-color: #171717;
-  color: #7dd3fc;
-}
-
-.theme-dark.variant-tertiary:active:not(.disabled) {
-  background-color: #262626;
-  color: #bae6fd;
-}
-
-.theme-dark.variant-tertiary:focus-visible {
-  outline-color: #38bdf8;
-}
-
-.theme-dark.variant-tertiary.disabled {
-  background-color: transparent;
-  color: #737373;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* ============================================ */
-/* Responsive Adjustments */
-/* ============================================ */
+/* ============================================
+   Responsive Design
+   ============================================ */
 
 @media (max-width: 768px) {
-  .size-small {
-    padding: 0.375rem 0.875rem;
-    font-size: 0.8125rem;
-    min-height: 1.875rem;
+  /* Mobile adjustments */
+  .button--small {
+    min-height: 1.875rem; /* 30px */
+    padding: 0.3125rem 0.625rem; /* 5px 10px */
   }
-
-  .size-medium {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.9375rem;
-    min-height: 2.5rem;
+  
+  .button--medium {
+    min-height: 2.25rem; /* 36px */
+    padding: 0.4375rem 0.875rem; /* 7px 14px */
   }
-
-  .size-large {
-    padding: 0.875rem 1.75rem;
-    font-size: 1.0625rem;
-    min-height: 3.25rem;
+  
+  .button--large {
+    min-height: 2.75rem; /* 44px */
+    padding: 0.625rem 1.25rem; /* 10px 20px */
   }
 }
 
+/* ============================================
+   Accessibility
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button__spinner {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .button {
+    border-width: 2px;
+  }
+  
+  .button--tertiary {
+    border-width: 1px;
+  }
+}
