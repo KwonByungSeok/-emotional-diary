@@ -1,94 +1,115 @@
-"use client";
-
-import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import React, { forwardRef } from "react";
 import styles from "./styles.module.css";
 
-/**
- * Button Component Props
- */
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** 버튼 variant */
+// ============================================
+// Type Definitions
+// ============================================
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * 버튼의 시각적 스타일 variant
+   */
   variant?: "primary" | "secondary" | "tertiary";
-  /** 버튼 크기 */
+
+  /**
+   * 버튼의 크기
+   */
   size?: "small" | "medium" | "large";
-  /** 버튼 테마 */
+
+  /**
+   * 테마 모드
+   */
   theme?: "light" | "dark";
-  /** 버튼 children */
-  children: ReactNode;
-  /** 전체 너비 여부 */
+
+  /**
+   * 버튼 텍스트
+   */
+  children: React.ReactNode;
+
+  /**
+   * 로딩 상태
+   */
+  loading?: boolean;
+
+  /**
+   * 아이콘 (선택사항)
+   */
+  icon?: React.ReactNode;
+
+  /**
+   * 아이콘 위치
+   */
+  iconPosition?: "left" | "right";
+
+  /**
+   * 전체 너비 사용 여부
+   */
   fullWidth?: boolean;
-  /** 비활성화 여부 */
-  disabled?: boolean;
-  /** 아이콘 (왼쪽) */
-  iconLeft?: ReactNode;
-  /** 아이콘 (오른쪽) */
-  iconRight?: ReactNode;
-  /** 로딩 상태 */
-  isLoading?: boolean;
+
+  /**
+   * 테스트 ID (테스트 자동화용)
+   */
+  "data-testid"?: string;
 }
 
-/**
- * Button Component
- * 
- * @description
- * 완전한 variant 시스템을 갖춘 버튼 컴포넌트
- * 
- * @example
- * ```tsx
- * <Button variant="primary" size="medium" theme="light">
- *   클릭하기
- * </Button>
- * ```
- */
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+// ============================================
+// Button Component
+// ============================================
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = "primary",
       size = "medium",
       theme = "light",
       children,
+      loading = false,
+      icon,
+      iconPosition = "left",
       fullWidth = false,
-      disabled = false,
-      iconLeft,
-      iconRight,
-      isLoading = false,
       className = "",
+      disabled,
+      "data-testid": testId,
       ...props
     },
     ref
   ) => {
-    // 클래스 이름 조합
-    const classNames = [
+    // 클래스명 조합
+    const buttonClasses = [
       styles.button,
-      styles[`button--${variant}`],
-      styles[`button--${size}`],
-      styles[`button--${theme}`],
-      fullWidth && styles["button--full-width"],
-      isLoading && styles["button--loading"],
+      styles[`variant-${variant}`],
+      styles[`size-${size}`],
+      styles[`theme-${theme}`],
+      loading && styles.loading,
+      disabled && styles.disabled,
+      fullWidth && styles.fullWidth,
       className,
     ]
       .filter(Boolean)
       .join(" ");
 
+    // 로딩 또는 비활성화 상태일 때 disabled 처리
+    const isDisabled = disabled || loading;
+
     return (
       <button
         ref={ref}
-        className={classNames}
-        disabled={disabled || isLoading}
+        className={buttonClasses}
+        disabled={isDisabled}
+        data-testid={testId}
         {...props}
       >
-        {isLoading ? (
-          <span className={styles.button__loader}>
-            <span className={styles.button__spinner} />
-          </span>
+        {loading ? (
+          <span className={styles.loadingSpinner} />
         ) : (
           <>
-            {iconLeft && (
-              <span className={styles.button__icon_left}>{iconLeft}</span>
+            {icon && iconPosition === "left" && (
+              <span className={styles.iconLeft}>{icon}</span>
             )}
-            <span className={styles.button__text}>{children}</span>
-            {iconRight && (
-              <span className={styles.button__icon_right}>{iconRight}</span>
+            <span className={styles.text}>{children}</span>
+            {icon && iconPosition === "right" && (
+              <span className={styles.iconRight}>{icon}</span>
             )}
           </>
         )}
@@ -98,5 +119,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+
+// ============================================
+// Export
+// ============================================
 
 export default Button;

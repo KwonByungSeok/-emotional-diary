@@ -1,286 +1,197 @@
-"use client";
-
-import React, { useState } from "react";
-import Button from "@/commons/components/button";
+import Image from "next/image";
+import { Input } from "@/commons/components/input";
 
 export default function Home() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLoadingTest = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  };
-
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "3rem",
-        backgroundColor: theme === "light" ? "#FAFAFA" : "#0A0A0A",
-        color: theme === "light" ? "#171717" : "#FAFAFA",
-        transition: "all 0.3s",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "3rem",
-          }}
-        >
-          <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-            Button Component Test
-          </h1>
-          <Button
-            variant="secondary"
-            size="medium"
-            theme={theme}
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          >
-            {theme === "light" ? "🌙 다크모드" : "☀️ 라이트모드"}
-          </Button>
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <Image
+          className="dark:invert"
+          src="https://nextjs.org/icons/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+        />
+
+        {/* Input Component Test Section */}
+        <div className="w-full max-w-md space-y-6">
+          <h2 className="text-2xl font-bold mb-4">Input Component Test</h2>
+
+          {/* Primary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Primary Variant</h3>
+            <Input
+              variant="primary"
+              size="small"
+              label="Small Input"
+              placeholder="회고를 남겨보세요."
+              helpText="This is a small primary input"
+            />
+            <Input
+              variant="primary"
+              size="medium"
+              label="Medium Input (Default)"
+              placeholder="회고를 남겨보세요."
+              helpText="This matches the Figma design"
+            />
+            <Input
+              variant="primary"
+              size="large"
+              label="Large Input"
+              placeholder="회고를 남겨보세요."
+              helpText="This is a large primary input"
+            />
+          </div>
+
+          {/* Secondary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Secondary Variant</h3>
+            <Input
+              variant="secondary"
+              size="medium"
+              label="Secondary Input"
+              placeholder="회고를 남겨보세요."
+              helpText="This is a secondary variant"
+            />
+          </div>
+
+          {/* Tertiary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Tertiary Variant</h3>
+            <Input
+              variant="tertiary"
+              size="medium"
+              label="Tertiary Input"
+              placeholder="회고를 남겨보세요."
+              helpText="This is a tertiary variant"
+            />
+          </div>
+
+          {/* Error State */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Error State</h3>
+            <Input
+              variant="primary"
+              size="medium"
+              label="Error Input"
+              placeholder="회고를 남겨보세요."
+              error={true}
+              errorMessage="This field is required"
+            />
+          </div>
+
+          {/* Required Field */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Required Field</h3>
+            <Input
+              variant="primary"
+              size="medium"
+              label="Required Input"
+              placeholder="회고를 남겨보세요."
+              required={true}
+              helpText="This field is required"
+            />
+          </div>
+
+          {/* Full Width */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Full Width</h3>
+            <Input
+              variant="primary"
+              size="medium"
+              label="Full Width Input"
+              placeholder="회고를 남겨보세요."
+              fullWidth={true}
+              helpText="This input takes full width"
+            />
+          </div>
         </div>
 
-        {/* Primary Variant */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
-          >
-            Primary Variant
-          </h2>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Button variant="primary" size="small" theme={theme}>
-              Small
-            </Button>
-            <Button variant="primary" size="medium" theme={theme}>
-              Medium
-            </Button>
-            <Button variant="primary" size="large" theme={theme}>
-              Large
-            </Button>
-            <Button variant="primary" size="medium" theme={theme} disabled>
-              Disabled
-            </Button>
-            <Button
-              variant="primary"
-              size="medium"
-              theme={theme}
-              isLoading={isLoading}
-              onClick={handleLoadingTest}
-            >
-              Loading Test
-            </Button>
-          </div>
-        </section>
+        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2">
+            Get started by editing{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
+              src/app/page.tsx
+            </code>
+            .
+          </li>
+          <li>Save and see your changes instantly.</li>
+        </ol>
 
-        {/* Secondary Variant */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Secondary Variant
-          </h2>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Button variant="secondary" size="small" theme={theme}>
-              Small
-            </Button>
-            <Button variant="secondary" size="medium" theme={theme}>
-              Medium
-            </Button>
-            <Button variant="secondary" size="large" theme={theme}>
-              Large
-            </Button>
-            <Button variant="secondary" size="medium" theme={theme} disabled>
-              Disabled
-            </Button>
-            <Button
-              variant="secondary"
-              size="medium"
-              theme={theme}
-              isLoading={isLoading}
-              onClick={handleLoadingTest}
-            >
-              Loading Test
-            </Button>
-          </div>
-        </section>
-
-        {/* Tertiary Variant */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
+            <Image
+              className="dark:invert"
+              src="https://nextjs.org/icons/vercel.svg"
+              alt="Vercel logomark"
+              width={20}
+              height={20}
+            />
+            Deploy now
+          </a>
+          <a
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Tertiary Variant
-          </h2>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Button variant="tertiary" size="small" theme={theme}>
-              Small
-            </Button>
-            <Button variant="tertiary" size="medium" theme={theme}>
-              Medium
-            </Button>
-            <Button variant="tertiary" size="large" theme={theme}>
-              Large
-            </Button>
-            <Button variant="tertiary" size="medium" theme={theme} disabled>
-              Disabled
-            </Button>
-            <Button
-              variant="tertiary"
-              size="medium"
-              theme={theme}
-              isLoading={isLoading}
-              onClick={handleLoadingTest}
-            >
-              Loading Test
-            </Button>
-          </div>
-        </section>
-
-        {/* With Icons */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
-          >
-            With Icons
-          </h2>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Button
-              variant="primary"
-              size="medium"
-              theme={theme}
-              iconLeft={<span>←</span>}
-            >
-              이전
-            </Button>
-            <Button
-              variant="primary"
-              size="medium"
-              theme={theme}
-              iconRight={<span>→</span>}
-            >
-              다음
-            </Button>
-            <Button
-              variant="secondary"
-              size="medium"
-              theme={theme}
-              iconLeft={<span>✓</span>}
-            >
-              확인
-            </Button>
-            <Button
-              variant="tertiary"
-              size="medium"
-              theme={theme}
-              iconLeft={<span>+</span>}
-            >
-              추가
-            </Button>
-          </div>
-        </section>
-
-        {/* Full Width */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
-          >
-            Full Width
-          </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <Button
-              variant="primary"
-              size="medium"
-              theme={theme}
-              fullWidth
-            >
-              Full Width Primary
-            </Button>
-            <Button
-              variant="secondary"
-              size="medium"
-              theme={theme}
-              fullWidth
-            >
-              Full Width Secondary
-            </Button>
-            <Button
-              variant="tertiary"
-              size="medium"
-              theme={theme}
-              fullWidth
-            >
-              Full Width Tertiary
-            </Button>
-          </div>
-        </section>
-
-        {/* All Combinations */}
-        <section style={{ marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "600",
-              marginBottom: "1rem",
-            }}
-          >
-            All Combinations (variant × size × theme)
-          </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-            {["primary", "secondary", "tertiary"].map((variant) => (
-              <div key={variant}>
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: "500",
-                    marginBottom: "0.5rem",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {variant}
-                </h3>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  {["small", "medium", "large"].map((size) => (
-                    <Button
-                      key={`${variant}-${size}`}
-                      variant={variant as "primary" | "secondary" | "tertiary"}
-                      size={size as "small" | "medium" | "large"}
-                      theme={theme}
-                    >
-                      {size}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
+            Read our docs
+          </a>
+        </div>
+      </main>
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          Learn
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          Examples
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          Go to nextjs.org →
+        </a>
+      </footer>
     </div>
   );
 }

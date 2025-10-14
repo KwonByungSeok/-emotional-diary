@@ -1,273 +1,235 @@
-/* ============================================
-   Button Component Styles
-   ============================================ */
+/* ============================================ */
+/* Button Base Styles */
+/* ============================================ */
 
-/* Base Button */
 .button {
   /* Reset */
   all: unset;
   box-sizing: border-box;
-  
-  /* Layout */
+
+  /* Base Layout */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  
+  gap: 8px;
+
   /* Typography */
-  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-weight: 500;
-  white-space: nowrap;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 600;
   text-align: center;
-  line-height: 1.5;
-  letter-spacing: 0;
-  
+  white-space: nowrap;
+
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: all 0.2s ease-in-out;
-  
+
+  /* Transitions */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
   /* Border */
   border: 1px solid transparent;
   border-radius: 8px;
-  
-  /* Position */
-  position: relative;
-  overflow: hidden;
+
+  /* Focus */
+  outline: none;
+
+  /* States */
+  &:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+  }
 }
 
-/* Button States */
-.button:focus-visible {
-  outline: 2px solid #0EA5E9;
-  outline-offset: 2px;
+/* ============================================ */
+/* Size Variants */
+/* ============================================ */
+
+.size-small {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.14px;
+  border-radius: 6px;
 }
 
-.button:disabled {
+.size-medium {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+
+.size-large {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations */
+/* ============================================ */
+
+/* Primary Variants */
+.variant-primary.theme-light {
+  --focus-color: #0ea5e9;
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.variant-primary.theme-light:hover:not(:disabled) {
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+.variant-primary.theme-light:active:not(:disabled) {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+.variant-primary.theme-dark {
+  --focus-color: #38bdf8;
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.variant-primary.theme-dark:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  border-color: #f5f5f5;
+}
+
+.variant-primary.theme-dark:active:not(:disabled) {
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+}
+
+/* Secondary Variants */
+.variant-secondary.theme-light {
+  --focus-color: #0ea5e9;
+  background-color: #f2f2f2;
+  color: #000000;
+  border-color: #f2f2f2;
+}
+
+.variant-secondary.theme-light:hover:not(:disabled) {
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+}
+
+.variant-secondary.theme-light:active:not(:disabled) {
+  background-color: #d4d4d4;
+  border-color: #d4d4d4;
+}
+
+.variant-secondary.theme-dark {
+  --focus-color: #38bdf8;
+  background-color: #404040;
+  color: #ffffff;
+  border-color: #404040;
+}
+
+.variant-secondary.theme-dark:hover:not(:disabled) {
+  background-color: #525252;
+  border-color: #525252;
+}
+
+.variant-secondary.theme-dark:active:not(:disabled) {
+  background-color: #737373;
+  border-color: #737373;
+}
+
+/* Tertiary Variants */
+.variant-tertiary.theme-light {
+  --focus-color: #0ea5e9;
+  background-color: transparent;
+  color: #000000;
+  border-color: #d4d4d4;
+}
+
+.variant-tertiary.theme-light:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  border-color: #a3a3a3;
+}
+
+.variant-tertiary.theme-light:active:not(:disabled) {
+  background-color: #e5e5e5;
+  border-color: #737373;
+}
+
+.variant-tertiary.theme-dark {
+  --focus-color: #38bdf8;
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #525252;
+}
+
+.variant-tertiary.theme-dark:hover:not(:disabled) {
+  background-color: #262626;
+  border-color: #737373;
+}
+
+.variant-tertiary.theme-dark:active:not(:disabled) {
+  background-color: #404040;
+  border-color: #a3a3a3;
+}
+
+/* ============================================ */
+/* State Modifiers */
+/* ============================================ */
+
+.disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.button:active:not(:disabled) {
-  transform: translateY(1px);
+.loading {
+  cursor: wait;
+  position: relative;
 }
 
-/* ============================================
-   Size Variants
-   ============================================ */
-
-/* Small */
-.button--small {
-  padding: 0.375rem 0.75rem; /* 6px 12px */
-  font-size: 0.75rem; /* 12px */
-  min-height: 2rem; /* 32px */
-  gap: 0.25rem;
-}
-
-/* Medium */
-.button--medium {
-  padding: 0.5rem 1rem; /* 8px 16px */
-  font-size: 0.875rem; /* 14px */
-  min-height: 2.5rem; /* 40px */
-  gap: 0.5rem;
-}
-
-/* Large */
-.button--large {
-  padding: 0.75rem 1.5rem; /* 12px 24px */
-  font-size: 1rem; /* 16px */
-  min-height: 3rem; /* 48px */
-  gap: 0.5rem;
-}
-
-/* ============================================
-   Variant + Theme Combinations
-   ============================================ */
-
-/* Primary - Light Theme */
-.button--primary.button--light {
-  background-color: #0284C7; /* primary.600 */
-  color: #FFFFFF;
-  border-color: #0284C7;
-}
-
-.button--primary.button--light:hover:not(:disabled) {
-  background-color: #0369A1; /* primary.700 */
-  border-color: #0369A1;
-}
-
-.button--primary.button--light:active:not(:disabled) {
-  background-color: #075985; /* primary.800 */
-  border-color: #075985;
-}
-
-/* Primary - Dark Theme */
-.button--primary.button--dark {
-  background-color: #38BDF8; /* primary.400 */
-  color: #0A0A0A; /* gray.950 */
-  border-color: #38BDF8;
-}
-
-.button--primary.button--dark:hover:not(:disabled) {
-  background-color: #7DD3FC; /* primary.300 */
-  border-color: #7DD3FC;
-}
-
-.button--primary.button--dark:active:not(:disabled) {
-  background-color: #BAE6FD; /* primary.200 */
-  border-color: #BAE6FD;
-}
-
-/* Secondary - Light Theme */
-.button--secondary.button--light {
-  background-color: #FFFFFF;
-  color: #171717; /* gray.900 */
-  border-color: #D4D4D4; /* gray.300 */
-}
-
-.button--secondary.button--light:hover:not(:disabled) {
-  background-color: #F5F5F5; /* gray.100 */
-  border-color: #A3A3A3; /* gray.400 */
-}
-
-.button--secondary.button--light:active:not(:disabled) {
-  background-color: #E5E5E5; /* gray.200 */
-  border-color: #737373; /* gray.500 */
-}
-
-/* Secondary - Dark Theme */
-.button--secondary.button--dark {
-  background-color: #262626; /* gray.800 */
-  color: #FAFAFA; /* gray.50 */
-  border-color: #404040; /* gray.700 */
-}
-
-.button--secondary.button--dark:hover:not(:disabled) {
-  background-color: #404040; /* gray.700 */
-  border-color: #525252; /* gray.600 */
-}
-
-.button--secondary.button--dark:active:not(:disabled) {
-  background-color: #525252; /* gray.600 */
-  border-color: #737373; /* gray.500 */
-}
-
-/* Tertiary - Light Theme */
-.button--tertiary.button--light {
-  background-color: transparent;
-  color: #0284C7; /* primary.600 */
-  border-color: transparent;
-}
-
-.button--tertiary.button--light:hover:not(:disabled) {
-  background-color: #F0F9FF; /* primary.50 */
-  color: #0369A1; /* primary.700 */
-}
-
-.button--tertiary.button--light:active:not(:disabled) {
-  background-color: #E0F2FE; /* primary.100 */
-  color: #075985; /* primary.800 */
-}
-
-/* Tertiary - Dark Theme */
-.button--tertiary.button--dark {
-  background-color: transparent;
-  color: #38BDF8; /* primary.400 */
-  border-color: transparent;
-}
-
-.button--tertiary.button--dark:hover:not(:disabled) {
-  background-color: #082F49; /* primary.950 */
-  color: #7DD3FC; /* primary.300 */
-}
-
-.button--tertiary.button--dark:active:not(:disabled) {
-  background-color: #0C4A6E; /* primary.900 */
-  color: #BAE6FD; /* primary.200 */
-}
-
-/* ============================================
-   Full Width Modifier
-   ============================================ */
-
-.button--full-width {
+.fullWidth {
   width: 100%;
 }
 
-/* ============================================
-   Icon Elements
-   ============================================ */
+/* ============================================ */
+/* Icon Styles */
+/* ============================================ */
 
-.button__icon_left,
-.button__icon_right {
-  display: inline-flex;
+.iconLeft {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  margin-right: 4px;
 }
 
-.button__icon_left {
-  margin-right: -0.125rem;
-}
-
-.button__icon_right {
-  margin-left: -0.125rem;
-}
-
-/* Small size icons */
-.button--small .button__icon_left,
-.button--small .button__icon_right {
-  width: 1rem; /* 16px */
-  height: 1rem; /* 16px */
-}
-
-/* Medium size icons */
-.button--medium .button__icon_left,
-.button--medium .button__icon_right {
-  width: 1.25rem; /* 20px */
-  height: 1.25rem; /* 20px */
-}
-
-/* Large size icons */
-.button--large .button__icon_left,
-.button--large .button__icon_right {
-  width: 1.5rem; /* 24px */
-  height: 1.5rem; /* 24px */
-}
-
-/* ============================================
-   Loading State
-   ============================================ */
-
-.button--loading {
-  pointer-events: none;
-}
-
-.button__loader {
-  display: inline-flex;
+.iconRight {
+  display: flex;
   align-items: center;
-  justify-content: center;
+  margin-left: 4px;
 }
 
-.button__spinner {
+.text {
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================ */
+/* Loading Spinner */
+/* ============================================ */
+
+.loadingSpinner {
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid currentColor;
-  border-right-color: transparent;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-
-.button--small .button__spinner {
-  width: 0.875rem;
-  height: 0.875rem;
-  border-width: 2px;
-}
-
-.button--large .button__spinner {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-width: 2.5px;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -279,56 +241,58 @@
   }
 }
 
-/* ============================================
-   Text Element
-   ============================================ */
-
-.button__text {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* ============================================
-   Responsive Design
-   ============================================ */
+/* ============================================ */
+/* Responsive Adjustments */
+/* ============================================ */
 
 @media (max-width: 768px) {
-  /* Mobile adjustments */
-  .button--small {
-    min-height: 1.875rem; /* 30px */
-    padding: 0.3125rem 0.625rem; /* 5px 10px */
+  .size-small {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 15px;
   }
-  
-  .button--medium {
-    min-height: 2.25rem; /* 36px */
-    padding: 0.4375rem 0.875rem; /* 7px 14px */
+
+  .size-medium {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 17px;
   }
-  
-  .button--large {
-    min-height: 2.75rem; /* 44px */
-    padding: 0.625rem 1.25rem; /* 10px 20px */
+
+  .size-large {
+    height: 52px;
+    padding: 0 22px;
+    font-size: 19px;
   }
 }
 
-/* ============================================
-   Accessibility
-   ============================================ */
+/* ============================================ */
+/* High Contrast Mode Support */
+/* ============================================ */
 
-@media (prefers-reduced-motion: reduce) {
-  .button,
-  .button__spinner {
-    animation: none;
-    transition: none;
-  }
-}
-
-/* High Contrast Mode */
 @media (prefers-contrast: high) {
   .button {
     border-width: 2px;
   }
-  
-  .button--tertiary {
-    border-width: 1px;
+
+  .variant-tertiary.theme-light {
+    border-color: #000000;
+  }
+
+  .variant-tertiary.theme-dark {
+    border-color: #ffffff;
+  }
+}
+
+/* ============================================ */
+/* Reduced Motion Support */
+/* ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .loadingSpinner {
+    animation: none;
   }
 }
