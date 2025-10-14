@@ -1,0 +1,542 @@
+/* ============================================ */
+/* SelectBox Base Styles */
+/* ============================================ */
+
+.container {
+  /* Reset */
+  box-sizing: border-box;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: fit-content;
+  position: relative;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.selectContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================ */
+/* Label Styles */
+/* ============================================ */
+
+.label {
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.14px;
+
+  /* Colors */
+  color: var(--label-color);
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.required {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ============================================ */
+/* Trigger Button Styles */
+/* ============================================ */
+
+.trigger {
+  /* Reset */
+  all: unset;
+  box-sizing: border-box;
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
+  text-align: left;
+
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+
+  /* Border */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  /* Background */
+  background-color: var(--background-color);
+
+  /* Focus */
+  outline: none;
+
+  /* States */
+  &:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-hover-color);
+    background-color: var(--background-hover-color);
+  }
+}
+
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--arrow-color);
+}
+
+.arrowUp {
+  /* Rotated state - handled by CSS transform or icon swap */
+}
+
+.arrowDown {
+  /* Default state */
+}
+
+/* ============================================ */
+/* Size Variants */
+/* ============================================ */
+
+.size-small {
+  height: 32px;
+  padding: 0 8px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.14px;
+  border-radius: 6px;
+}
+
+.size-small .arrow {
+  width: 20px;
+  height: 20px;
+}
+
+.size-medium {
+  height: 48px;
+  padding: 0 12px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+
+.size-medium .arrow {
+  width: 24px;
+  height: 24px;
+}
+
+.size-large {
+  height: 56px;
+  padding: 0 16px;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.18px;
+  border-radius: 12px;
+}
+
+.size-large .arrow {
+  width: 28px;
+  height: 28px;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations - Light Theme */
+/* ============================================ */
+
+/* Primary - Light */
+.variant-primary.theme-light {
+  --background-color: #ffffff;
+  --background-hover-color: #f8fafc;
+  --border-color: #c7c7c7;
+  --border-hover-color: #a3a3a3;
+  --text-color: #1c1c1c;
+  --arrow-color: #525252;
+  --focus-color: #0ea5e9;
+  --label-color: #374151;
+}
+
+.variant-primary.theme-light.error {
+  --border-color: #ef4444;
+  --border-hover-color: #dc2626;
+  --focus-color: #ef4444;
+}
+
+.variant-primary.theme-light.open {
+  --border-color: #0ea5e9;
+  --background-color: #f8fafc;
+}
+
+/* Secondary - Light */
+.variant-secondary.theme-light {
+  --background-color: #f8fafc;
+  --background-hover-color: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-hover-color: #cbd5e1;
+  --text-color: #1e293b;
+  --arrow-color: #475569;
+  --focus-color: #0ea5e9;
+  --label-color: #374151;
+}
+
+.variant-secondary.theme-light.error {
+  --border-color: #ef4444;
+  --border-hover-color: #dc2626;
+  --focus-color: #ef4444;
+}
+
+.variant-secondary.theme-light.open {
+  --border-color: #0ea5e9;
+  --background-color: #f1f5f9;
+}
+
+/* Tertiary - Light */
+.variant-tertiary.theme-light {
+  --background-color: transparent;
+  --background-hover-color: #f8fafc;
+  --border-color: #d1d5db;
+  --border-hover-color: #9ca3af;
+  --text-color: #374151;
+  --arrow-color: #6b7280;
+  --focus-color: #0ea5e9;
+  --label-color: #374151;
+}
+
+.variant-tertiary.theme-light.error {
+  --border-color: #ef4444;
+  --border-hover-color: #dc2626;
+  --focus-color: #ef4444;
+}
+
+.variant-tertiary.theme-light.open {
+  --border-color: #0ea5e9;
+  --background-color: #f8fafc;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations - Dark Theme */
+/* ============================================ */
+
+/* Primary - Dark */
+.variant-primary.theme-dark {
+  --background-color: #1f2937;
+  --background-hover-color: #374151;
+  --border-color: #4b5563;
+  --border-hover-color: #6b7280;
+  --text-color: #f9fafb;
+  --arrow-color: #d1d5db;
+  --focus-color: #38bdf8;
+  --label-color: #e5e7eb;
+}
+
+.variant-primary.theme-dark.error {
+  --border-color: #f87171;
+  --border-hover-color: #ef4444;
+  --focus-color: #f87171;
+}
+
+.variant-primary.theme-dark.open {
+  --border-color: #38bdf8;
+  --background-color: #374151;
+}
+
+/* Secondary - Dark */
+.variant-secondary.theme-dark {
+  --background-color: #374151;
+  --background-hover-color: #4b5563;
+  --border-color: #6b7280;
+  --border-hover-color: #9ca3af;
+  --text-color: #f3f4f6;
+  --arrow-color: #d1d5db;
+  --focus-color: #38bdf8;
+  --label-color: #e5e7eb;
+}
+
+.variant-secondary.theme-dark.error {
+  --border-color: #f87171;
+  --border-hover-color: #ef4444;
+  --focus-color: #f87171;
+}
+
+.variant-secondary.theme-dark.open {
+  --border-color: #38bdf8;
+  --background-color: #4b5563;
+}
+
+/* Tertiary - Dark */
+.variant-tertiary.theme-dark {
+  --background-color: transparent;
+  --background-hover-color: #374151;
+  --border-color: #6b7280;
+  --border-hover-color: #9ca3af;
+  --text-color: #d1d5db;
+  --arrow-color: #9ca3af;
+  --focus-color: #38bdf8;
+  --label-color: #e5e7eb;
+}
+
+.variant-tertiary.theme-dark.error {
+  --border-color: #f87171;
+  --border-hover-color: #ef4444;
+  --focus-color: #f87171;
+}
+
+.variant-tertiary.theme-dark.open {
+  --border-color: #38bdf8;
+  --background-color: #374151;
+}
+
+/* ============================================ */
+/* Dropdown Styles */
+/* ============================================ */
+
+.dropdown {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+
+  /* Appearance */
+  background-color: var(--dropdown-background);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 8px;
+  box-shadow: var(--dropdown-shadow);
+
+  /* Display */
+  opacity: 0;
+
+  /* Reset */
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.dropdown.open {
+  opacity: 1;
+}
+
+/* Light theme dropdown */
+.dropdown.theme-light {
+  --dropdown-background: #ffffff;
+  --dropdown-border: #e5e7eb;
+  --dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme dropdown */
+.dropdown.theme-dark {
+  --dropdown-background: #374151;
+  --dropdown-border: #4b5563;
+  --dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================ */
+/* Option Styles */
+/* ============================================ */
+
+.option {
+  /* Layout */
+  padding: 8px 12px;
+  cursor: pointer;
+
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+
+  /* Appearance */
+  color: var(--option-text-color);
+  background-color: transparent;
+
+  /* Interaction */
+  user-select: none;
+}
+
+.option:hover,
+.option.focused {
+  background-color: var(--option-hover-background);
+  color: var(--option-hover-text-color);
+}
+
+.option.selected {
+  background-color: var(--option-selected-background);
+  color: var(--option-selected-text-color);
+  font-weight: 500;
+}
+
+.option.selected:hover,
+.option.selected.focused {
+  background-color: var(--option-selected-hover-background);
+}
+
+.optionDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.optionDisabled:hover,
+.optionDisabled.focused {
+  background-color: transparent;
+  color: var(--option-text-color);
+}
+
+/* Light theme options */
+.dropdown.theme-light .option {
+  --option-text-color: #374151;
+  --option-hover-background: #f3f4f6;
+  --option-hover-text-color: #1f2937;
+  --option-selected-background: #dbeafe;
+  --option-selected-text-color: #1e40af;
+  --option-selected-hover-background: #bfdbfe;
+}
+
+/* Dark theme options */
+.dropdown.theme-dark .option {
+  --option-text-color: #e5e7eb;
+  --option-hover-background: #4b5563;
+  --option-hover-text-color: #f9fafb;
+  --option-selected-background: #1e3a8a;
+  --option-selected-text-color: #dbeafe;
+  --option-selected-hover-background: #1e40af;
+}
+
+/* ============================================ */
+/* Help Text & Error Message */
+/* ============================================ */
+
+.helpText,
+.errorMessage {
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.12px;
+
+  /* Layout */
+  margin-top: 4px;
+}
+
+.helpText {
+  color: #6b7280;
+}
+
+.errorMessage {
+  color: #ef4444;
+}
+
+/* ============================================ */
+/* Accessibility & States */
+/* ============================================ */
+
+/* Focus visible styles */
+.trigger:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  border-color: var(--border-color);
+  background-color: var(--background-color);
+}
+
+/* Error state */
+.error {
+  border-color: var(--border-color);
+}
+
+/* ============================================ */
+/* Responsive Design */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  .dropdown {
+    max-height: 160px;
+  }
+
+  .option {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* ============================================ */
+/* Animation removed per cursor rules */
+/* ============================================ */
+
+/* ============================================ */
+/* Scrollbar Styling */
+/* ============================================ */
+
+.dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 3px;
+}
+
+.dropdown.theme-dark::-webkit-scrollbar-thumb {
+  background-color: #6b7280;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+.dropdown.theme-dark::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}

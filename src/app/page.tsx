@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Input } from "@/commons/components/input";
 import { Searchbar } from "@/commons/components/searchbar";
+import { Toggle } from "@/commons/components/toggle";
 import { SearchbarVariant, SearchbarSize } from "@/commons/constants/enum";
 
 export default function Home() {
@@ -106,6 +107,154 @@ export default function Home() {
               size={SearchbarSize.MEDIUM}
               placeholder="검색어를 입력해 주세요."
               disabled={true}
+            />
+          </div>
+        </div>
+
+        {/* Toggle Component Test Section */}
+        <div className="w-full max-w-md space-y-6">
+          <h2 className="text-2xl font-bold mb-4">Toggle Component Test</h2>
+
+          {/* Primary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Primary Variant</h3>
+            <Toggle
+              variant="primary"
+              size="small"
+              label="Small Toggle"
+              description="This is a small primary toggle"
+              onChange={(checked) => console.log("Small toggle:", checked)}
+            />
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Medium Toggle (Default)"
+              description="This matches the Figma design"
+              onChange={(checked) => console.log("Medium toggle:", checked)}
+            />
+            <Toggle
+              variant="primary"
+              size="large"
+              label="Large Toggle"
+              description="This is a large primary toggle"
+              onChange={(checked) => console.log("Large toggle:", checked)}
+            />
+          </div>
+
+          {/* Secondary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Secondary Variant</h3>
+            <Toggle
+              variant="secondary"
+              size="medium"
+              label="Secondary Toggle"
+              description="This is a secondary variant"
+              onChange={(checked) => console.log("Secondary toggle:", checked)}
+            />
+          </div>
+
+          {/* Tertiary Variants */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Tertiary Variant</h3>
+            <Toggle
+              variant="tertiary"
+              size="medium"
+              label="Tertiary Toggle"
+              description="This is a tertiary variant"
+              onChange={(checked) => console.log("Tertiary toggle:", checked)}
+            />
+          </div>
+
+          {/* Label Position */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Label Position</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Left Label"
+              labelPosition="left"
+              description="Label on the left side"
+              onChange={(checked) => console.log("Left label toggle:", checked)}
+            />
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Right Label"
+              labelPosition="right"
+              description="Label on the right side"
+              onChange={(checked) =>
+                console.log("Right label toggle:", checked)
+              }
+            />
+          </div>
+
+          {/* Controlled Toggle */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Controlled Toggle</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Controlled Toggle"
+              description="This toggle is controlled"
+              checked={true}
+              onChange={(checked) => console.log("Controlled toggle:", checked)}
+            />
+          </div>
+
+          {/* Error State */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Error State</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Error Toggle"
+              description="This toggle has an error"
+              error={true}
+              errorMessage="This field is required"
+              onChange={(checked) => console.log("Error toggle:", checked)}
+            />
+          </div>
+
+          {/* Disabled State */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Disabled State</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Disabled Toggle (Off)"
+              description="This toggle is disabled"
+              disabled={true}
+            />
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Disabled Toggle (On)"
+              description="This toggle is disabled but checked"
+              disabled={true}
+              defaultChecked={true}
+            />
+          </div>
+
+          {/* Full Width */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Full Width</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              label="Full Width Toggle"
+              description="This toggle takes full width"
+              fullWidth={true}
+              onChange={(checked) => console.log("Full width toggle:", checked)}
+            />
+          </div>
+
+          {/* No Label */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">No Label</h3>
+            <Toggle
+              variant="primary"
+              size="medium"
+              onChange={(checked) => console.log("No label toggle:", checked)}
             />
           </div>
         </div>

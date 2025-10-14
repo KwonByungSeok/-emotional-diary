@@ -1,0 +1,487 @@
+/* ============================================ */
+/* Toggle Base Styles */
+/* ============================================ */
+
+.container {
+  /* Base Layout */
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.toggleWrapper {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input {
+  /* Hide native checkbox */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+.toggle {
+  /* Base Layout */
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+
+  /* Border and Shape */
+  border-radius: 100px;
+  border: 2px solid transparent;
+
+  /* Transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Focus */
+  outline: none;
+}
+
+.thumb {
+  /* Layout */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+
+  /* Transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================ */
+/* Size Variants */
+/* ============================================ */
+
+.size-small {
+  width: 40px;
+  height: 22px;
+}
+
+.size-small .thumb {
+  width: 16px;
+  height: 16px;
+  left: 2px;
+}
+
+.size-small.checked .thumb {
+  left: 22px;
+}
+
+.size-medium {
+  width: 58px;
+  height: 32px;
+}
+
+.size-medium .thumb {
+  width: 24px;
+  height: 24px;
+  left: 4px;
+}
+
+.size-medium.checked .thumb {
+  left: 30px;
+}
+
+.size-large {
+  width: 72px;
+  height: 40px;
+}
+
+.size-large .thumb {
+  width: 32px;
+  height: 32px;
+  left: 4px;
+}
+
+.size-large.checked .thumb {
+  left: 36px;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations */
+/* ============================================ */
+
+/* Primary Variants */
+.variant-primary.theme-light {
+  background-color: #e5e5e5;
+}
+
+.variant-primary.theme-light .thumb {
+  background-color: #ffffff;
+}
+
+.variant-primary.theme-light.checked {
+  background-color: #3ad84a;
+}
+
+.variant-primary.theme-light:hover:not(.disabled) {
+  background-color: #d4d4d4;
+}
+
+.variant-primary.theme-light.checked:hover:not(.disabled) {
+  background-color: #32c441;
+}
+
+.variant-primary.theme-dark {
+  background-color: #525252;
+}
+
+.variant-primary.theme-dark .thumb {
+  background-color: #ffffff;
+}
+
+.variant-primary.theme-dark.checked {
+  background-color: #3ad84a;
+}
+
+.variant-primary.theme-dark:hover:not(.disabled) {
+  background-color: #737373;
+}
+
+.variant-primary.theme-dark.checked:hover:not(.disabled) {
+  background-color: #32c441;
+}
+
+/* Secondary Variants */
+.variant-secondary.theme-light {
+  background-color: #f2f2f2;
+}
+
+.variant-secondary.theme-light .thumb {
+  background-color: #ffffff;
+}
+
+.variant-secondary.theme-light.checked {
+  background-color: #0ea5e9;
+}
+
+.variant-secondary.theme-light:hover:not(.disabled) {
+  background-color: #e5e5e5;
+}
+
+.variant-secondary.theme-light.checked:hover:not(.disabled) {
+  background-color: #0284c7;
+}
+
+.variant-secondary.theme-dark {
+  background-color: #404040;
+}
+
+.variant-secondary.theme-dark .thumb {
+  background-color: #ffffff;
+}
+
+.variant-secondary.theme-dark.checked {
+  background-color: #38bdf8;
+}
+
+.variant-secondary.theme-dark:hover:not(.disabled) {
+  background-color: #525252;
+}
+
+.variant-secondary.theme-dark.checked:hover:not(.disabled) {
+  background-color: #0ea5e9;
+}
+
+/* Tertiary Variants */
+.variant-tertiary.theme-light {
+  background-color: transparent;
+  border-color: #d4d4d4;
+}
+
+.variant-tertiary.theme-light .thumb {
+  background-color: #d4d4d4;
+}
+
+.variant-tertiary.theme-light.checked {
+  background-color: transparent;
+  border-color: #000000;
+}
+
+.variant-tertiary.theme-light.checked .thumb {
+  background-color: #000000;
+}
+
+.variant-tertiary.theme-light:hover:not(.disabled) {
+  border-color: #a3a3a3;
+}
+
+.variant-tertiary.theme-light:hover:not(.disabled) .thumb {
+  background-color: #a3a3a3;
+}
+
+.variant-tertiary.theme-light.checked:hover:not(.disabled) {
+  border-color: #1a1a1a;
+}
+
+.variant-tertiary.theme-light.checked:hover:not(.disabled) .thumb {
+  background-color: #1a1a1a;
+}
+
+.variant-tertiary.theme-dark {
+  background-color: transparent;
+  border-color: #525252;
+}
+
+.variant-tertiary.theme-dark .thumb {
+  background-color: #525252;
+}
+
+.variant-tertiary.theme-dark.checked {
+  background-color: transparent;
+  border-color: #ffffff;
+}
+
+.variant-tertiary.theme-dark.checked .thumb {
+  background-color: #ffffff;
+}
+
+.variant-tertiary.theme-dark:hover:not(.disabled) {
+  border-color: #737373;
+}
+
+.variant-tertiary.theme-dark:hover:not(.disabled) .thumb {
+  background-color: #737373;
+}
+
+.variant-tertiary.theme-dark.checked:hover:not(.disabled) {
+  border-color: #f5f5f5;
+}
+
+.variant-tertiary.theme-dark.checked:hover:not(.disabled) .thumb {
+  background-color: #f5f5f5;
+}
+
+/* ============================================ */
+/* Label Styles */
+/* ============================================ */
+
+.label {
+  /* Typography */
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  cursor: pointer;
+  user-select: none;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.labelPosition-left {
+  order: -1;
+}
+
+.labelPosition-right {
+  order: 1;
+}
+
+.description {
+  /* Typography */
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  opacity: 0.7;
+}
+
+/* ============================================ */
+/* Theme Colors for Labels */
+/* ============================================ */
+
+.theme-light .label {
+  color: #000000;
+}
+
+.theme-light .description {
+  color: #525252;
+}
+
+.theme-dark .label {
+  color: #ffffff;
+}
+
+.theme-dark .description {
+  color: #a3a3a3;
+}
+
+/* ============================================ */
+/* State Modifiers */
+/* ============================================ */
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled .toggle {
+  cursor: not-allowed;
+}
+
+.disabled .label,
+.labelDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.fullWidth {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* ============================================ */
+/* Error States */
+/* ============================================ */
+
+.error .toggle {
+  border-color: #ef4444;
+}
+
+.error .label {
+  color: #ef4444;
+}
+
+.errorMessage {
+  /* Typography */
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  color: #ef4444;
+
+  /* Layout */
+  margin-top: 4px;
+  width: 100%;
+}
+
+/* ============================================ */
+/* Focus States */
+/* ============================================ */
+
+.input:focus + .toggle {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.theme-light {
+  --focus-color: #0ea5e9;
+}
+
+.theme-dark {
+  --focus-color: #38bdf8;
+}
+
+/* ============================================ */
+/* Responsive Adjustments */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  .size-small {
+    width: 44px;
+    height: 26px;
+  }
+
+  .size-small .thumb {
+    width: 18px;
+    height: 18px;
+    left: 3px;
+  }
+
+  .size-small.checked .thumb {
+    left: 23px;
+  }
+
+  .size-medium {
+    width: 62px;
+    height: 36px;
+  }
+
+  .size-medium .thumb {
+    width: 28px;
+    height: 28px;
+    left: 4px;
+  }
+
+  .size-medium.checked .thumb {
+    left: 30px;
+  }
+
+  .size-large {
+    width: 76px;
+    height: 44px;
+  }
+
+  .size-large .thumb {
+    width: 36px;
+    height: 36px;
+    left: 4px;
+  }
+
+  .size-large.checked .thumb {
+    left: 36px;
+  }
+
+  .label {
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+/* ============================================ */
+/* High Contrast Mode Support */
+/* ============================================ */
+
+@media (prefers-contrast: high) {
+  .toggle {
+    border-width: 3px;
+  }
+
+  .variant-tertiary.theme-light {
+    border-color: #000000;
+  }
+
+  .variant-tertiary.theme-dark {
+    border-color: #ffffff;
+  }
+
+  .thumb {
+    box-shadow: 0 0 0 2px currentColor;
+  }
+}
+
+/* ============================================ */
+/* Reduced Motion Support */
+/* ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle,
+  .thumb {
+    transition: none;
+  }
+}
