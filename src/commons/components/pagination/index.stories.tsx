@@ -112,7 +112,9 @@ type Story = StoryObj<typeof Pagination>;
 // Interactive Wrapper Component
 // ============================================
 
-const InteractivePagination = (args: React.ComponentProps<typeof Pagination>) => {
+const InteractivePagination = (
+  args: React.ComponentProps<typeof Pagination>
+) => {
   const [currentPage, setCurrentPage] = useState(args.currentPage || 1);
 
   const handlePageChange = (page: number) => {

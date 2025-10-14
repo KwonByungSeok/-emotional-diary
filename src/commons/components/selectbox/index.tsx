@@ -351,8 +351,8 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
               <img
                 src="/icons/arrow_drop_down.svg"
                 alt=""
-                width="24"
-                height="24"
+                width="8.6"
+                height="4.7"
               />
             </span>
           </button>
@@ -381,7 +381,17 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
                     !option.disabled && setFocusedIndex(index)
                   }
                 >
-                  {option.label}
+                  <span className={styles.optionText}>{option.label}</span>
+                  {option.value === selectedValue && (
+                    <span className={styles.optionIcon}>
+                      <img
+                        src="/icons/check_outline_light_xs.svg"
+                        alt=""
+                        width="16"
+                        height="16"
+                      />
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

@@ -46,17 +46,20 @@ export interface ToggleProps
   ) => void;
 
   /**
-   * 라벨 텍스트
+   * 라벨 텍스트 (사용되지 않음 - 토글 버튼만 사용)
+   * @deprecated 토글 글자 제거로 인해 사용되지 않습니다
    */
   label?: string;
 
   /**
-   * 라벨 위치
+   * 라벨 위치 (사용되지 않음 - 토글 버튼만 사용)
+   * @deprecated 토글 글자 제거로 인해 사용되지 않습니다
    */
   labelPosition?: "left" | "right";
 
   /**
-   * 설명 텍스트
+   * 설명 텍스트 (사용되지 않음 - 토글 버튼만 사용)
+   * @deprecated 토글 글자 제거로 인해 사용되지 않습니다
    */
   description?: string;
 
@@ -94,9 +97,9 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
       checked,
       defaultChecked = false,
       onChange,
-      label,
-      labelPosition = "right",
-      description,
+      label, // 사용되지 않음
+      labelPosition = "right", // 사용되지 않음
+      description, // 사용되지 않음
       error = false,
       errorMessage,
       fullWidth = false,
@@ -132,6 +135,29 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
       [isControlled, onChange]
     );
 
+    // 토글 스위치 클릭 핸들러
+    const handleToggleClick = useCallback(
+      (event: React.MouseEvent) => {
+        if (disabled) return;
+
+        event.preventDefault();
+        const newChecked = !toggleChecked;
+
+        if (!isControlled) {
+          setInternalChecked(newChecked);
+        }
+
+        // 가상의 input change 이벤트 생성
+        const syntheticEvent = {
+          target: { checked: newChecked },
+          currentTarget: { checked: newChecked },
+        } as React.ChangeEvent<HTMLInputElement>;
+
+        onChange?.(newChecked, syntheticEvent);
+      },
+      [disabled, toggleChecked, isControlled, onChange]
+    );
+
     // 컨테이너 클래스명 조합
     const containerClasses = [
       styles.container,
@@ -157,15 +183,6 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
       .filter(Boolean)
       .join(" ");
 
-    // 라벨 클래스명 조합
-    const labelClasses = [
-      styles.label,
-      styles[`labelPosition-${labelPosition}`],
-      disabled && styles.labelDisabled,
-    ]
-      .filter(Boolean)
-      .join(" ");
-
     // 토글 컨텐츠 렌더링
     const toggleContent = (
       <div className={styles.toggleWrapper}>
@@ -180,32 +197,16 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
           data-testid={testId}
           {...props}
         />
-        <div className={toggleClasses}>
+        <div className={toggleClasses} onClick={handleToggleClick}>
           <div className={styles.thumb} />
         </div>
       </div>
     );
 
-    // 라벨 컨텐츠 렌더링
-    const labelContent = label && (
-      <label htmlFor={toggleId} className={labelClasses}>
-        {label}
-        {description && (
-          <span className={styles.description}>{description}</span>
-        )}
-      </label>
-    );
-
     return (
       <div className={containerClasses}>
-        {/* 라벨이 왼쪽에 있는 경우 */}
-        {labelPosition === "left" && labelContent}
-
-        {/* 토글 스위치 */}
+        {/* 토글 스위치만 렌더링 */}
         {toggleContent}
-
-        {/* 라벨이 오른쪽에 있는 경우 */}
-        {labelPosition === "right" && labelContent}
 
         {/* 에러 메시지 */}
         {error && errorMessage && (
@@ -215,11 +216,5 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
     );
   }
 );
-
-Toggle.displayName = "Toggle";
-
-// ============================================
-// Export
-// ============================================
 
 export default Toggle;

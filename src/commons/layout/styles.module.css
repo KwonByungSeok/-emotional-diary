@@ -10,11 +10,26 @@
 /* Header */
 .header {
   height: 60px;
-  background-color: #f0f0f0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
+  justify-content: flex-start;
+  padding: 0 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+}
+
+.logoText {
+  font-family: var(--font-family-korean);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.18px;
+  color: var(--foreground-primary);
 }
 
 /* Gap */
@@ -24,40 +39,118 @@
 
 /* Banner */
 .banner {
+  position: relative;
   height: 240px;
-  background-color: #e0e0e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
+  width: 1168px;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #d9d9d9;
+}
+
+.bannerImage {
+  object-fit: cover;
+  border-radius: 24px;
 }
 
 /* Navigation */
 .navigation {
   height: 48px;
-  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.tab {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ddd;
+  width: 119px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.tabActive {
+  border-bottom: 2px solid var(--foreground-primary);
+}
+
+.tabText {
+  font-family: var(--font-family-korean);
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  padding: 0 8px;
+}
+
+.tabActive .tabText {
+  font-weight: 700; /* Bold */
+  color: #000000; /* 일기보관함: black */
+}
+
+.tabInactive {
+  font-weight: 500;
+  color: #ababab; /* 사진보관함: gray60 */
 }
 
 /* Children Content */
 .children {
   flex: 1;
   min-height: 200px;
-  background-color: #fafafa;
+  background-color: var(--background-primary);
   padding: 20px;
   box-sizing: border-box;
-  border: 1px solid #ddd;
 }
 
 /* Footer */
 .footer {
   height: 160px;
-  background-color: #f0f0f0;
+  background-color: #f2f2f2;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ddd;
+  padding: 24px 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.footerContent {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerTitle {
+  font-family: var(--font-family-korean);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  color: var(--foreground-primary);
+  margin: 0;
+}
+
+.footerInfo {
+  font-family: var(--font-family-korean);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: var(--foreground-secondary);
+  margin: 0;
+}
+
+.footerCopyright {
+  font-family: var(--font-family-korean);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: var(--foreground-tertiary);
+  margin: 0;
 }

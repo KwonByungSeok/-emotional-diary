@@ -1,0 +1,122 @@
+/* ============================================ */
+/* Diaries Component Styles */
+/* ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1168px;
+  margin: 0 auto;
+}
+
+/* ============================================ */
+/* Gap Sections - 정확한 수치값 적용 */
+/* ============================================ */
+
+/* Gap 1: 1168 * 32 */
+.gap {
+  width: 1168px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* Gap 2: 1168 * 42 */
+.gap2 {
+  width: 1168px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+/* Gap 3: 1168 * 40 */
+.gap3 {
+  width: 1168px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* Gap 4: 1168 * 40 */
+.gap4 {
+  width: 1168px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* ============================================ */
+/* Content Sections - 정확한 수치값 적용 */
+/* ============================================ */
+
+/* Search Section: 1168 * 48 */
+.searchSection {
+  width: 1168px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main Content Section: 1168 * 936 */
+.mainSection {
+  width: 1168px;
+  height: 936px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e5e5;
+  background-color: #fafafa;
+}
+
+/* Pagination Section: 1168 * 32 */
+.paginationSection {
+  width: 1168px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================ */
+/* Placeholder Styles */
+/* ============================================ */
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #737373;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.placeholder p {
+  margin: 0;
+}
+
+/* ============================================ */
+/* Responsive Adjustments */
+/* ============================================ */
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .gap,
+  .gap2,
+  .gap3,
+  .gap4,
+  .searchSection,
+  .mainSection,
+  .paginationSection {
+    width: 100%;
+  }
+
+  .mainSection {
+    min-height: 400px;
+    height: auto;
+  }
+}
