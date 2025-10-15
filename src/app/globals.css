@@ -242,7 +242,7 @@
 
 body {
   color: var(--foreground-primary);
-  background: var(--background-primary);
+  background: #ffffff;
   font-family: var(--font-family-default);
 }
 
