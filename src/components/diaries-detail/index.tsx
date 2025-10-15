@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/commons/components/button";
+import { Input } from "@/commons/components/input";
 import { EmotionType, getEmotionData, getEmotionImage, getEmotionLabel } from "@/commons/constants/enum";
 import styles from "./styles.module.css";
 
@@ -27,6 +28,13 @@ interface DiaryDetailData {
   updatedAt: string;
 }
 
+// 회고 데이터 인터페이스
+interface RetrospectData {
+  id: string;
+  content: string;
+  createdAt: string;
+}
+
 // ============================================
 // Mock Data
 // ============================================
@@ -40,6 +48,20 @@ const mockDiaryData: DiaryDetailData = {
   updatedAt: "2024-07-12"
 };
 
+// Mock 회고 데이터
+const mockRetrospectData: RetrospectData[] = [
+  {
+    id: "1",
+    content: "3년이 지나고 다시 보니 이때가 그립다.",
+    createdAt: "2024. 09. 24"
+  },
+  {
+    id: "2", 
+    content: "3년이 지나고 다시 보니 이때가 그립다.",
+    createdAt: "2024. 09. 24"
+  }
+];
+
 // ============================================
 // DiariesDetail Component
 // ============================================
@@ -51,6 +73,10 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
   // TODO: 향후 실제 데이터 fetching에서 id 사용
   const diaryData = { ...mockDiaryData, id: id || mockDiaryData.id };
   const emotionData = getEmotionData(diaryData.emotion);
+  
+  // 회고 입력 상태 관리
+  const [retrospectInput, setRetrospectInput] = useState("");
+  const [retrospectList, setRetrospectList] = useState<RetrospectData[]>(mockRetrospectData);
   
   const handleCopyContent = () => {
     navigator.clipboard.writeText(diaryData.content);
@@ -67,6 +93,22 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
     console.log("삭제 버튼 클릭");
   };
 
+  const handleRetrospectSubmit = () => {
+    if (retrospectInput.trim()) {
+      const newRetrospect: RetrospectData = {
+        id: Date.now().toString(),
+        content: retrospectInput.trim(),
+        createdAt: new Date().toLocaleDateString('ko-KR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).replace(/\./g, '. ').replace(/ /g, '')
+      };
+      setRetrospectList(prev => [newRetrospect, ...prev]);
+      setRetrospectInput("");
+    }
+  };
+
   return (
     <div className={`${styles.container} ${className || ""}`}>
       {/* Gap: 1168 * 64 */}
@@ -80,10 +122,10 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
         <div className={styles.emotionDateSection}>
           <div className={styles.emotionInfo}>
             <Image
-              src={getEmotionImage(diaryData.emotion, "medium")}
+              src={getEmotionImage(diaryData.emotion, "small")}
               alt={getEmotionLabel(diaryData.emotion)}
-              width={32}
-              height={32}
+              width={24}
+              height={24}
               className={styles.emotionIcon}
             />
             <span 
@@ -136,7 +178,7 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
         <div className={styles.buttonGroup}>
           <Button
             variant="tertiary"
-            size="medium"
+            size="small"
             theme="light"
             onClick={handleEdit}
           >
@@ -144,7 +186,7 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
           </Button>
           <Button
             variant="tertiary"
-            size="medium"
+            size="small"
             theme="light"
             onClick={handleDelete}
           >
@@ -158,10 +200,28 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
       
       {/* Retrospect Input: 1168 * 85 */}
       <div className={styles.retrospectInput}>
-        <textarea 
-          placeholder="회고를 작성해주세요..."
-          className={styles.textarea}
-        />
+        <div className={styles.retrospectLabel}>회고</div>
+        <div className={styles.retrospectInputContainer}>
+          <Input
+            variant="primary"
+            size="medium"
+            theme="light"
+            placeholder="회고를 남겨보세요."
+            value={retrospectInput}
+            onChange={(e) => setRetrospectInput(e.target.value)}
+            className="flex-1"
+            fullWidth={false}
+          />
+          <Button
+            variant="primary"
+            size="medium"
+            theme="light"
+            onClick={handleRetrospectSubmit}
+            className="w-[51px]"
+          >
+            입력
+          </Button>
+        </div>
       </div>
       
       {/* Gap: 1168 * 16 */}
@@ -169,14 +229,17 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
       
       {/* Retrospect List: 1168 * 72 */}
       <div className={styles.retrospectList}>
-        <div className={styles.retrospectItem}>
-          <span className={styles.retrospectDate}>2024-01-01</span>
-          <p className={styles.retrospectContent}>첫 번째 회고 내용입니다.</p>
-        </div>
-        <div className={styles.retrospectItem}>
-          <span className={styles.retrospectDate}>2024-01-02</span>
-          <p className={styles.retrospectContent}>두 번째 회고 내용입니다.</p>
-        </div>
+        {retrospectList.map((retrospect, index) => (
+          <div key={retrospect.id}>
+            <div className={styles.retrospectItem}>
+              <span className={styles.retrospectContent}>{retrospect.content}</span>
+              <span className={styles.retrospectDate}>[{retrospect.createdAt}]</span>
+            </div>
+            {index < retrospectList.length - 1 && (
+              <div className={styles.retrospectDivider}></div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
