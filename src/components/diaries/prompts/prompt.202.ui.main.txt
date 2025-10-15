@@ -10,7 +10,7 @@
 
 ==============================================
 
-조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: jc377b8g)
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: acyxrixx)
 조건-피그마) 구현될 컴포넌트 노드ID(main 영역): 3:1575
 
 조건-파일경로) 구현될 TSX 파일경로: src/components/diaries/index.tsx
@@ -47,4 +47,10 @@
 
 ==============================================
 
-핵심요구사항) styles_cardMeta와 styles_cardTitle의 폰트 사이즈가 피그마와 다름. 피그마와 동일하게 만들것.
+핵심요구사항) styles_cardContent padding이 위아래만 16px이여야함. 왼쪽 오른쪽 padding은 8px이여야함. 피그마와 동일하게 수정할것.
+
+핵심요구사항) styles_cardMeta 사이즈가 피그마에선 258px x 24px인데 현재 사이즈가 다름. 피그마와 동일하게 수정할것
+노드ID: 3:1610
+
+핵심요구사항) styles_cardTitle 사이즈가 피그마에선 258px x 24px인데 현재 사이즈가 다름. 피그마와 동일하게 수정할것
+노드ID: 3-1613

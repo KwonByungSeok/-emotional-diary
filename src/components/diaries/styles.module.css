@@ -170,7 +170,7 @@
 /* 카드 콘텐츠 영역 */
 .cardContent {
   width: 100%;
-  padding: 16px;
+  padding: 16px 8px; /* 위아래 16px, 좌우 8px */
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -181,7 +181,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 20px;
+  width: 258px; /* 피그마와 일치 */
+  height: 24px; /* 피그마와 일치 */
 }
 
 .emotionLabel {
@@ -203,7 +204,8 @@
 
 /* 카드 제목 */
 .cardTitle {
-  height: 24px;
+  width: 258px; /* 피그마와 일치 */
+  height: 24px; /* 피그마와 일치 */
   overflow: hidden;
 }
 
