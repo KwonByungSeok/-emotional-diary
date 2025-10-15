@@ -1,0 +1,184 @@
+/* ============================================ */
+/* DiariesNew UI Styles */
+/* ============================================ */
+
+/* Wrapper - 640 * 560 */
+.wrapper {
+  width: 640px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-elevated);
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Header - full * 24 */
+.header {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.headerTitle {
+  font-size: var(--heading-h1-font-size);
+  line-height: var(--heading-h1-line-height);
+  font-weight: var(--heading-h1-font-weight);
+  letter-spacing: var(--heading-h1-letter-spacing);
+  color: var(--foreground-primary);
+  margin: 0;
+}
+
+/* Gap 1 - full * 40 */
+.gap1 {
+  width: 100%;
+  height: 40px;
+}
+
+/* Emotion Box - full * 64 */
+.emotionBox {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emotionTitle {
+  font-size: var(--heading-h3-font-size);
+  line-height: var(--heading-h3-line-height);
+  font-weight: var(--heading-h3-font-weight);
+  letter-spacing: var(--heading-h3-letter-spacing);
+  color: var(--foreground-primary);
+  margin: 0;
+}
+
+.emotionRadioGroup {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.emotionRadioItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.emotionRadioInput {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-primary);
+  background-color: var(--background-elevated);
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.emotionRadioInput:checked {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-primary);
+}
+
+.emotionRadioInput:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--background-elevated);
+}
+
+.emotionRadioLabel {
+  font-size: var(--body-large-font-size);
+  line-height: var(--body-large-line-height);
+  font-weight: var(--body-large-font-weight);
+  color: var(--foreground-secondary);
+}
+
+/* Gap 2 - full * 40 */
+.gap2 {
+  width: 100%;
+  height: 40px;
+}
+
+/* Input Title - full * 76 */
+.inputTitle {
+  width: 100%;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Gap 3 - full * 24 */
+.gap3 {
+  width: 100%;
+  height: 24px;
+}
+
+/* Input Content - full * 156 */
+.inputContent {
+  width: 100%;
+  height: 156px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contentLabel {
+  font-size: var(--label-medium-font-size);
+  line-height: var(--label-medium-line-height);
+  font-weight: var(--label-medium-font-weight);
+  color: var(--foreground-secondary);
+}
+
+.contentTextarea {
+  width: 100%;
+  height: 128px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background-color: var(--background-elevated);
+  color: var(--foreground-primary);
+  font-family: var(--font-family-default);
+  font-size: var(--body-medium-font-size);
+  line-height: var(--body-medium-line-height);
+  resize: none;
+  box-sizing: border-box;
+}
+
+.contentTextarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+.contentTextarea::placeholder {
+  color: var(--foreground-tertiary);
+}
+
+/* Gap 4 - full * 40 */
+.gap4 {
+  width: 100%;
+  height: 40px;
+}
+
+/* Footer - full * 48 */
+.footer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}

@@ -10,7 +10,7 @@
 
 ==============================================
 
-조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: 0e1i7vh5)
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: 20kil56k)
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-title 영역): 3:1073
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-content 영역): 3:1083
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-footer 영역): 3:1092
@@ -31,9 +31,9 @@
 
 ==============================================
 
-핵심요구사항) MCP를 연동하여 피그마의 디자인을 이미 만들어져있는 와이어프레임의 detail-title, detail-content, deatil-footer 영역에 그대로 구현할 것.
+기존히스토리-참고만) MCP를 연동하여 피그마의 디자인을 이미 만들어져있는 와이어프레임의 detail-title, detail-content, deatil-footer 영역에 그대로 구현할 것.
 
-핵심요구사항) 일기상세는 아래의 조건으로 Mock 데이터를 만들어 적용할 것.
+기존히스토리-참고만) 일기상세는 아래의 조건으로 Mock 데이터를 만들어 적용할 것.
             1. 일기카드는 감정과 관련된 내용으로 enum 타입을 활용할 것.
                 - 경로: commons/constants/enum.ts
                 - 조건: enum.ts의 원본은 수정하지 말 것.
@@ -49,7 +49,7 @@
                     - 내용텍스트: 피그마와 동일하게 구현할 것.
                     - 내용복사아이콘: 피그마와 동일하게 구현할 것.
 
-핵심요구사항) 공통컴포넌트는 다음의 규칙을 지켜 step-by-step 으로 구현하고, 적용 결과를 체크리스트로 반환할 것.
+기존히스토리-참고만) 공통컴포넌트는 다음의 규칙을 지켜 step-by-step 으로 구현하고, 적용 결과를 체크리스트로 반환할 것.
             1. 공통컴포넌트 원본을 수정하지 말고, 아래의 props만 활용할 것.
                 - variant: primary, secondary를 확인하여 구현할 것.
                 - theme: light 모드만 사용할 것.
@@ -60,3 +60,19 @@
                 1) detail-footer
                     - 수정버튼: <Button />
                     - 삭제버튼: <Button />
+
+기존히스토리-참고만) styles_emotionDateSection 아래가 아닌 styles_titleSection의 border-bottom을 2px solild black 추가할 것.
+
+기존히스토리-참고만) styles_detailFooter는 height를 56px로 설정하고, border-bottom을 1px solid black으로 추가할 것.
+
+기존히스토리-참고만) styles_detailContent의 border는 피그마에 존재하지 않음. 삭제할것.
+
+기존히스토리-참고만) footer 섹션에 버튼들이 공통컴포넌트로 구현이 안되었음. 수정할것.
+
+기존히스토리-참고만) styles_contentText는 스크롤이 있으면 안됨. 노드ID: 3:1083 확인하고 수정할것.
+
+기존히스토리-참고만) styles_container, styles_detailTitle, styles_detailFooter 패딩이 이상하게 적용되어있음 노드ID: 3:1071확인하고 피그마랑 똑같이 구현할것. 
+
+==============================================
+
+핵심요구사항) styles_detailFooter는 height를 56px로 설정하고, border-bottom을 1px solid black으로 추가할 것.

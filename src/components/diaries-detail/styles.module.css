@@ -243,7 +243,6 @@
   min-height: 72px; /* 1168(width) * 72(height) - 최소 높이만 설정 */
   display: flex;
   flex-direction: column;
-  background-color: var(--background-primary);
   border-radius: 16px;
   padding: 0;
   overflow: visible;
@@ -253,35 +252,36 @@
   height: 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
+  gap: 12px;
   margin: 0;
 }
 
 .retrospectContent {
+  width: auto;
+  height: 24px;
   font-family: var(--font-family-korean);
-  font-size: var(--body-large-font-size);
-  font-weight: var(--body-large-font-weight);
-  line-height: var(--body-large-line-height);
-  letter-spacing: var(--body-large-letter-spacing);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.16px;
   color: var(--foreground-primary);
-  flex: 1;
 }
 
 .retrospectDate {
+  width: auto;
+  height: 24px;
   font-family: var(--font-family-korean);
-  font-size: var(--body-large-font-size);
-  font-weight: var(--body-large-font-weight);
-  line-height: var(--body-large-line-height);
-  letter-spacing: var(--body-large-letter-spacing);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.16px;
   color: var(--foreground-tertiary);
-  margin-left: 16px;
 }
 
 .retrospectDivider {
   height: 1px;
   background-color: var(--border-secondary);
-  margin: 0 16px;
+  margin: 12px 16px;
 }
 
 /* ============================================
