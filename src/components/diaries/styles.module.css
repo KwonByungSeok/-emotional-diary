@@ -209,14 +209,14 @@
   overflow: hidden;
 }
 
-.cardTitle h3 {
+.titleText {
   margin: 0;
-  font-family: var(--font-family-default);
-  font-size: var(--heading-h3-font-size);
-  font-weight: var(--heading-h3-font-weight);
-  line-height: 24px; /* 피그마와 일치: 18px * 1.333 = 24px */
-  letter-spacing: var(--heading-h3-letter-spacing);
-  color: var(--foreground-primary);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  color: #000000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -230,6 +230,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Pagination Container - width만 허용 */
+.paginationContainer {
+  width: 288px; /* 피그마 디자인과 일치: 24 + 224 + 24 + 16px gap */
 }
 
 /* ============================================ */

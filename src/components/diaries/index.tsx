@@ -93,7 +93,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
 
         {/* 제목 */}
         <div className={styles.cardTitle}>
-          <h3>{title}</h3>
+          <span className={styles.titleText}>{title}</span>
         </div>
       </div>
     </div>
@@ -411,9 +411,17 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
       {/* Pagination Section */}
       <div className={styles.paginationSection}>
         <Pagination
+          variant="primary"
+          size="medium"
+          theme="light"
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
+          maxVisiblePages={5}
+          showNavigationButtons={true}
+          showBoundaryButtons={false}
+          showEllipsis={false}
+          className={styles.paginationContainer}
         />
       </div>
 
