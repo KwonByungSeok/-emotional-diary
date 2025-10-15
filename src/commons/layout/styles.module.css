@@ -101,9 +101,11 @@
 .children {
   flex: 1;
   min-height: 200px;
-  background-color: var(--background-primary);
-  padding: 20px;
-  box-sizing: border-box;
+  background-color: #ffffff; /* body와 일치하는 배경 색상 */
+  overflow: hidden; /* 자식 요소들이 컨테이너를 벗어나지 않도록 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* diaries 컴포넌트를 중앙 정렬 */
 }
 
 /* Footer */

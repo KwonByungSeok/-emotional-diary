@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Searchbar } from "./index";
+import { SearchbarVariant, SearchbarSize, SearchbarTheme } from "@/commons/constants/enum";
 
 // ============================================
 // Meta Configuration
@@ -103,9 +104,9 @@ type Story = StoryObj<typeof Searchbar>;
 
 export const Default: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
+    variant: SearchbarVariant.PRIMARY,
+    size: SearchbarSize.MEDIUM,
+    theme: SearchbarTheme.LIGHT,
     placeholder: "검색어를 입력해 주세요.",
     showSearchIcon: true,
     showClearButton: true,
@@ -120,24 +121,24 @@ export const Default: Story = {
 
 export const Primary: Story = {
   args: {
-    variant: "primary",
-    theme: "light",
+    variant: SearchbarVariant.PRIMARY,
+    theme: SearchbarTheme.LIGHT,
     placeholder: "Primary 스타일 검색바",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
-    theme: "light",
+    variant: SearchbarVariant.SECONDARY,
+    theme: SearchbarTheme.LIGHT,
     placeholder: "Secondary 스타일 검색바",
   },
 };
 
 export const Tertiary: Story = {
   args: {
-    variant: "tertiary",
-    theme: "light",
+    variant: SearchbarVariant.TERTIARY,
+    theme: SearchbarTheme.LIGHT,
     placeholder: "Tertiary 스타일 검색바",
   },
 };
@@ -148,24 +149,24 @@ export const Tertiary: Story = {
 
 export const Small: Story = {
   args: {
-    size: "small",
-    variant: "primary",
+    size: SearchbarSize.SMALL,
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "작은 크기 검색바",
   },
 };
 
 export const Medium: Story = {
   args: {
-    size: "medium",
-    variant: "primary",
+    size: SearchbarSize.MEDIUM,
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "중간 크기 검색바",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: "large",
-    variant: "primary",
+    size: SearchbarSize.LARGE,
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "큰 크기 검색바",
   },
 };
@@ -176,8 +177,8 @@ export const Large: Story = {
 
 export const LightTheme: Story = {
   args: {
-    theme: "light",
-    variant: "primary",
+    theme: SearchbarTheme.LIGHT,
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "라이트 테마 검색바",
   },
   parameters: {
@@ -187,8 +188,8 @@ export const LightTheme: Story = {
 
 export const DarkTheme: Story = {
   args: {
-    theme: "dark",
-    variant: "primary",
+    theme: SearchbarTheme.DARK,
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "다크 테마 검색바",
   },
   parameters: {
@@ -202,7 +203,7 @@ export const DarkTheme: Story = {
 
 export const WithoutSearchIcon: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     showSearchIcon: false,
     placeholder: "검색 아이콘 없는 검색바",
   },
@@ -210,7 +211,7 @@ export const WithoutSearchIcon: Story = {
 
 export const WithoutClearButton: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     showClearButton: false,
     placeholder: "클리어 버튼 없는 검색바",
   },
@@ -218,7 +219,7 @@ export const WithoutClearButton: Story = {
 
 export const WithoutBothIcons: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     showSearchIcon: false,
     showClearButton: false,
     placeholder: "아이콘 없는 검색바",
@@ -231,7 +232,7 @@ export const WithoutBothIcons: Story = {
 
 export const Disabled: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     disabled: true,
     placeholder: "비활성화된 검색바",
   },
@@ -239,7 +240,7 @@ export const Disabled: Story = {
 
 export const WithValue: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "값이 있는 검색바",
     value: "검색어 예시",
   },
@@ -251,7 +252,7 @@ export const WithValue: Story = {
 
 export const FullWidth: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     fullWidth: true,
     placeholder: "전체 너비 검색바",
   },
@@ -275,33 +276,33 @@ export const AllVariants: Story = {
       }}
     >
       <Searchbar
-        variant="primary"
-        theme="light"
+        variant={SearchbarVariant.PRIMARY}
+        theme={SearchbarTheme.LIGHT}
         placeholder="Primary Light 스타일"
       />
       <Searchbar
-        variant="secondary"
-        theme="light"
+        variant={SearchbarVariant.SECONDARY}
+        theme={SearchbarTheme.LIGHT}
         placeholder="Secondary Light 스타일"
       />
       <Searchbar
-        variant="tertiary"
-        theme="light"
+        variant={SearchbarVariant.TERTIARY}
+        theme={SearchbarTheme.LIGHT}
         placeholder="Tertiary Light 스타일"
       />
       <Searchbar
-        variant="primary"
-        theme="dark"
+        variant={SearchbarVariant.PRIMARY}
+        theme={SearchbarTheme.DARK}
         placeholder="Primary Dark 스타일"
       />
       <Searchbar
-        variant="secondary"
-        theme="dark"
+        variant={SearchbarVariant.SECONDARY}
+        theme={SearchbarTheme.DARK}
         placeholder="Secondary Dark 스타일"
       />
       <Searchbar
-        variant="tertiary"
-        theme="dark"
+        variant={SearchbarVariant.TERTIARY}
+        theme={SearchbarTheme.DARK}
         placeholder="Tertiary Dark 스타일"
       />
     </div>
@@ -323,16 +324,16 @@ export const AllSizes: Story = {
       }}
     >
       <Searchbar
-        size="small"
-        variant="primary"
+        size={SearchbarSize.SMALL}
+        variant={SearchbarVariant.PRIMARY}
         placeholder="작은 크기 검색바"
       />
       <Searchbar
-        size="medium"
-        variant="primary"
+        size={SearchbarSize.MEDIUM}
+        variant={SearchbarVariant.PRIMARY}
         placeholder="중간 크기 검색바"
       />
-      <Searchbar size="large" variant="primary" placeholder="큰 크기 검색바" />
+      <Searchbar size={SearchbarSize.LARGE} variant={SearchbarVariant.PRIMARY} placeholder="큰 크기 검색바" />
     </div>
   ),
   parameters: {
@@ -350,20 +351,20 @@ export const AllStates: Story = {
         width: "300px",
       }}
     >
-      <Searchbar variant="primary" placeholder="정상 상태 검색바" />
+      <Searchbar variant={SearchbarVariant.PRIMARY} placeholder="정상 상태 검색바" />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="값이 있는 검색바"
         value="검색어 예시"
       />
-      <Searchbar variant="primary" placeholder="비활성화된 검색바" disabled />
+      <Searchbar variant={SearchbarVariant.PRIMARY} placeholder="비활성화된 검색바" disabled />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="검색 아이콘 없는 검색바"
         showSearchIcon={false}
       />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="클리어 버튼 없는 검색바"
         showClearButton={false}
       />
@@ -385,21 +386,21 @@ export const FeatureVariations: Story = {
       }}
     >
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="기본 검색바 (아이콘 모두 포함)"
       />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="검색 아이콘만 있는 검색바"
         showClearButton={false}
       />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="클리어 버튼만 있는 검색바"
         showSearchIcon={false}
       />
       <Searchbar
-        variant="primary"
+        variant={SearchbarVariant.PRIMARY}
         placeholder="아이콘 없는 검색바"
         showSearchIcon={false}
         showClearButton={false}
@@ -417,7 +418,7 @@ export const FeatureVariations: Story = {
 
 export const Interactive: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "상호작용 가능한 검색바",
   },
   play: async ({ canvasElement }) => {
@@ -464,8 +465,8 @@ export const Interactive: Story = {
 
 export const HeaderSearchbar: Story = {
   args: {
-    variant: "secondary",
-    size: "medium",
+    variant: SearchbarVariant.SECONDARY,
+    size: SearchbarSize.MEDIUM,
     placeholder: "제품, 브랜드, 키워드 검색",
     fullWidth: true,
   },
@@ -477,8 +478,8 @@ export const HeaderSearchbar: Story = {
 
 export const MobileSearchbar: Story = {
   args: {
-    variant: "primary",
-    size: "large",
+    variant: SearchbarVariant.PRIMARY,
+    size: SearchbarSize.LARGE,
     placeholder: "검색어를 입력하세요",
     fullWidth: true,
   },
@@ -492,8 +493,8 @@ export const MobileSearchbar: Story = {
 
 export const CompactSearchbar: Story = {
   args: {
-    variant: "tertiary",
-    size: "small",
+    variant: SearchbarVariant.TERTIARY,
+    size: SearchbarSize.SMALL,
     placeholder: "빠른 검색",
     showClearButton: false,
   },
@@ -508,7 +509,7 @@ export const CompactSearchbar: Story = {
 
 export const AccessibilityExample: Story = {
   args: {
-    variant: "primary",
+    variant: SearchbarVariant.PRIMARY,
     placeholder: "접근성을 고려한 검색바",
     "data-testid": "searchbar-accessibility",
     id: "main-searchbar",

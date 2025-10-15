@@ -31,4 +31,9 @@
 
 ==============================================
 
-핵심요구사항) main 배경색이 바뀌었어. 피그마와 동일하게 흰색으로 변경해줘. ✅ 완료
+핵심요구사항) className styles_children인 main태그 안의 내용물 오버플로우 문제 해결 완료.
+            - Layout의 children 클래스에서 padding 제거, overflow: hidden 적용
+            - diaries 컴포넌트 컨테이너에 overflow: hidden 추가
+            - 모든 그리드 레벨(diaryGrid, diaryRow, diaryRowInner)에 overflow: hidden 적용
+            - position: relative로 자식 요소들의 절대 위치 기준점 제공
+            - flex-shrink: 0으로 크기 고정 보장

@@ -97,9 +97,9 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
       checked,
       defaultChecked = false,
       onChange,
-      label, // 사용되지 않음
-      labelPosition = "right", // 사용되지 않음
-      description, // 사용되지 않음
+      label: _label, // eslint-disable-line @typescript-eslint/no-unused-vars
+      labelPosition: _labelPosition = "right", // eslint-disable-line @typescript-eslint/no-unused-vars
+      description: _description, // eslint-disable-line @typescript-eslint/no-unused-vars
       error = false,
       errorMessage,
       fullWidth = false,
@@ -216,5 +216,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
     );
   }
 );
+
+Toggle.displayName = "Toggle";
 
 export default Toggle;

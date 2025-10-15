@@ -3,7 +3,7 @@
  * 프로젝트 전체에서 사용되는 열거형 데이터 정의
  */
 
-import { ColorPrimitives } from "./color";
+// import { ColorPrimitives } from "./color"; // 현재 사용하지 않음
 
 // ============================================
 // Access Level Enum
@@ -71,7 +71,7 @@ export const EmotionMap: Record<EmotionType, EmotionData> = {
       medium: "/images/emotion-happy-m.png",
       small: "/images/emotion-happy-s.png",
     },
-    color: ColorPrimitives.error[600], // red60
+    color: "#ea5757", // 피그마와 일치하는 빨간색
   },
   [EmotionType.SAD]: {
     type: EmotionType.SAD,
@@ -80,7 +80,7 @@ export const EmotionMap: Record<EmotionType, EmotionData> = {
       medium: "/images/emotion-sad-m.png",
       small: "/images/emotion-sad-s.png",
     },
-    color: ColorPrimitives.info[600], // blue60
+    color: "#28b4e1", // 피그마와 일치하는 파란색
   },
   [EmotionType.ANGRY]: {
     type: EmotionType.ANGRY,
@@ -89,7 +89,7 @@ export const EmotionMap: Record<EmotionType, EmotionData> = {
       medium: "/images/emotion-angry-m.png",
       small: "/images/emotion-angry-s.png",
     },
-    color: ColorPrimitives.gray[600], // gray60
+    color: "#777777", // 피그마와 일치하는 회색
   },
   [EmotionType.SURPRISE]: {
     type: EmotionType.SURPRISE,
@@ -98,7 +98,7 @@ export const EmotionMap: Record<EmotionType, EmotionData> = {
       medium: "/images/emotion-surprise-m.png",
       small: "/images/emotion-surprise-s.png",
     },
-    color: ColorPrimitives.warning[600], // yellow60
+    color: "#d59029", // 피그마와 일치하는 주황색
   },
   [EmotionType.ETC]: {
     type: EmotionType.ETC,
@@ -107,7 +107,7 @@ export const EmotionMap: Record<EmotionType, EmotionData> = {
       medium: "/images/emotion-etc-m.png",
       small: "/images/emotion-etc-s.png",
     },
-    color: ColorPrimitives.success[600], // green60
+    color: "#a229ed", // 피그마와 일치하는 보라색
   },
 } as const;
 
