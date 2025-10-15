@@ -188,7 +188,7 @@
   font-family: var(--font-family-default);
   font-size: var(--label-medium-font-size);
   font-weight: var(--label-medium-font-weight);
-  line-height: var(--label-medium-line-height);
+  line-height: 20px; /* 피그마와 일치: 14px * 1.428 = 20px */
   letter-spacing: var(--label-medium-letter-spacing);
 }
 
@@ -196,7 +196,7 @@
   font-family: var(--font-family-default);
   font-size: var(--caption-large-font-size);
   font-weight: var(--caption-large-font-weight);
-  line-height: var(--caption-large-line-height);
+  line-height: 24px; /* 피그마와 일치: 14px * 1.714 = 24px */
   letter-spacing: var(--caption-large-letter-spacing);
   color: var(--foreground-tertiary);
 }
@@ -212,7 +212,7 @@
   font-family: var(--font-family-default);
   font-size: var(--heading-h3-font-size);
   font-weight: var(--heading-h3-font-weight);
-  line-height: var(--heading-h3-line-height);
+  line-height: 24px; /* 피그마와 일치: 18px * 1.333 = 24px */
   letter-spacing: var(--heading-h3-letter-spacing);
   color: var(--foreground-primary);
   white-space: nowrap;
