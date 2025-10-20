@@ -5,6 +5,8 @@
   width: 1168px;
   margin: 0 auto;
   min-height: 100vh;
+  max-width: 100vw; /* 뷰포트 너비를 초과하지 않도록 */
+  box-sizing: border-box;
 }
 
 /* Header */
@@ -14,6 +16,15 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 0;
+}
+
+.header:not(:empty) {
+  height: 60px;
+}
+
+.header:empty {
+  height: 0;
+  display: none;
 }
 
 .logo {
@@ -49,6 +60,15 @@
   background-color: #d9d9d9;
 }
 
+.banner:not(:empty) {
+  height: 240px;
+}
+
+.banner:empty {
+  height: 0;
+  display: none;
+}
+
 .bannerImage {
   object-fit: cover;
   border-radius: 24px;
@@ -60,6 +80,15 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.navigation:not(:empty) {
+  height: 48px;
+}
+
+.navigation:empty {
+  height: 0;
+  display: none;
 }
 
 .tabContainer {
@@ -121,6 +150,15 @@
   padding: 24px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+}
+
+.footer:not(:empty) {
+  height: 160px;
+}
+
+.footer:empty {
+  height: 0;
+  display: none;
 }
 
 .footerContent {

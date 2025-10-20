@@ -17,28 +17,28 @@
 
 /* Gap 1: 1168 * 32 */
 .gap {
-  width: 1168px;
+  width: 100%;
   height: 32px;
   flex-shrink: 0;
 }
 
 /* Gap 2: 1168 * 42 */
 .gap2 {
-  width: 1168px;
+  width: 100%;
   height: 42px;
   flex-shrink: 0;
 }
 
 /* Gap 3: 1168 * 40 */
 .gap3 {
-  width: 1168px;
+  width: 100%;
   height: 40px;
   flex-shrink: 0;
 }
 
 /* Gap 4: 1168 * 40 */
 .gap4 {
-  width: 1168px;
+  width: 100%;
   height: 40px;
   flex-shrink: 0;
 }
@@ -49,7 +49,7 @@
 
 /* Search Section: 1168 * 48 */
 .searchSection {
-  width: 1168px;
+  width: 100%;
   height: 48px;
   flex-shrink: 0;
   display: flex;
@@ -81,7 +81,7 @@
 
 /* Main Content Section: 1168 * 936 */
 .mainSection {
-  width: 1168px;
+  width: 100%;
   height: 936px;
   flex-shrink: 0;
   overflow: hidden; /* 자식 요소들이 영역을 벗어나지 않도록 */
@@ -224,7 +224,7 @@
 
 /* Pagination Section: 1168 * 32 */
 .paginationSection {
-  width: 1168px;
+  width: 100%;
   height: 32px;
   flex-shrink: 0;
   display: flex;
