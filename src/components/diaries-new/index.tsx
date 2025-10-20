@@ -6,6 +6,7 @@ import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
 import { EmotionType, getAllEmotions } from "@/commons/constants/enum";
 import { useModal } from "@/commons/providers/modal/modal.provider";
+import { useModalClose } from "./hooks/index.link.modal.close.hook";
 
 // ============================================
 // Types & Interfaces
@@ -28,6 +29,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
 
   // 모달 훅
   const { closeModal } = useModal();
+  const { openCancelModal } = useModalClose();
 
   // 감정 데이터
   const emotions = getAllEmotions();
@@ -62,7 +64,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
 
   // 닫기 핸들러
   const handleClose = () => {
-    closeModal();
+    openCancelModal();
   };
 
   return (
@@ -144,6 +146,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
           theme="light"
           size="large"
           onClick={handleSubmit}
+          data-testid="diaries-submit-button"
         >
           등록하기
         </Button>
