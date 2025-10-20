@@ -16,6 +16,7 @@ import {
   SearchbarSize,
   SearchbarTheme,
 } from "@/commons/constants/enum";
+import { useDiaryModalLink } from "./hooks/index.link.modal.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -110,6 +111,9 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
   const [selectedFilter, setSelectedFilter] = React.useState("all");
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalPages = 10; // 임시값
+
+  // 모달 링크 훅
+  const { openDiaryWriteModal } = useDiaryModalLink();
 
   // Mock 데이터 생성 - 피그마 디자인 순서대로
   const mockDiaries = [
@@ -225,7 +229,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
 
   // 일기쓰기 버튼 핸들러
   const handleWriteDiary = () => {
-    console.log("일기쓰기 버튼 클릭");
+    openDiaryWriteModal();
   };
 
   // 페이지 변경 핸들러
@@ -240,7 +244,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
     .join(" ");
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} data-testid="diaries-page">
       {/* Gap 1 */}
       <div className={styles.gap}></div>
 
@@ -280,6 +284,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
           theme="light"
           onClick={handleWriteDiary}
           className={styles.writeButton}
+          data-testid="diary-write-button"
           icon={
             <svg
               width="24"

@@ -1,0 +1,92 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - link "민지의 다이어리":
+    - /url: /diaries
+- img "배너 이미지"
+- navigation:
+  - link "일기보관함":
+    - /url: /diaries
+  - link "사진보관함":
+    - /url: /pictures
+- main:
+  - main:
+    - button "전체"
+    - button "검색":
+      - img "검색"
+    - textbox "검색어를 입력해 주세요."
+    - button "일기쓰기":
+      - img
+      - text: 일기쓰기
+    - img "타이틀 영역 입니다. 한줄까지만 노출 됩니다."
+    - button:
+      - img
+    - text: 슬퍼요 2024. 03. 12 타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 놀랐어요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 화나요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 행복해요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다. 한줄까지만 노출 됩니다."
+    - button:
+      - img
+    - text: 기타 2024. 03. 12 타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 놀랐어요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 화나요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 행복해요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다. 한줄까지만 노출 됩니다."
+    - button:
+      - img
+    - text: 슬퍼요 2024. 03. 12 타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 놀랐어요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 화나요 2024. 03. 12 타이틀 영역 입니다.
+    - img "타이틀 영역 입니다."
+    - button:
+      - img
+    - text: 행복해요 2024. 03. 12 타이틀 영역 입니다.
+    - navigation "페이지네이션":
+      - list:
+        - listitem:
+          - button "이전 페이지로 이동" [disabled]:
+            - img
+        - listitem:
+          - button "1페이지로 이동": "1"
+        - listitem:
+          - button "2페이지로 이동": "2"
+        - listitem:
+          - button "3페이지로 이동": "3"
+        - listitem:
+          - button "4페이지로 이동": "4"
+        - listitem:
+          - button "5페이지로 이동": "5"
+        - listitem:
+          - button "다음 페이지로 이동":
+            - img
+- contentinfo:
+  - heading "민지의 다이어리" [level=3]
+  - paragraph: "대표 : {name}"
+  - paragraph: "Copyright © 2024. {name} Co., Ltd."
+```

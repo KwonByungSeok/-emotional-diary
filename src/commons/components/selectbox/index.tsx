@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useState, useRef, useEffect } from "react";
+import React, { forwardRef, useState, useRef, useEffect, useId } from "react";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -157,8 +157,9 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
       (option) => option.value === selectedValue
     );
 
-    // 유니크 ID 생성
-    const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
+    // 유니크 ID 생성 (hydration 불일치 방지)
+    const generatedId = useId();
+    const selectId = id || generatedId;
     const listId = `${selectId}-list`;
     const triggerAriaLabel = `${selectId}-trigger`;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useState, useCallback } from "react";
+import React, { forwardRef, useState, useCallback, useId } from "react";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -119,7 +119,8 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
     const toggleChecked = isControlled ? checked : internalChecked;
 
     // 고유 ID 생성
-    const toggleId = id || `toggle-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const toggleId = id || generatedId;
 
     // 토글 상태 변경 핸들러
     const handleChange = useCallback(

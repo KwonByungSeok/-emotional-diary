@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
 import { EmotionType, getAllEmotions } from "@/commons/constants/enum";
+import { useModal } from "@/commons/providers/modal/modal.provider";
 
 // ============================================
 // Types & Interfaces
@@ -24,6 +25,9 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
   const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  // 모달 훅
+  const { closeModal } = useModal();
 
   // 감정 데이터
   const emotions = getAllEmotions();
@@ -51,16 +55,18 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
       title: title.trim(),
       content: content.trim(),
     });
+
+    // 등록 후 모달 닫기
+    closeModal();
   };
 
   // 닫기 핸들러
   const handleClose = () => {
-    // TODO: 실제 닫기 로직 구현
-    console.log("닫기");
+    closeModal();
   };
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} data-testid="diaries-new-modal">
       {/* Header */}
       <div className={styles.header}>
         <span className={styles.headerTitle}>일기 쓰기</span>

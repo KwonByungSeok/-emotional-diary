@@ -1,0 +1,202 @@
+/* ============================================ */
+/* Modal Component Styles */
+/* 피그마 디자인을 기반으로 한 모달 컴포넌트 스타일 */
+/* ============================================ */
+
+/* Base Modal Container */
+.modal {
+  /* 피그마에서 확인한 크기: 480px × 200px */
+  width: 480px;
+  min-height: 200px;
+  
+  /* 피그마에서 확인한 border radius: 24px */
+  border-radius: 24px;
+  
+  /* 내부 패딩 */
+  padding: 24px;
+  
+  /* 레이아웃 */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  
+  /* 그림자 효과 */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  /* Background */
+  background-color: var(--modal-background);
+  
+  /* Typography */
+  font-family: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+/* Title */
+.title {
+  /* 피그마에서 확인한 스타일 */
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: var(--modal-title-color);
+  
+  /* 기본 마진 제거 */
+  margin: 0;
+}
+
+/* Content */
+.content {
+  /* 피그마에서 확인한 스타일 */
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: var(--modal-content-color);
+  
+  /* 기본 마진 제거 */
+  margin: 0;
+}
+
+/* Actions Section */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Single Action Button */
+.singleButton {
+  /* 피그마에서 확인한 크기: 432px × 48px */
+  width: 432px;
+  height: 48px;
+}
+
+/* Dual Action Buttons */
+.cancelButton,
+.confirmButton {
+  /* 피그마에서 확인한 크기: 각각 104px × 48px */
+  width: 104px;
+  height: 48px;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations - Light Theme */
+/* ============================================ */
+
+/* Light Theme - Info Variant */
+.theme-light {
+  --modal-background: #ffffff;
+  --modal-title-color: #111827;
+  --modal-content-color: #374151;
+  --modal-focus-color: #0ea5e9;
+}
+
+/* Light Theme - Danger Variant */
+.theme-light.variant-danger {
+  --modal-background: #ffffff;
+  --modal-title-color: #dc2626;
+  --modal-content-color: #374151;
+  --modal-focus-color: #ef4444;
+}
+
+/* ============================================ */
+/* Theme & Variant Combinations - Dark Theme */
+/* ============================================ */
+
+/* Dark Theme - Info Variant */
+.theme-dark {
+  --modal-background: #1f2937;
+  --modal-title-color: #f9fafb;
+  --modal-content-color: #d1d5db;
+  --modal-focus-color: #38bdf8;
+}
+
+/* Dark Theme - Danger Variant */
+.theme-dark.variant-danger {
+  --modal-background: #1f2937;
+  --modal-title-color: #f87171;
+  --modal-content-color: #d1d5db;
+  --modal-focus-color: #f87171;
+}
+
+/* ============================================ */
+/* Action Styles */
+/* ============================================ */
+
+/* Single Action */
+.actions-single .actions {
+  justify-content: center;
+}
+
+/* Dual Action */
+.actions-dual .actions {
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .modal {
+    width: calc(100vw - 32px);
+    max-width: 480px;
+    margin: 0 16px;
+  }
+  
+  .singleButton {
+    width: 100%;
+  }
+  
+  .cancelButton,
+  .confirmButton {
+    flex: 1;
+    min-width: 104px;
+  }
+  
+  .title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  
+  .content {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+/* ============================================ */
+/* Accessibility */
+/* ============================================ */
+
+.modal:focus-within {
+  outline: 2px solid var(--modal-focus-color);
+  outline-offset: 2px;
+}
+
+/* Focus visible styles */
+.modal:focus-visible {
+  outline: 2px solid var(--modal-focus-color);
+  outline-offset: 2px;
+}
+
+/* ============================================ */
+/* High Contrast Mode Support */
+/* ============================================ */
+
+@media (prefers-contrast: high) {
+  .modal {
+    border: 2px solid var(--modal-title-color);
+  }
+}
+

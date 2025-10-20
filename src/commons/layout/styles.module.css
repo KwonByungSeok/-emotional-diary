@@ -73,6 +73,7 @@
 .bannerImage {
   object-fit: cover;
   border-radius: 24px;
+  pointer-events: none; /* 배너 이미지가 클릭 이벤트를 차단하지 않도록 설정 */
 }
 
 /* Navigation */

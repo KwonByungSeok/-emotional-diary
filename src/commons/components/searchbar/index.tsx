@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useId } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { SearchbarVariant, SearchbarSize, SearchbarTheme } from "@/commons/constants/enum";
@@ -93,8 +93,8 @@ export const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(
     const [inputValue, setInputValue] = useState(value || "");
 
     // 고유 ID 생성
-    const searchbarId =
-      id || `searchbar-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const searchbarId = id || generatedId;
 
     // 컨테이너 클래스명 조합
     const containerClasses = [
