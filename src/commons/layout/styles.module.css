@@ -7,6 +7,7 @@
   min-height: 100vh;
   max-width: 100vw; /* 뷰포트 너비를 초과하지 않도록 */
   box-sizing: border-box;
+  position: relative;
 }
 
 /* Header */

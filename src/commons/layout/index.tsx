@@ -24,90 +24,92 @@ export default function Layout({ children }: LayoutProps) {
   const { showHeader, showLogo, showBanner, showNavigation, showFooter } = useArea();
 
   return (
-    <div className={styles.container}>
-      {/* ============================================
-          Header Section
-          ============================================ */}
-      {showHeader && (
-        <header className={styles.header}>
-          {showLogo && (
-            <Link href={getLogoNavigationPath()} className={styles.logo} data-testid="logo-link">
-              <span className={styles.logoText}>민지의 다이어리</span>
-            </Link>
-          )}
-        </header>
-      )}
+    <>
+      <div className={styles.container}>
+        {/* ============================================
+            Header Section
+            ============================================ */}
+        {showHeader && (
+          <header className={styles.header}>
+            {showLogo && (
+              <Link href={getLogoNavigationPath()} className={styles.logo} data-testid="logo-link">
+                <span className={styles.logoText}>민지의 다이어리</span>
+              </Link>
+            )}
+          </header>
+        )}
 
-      {/* ============================================
-          Gap Section
-          ============================================ */}
-      {showHeader && <div className={styles.gap}></div>}
+        {/* ============================================
+            Gap Section
+            ============================================ */}
+        {showHeader && <div className={styles.gap}></div>}
 
-      {/* ============================================
-          Banner Section
-          ============================================ */}
-      {showBanner && (
-        <section className={styles.banner}>
-          <Image
-            src="/images/banner.png"
-            alt="배너 이미지"
-            fill
-            className={styles.bannerImage}
-            priority
-          />
-        </section>
-      )}
+        {/* ============================================
+            Banner Section
+            ============================================ */}
+        {showBanner && (
+          <section className={styles.banner}>
+            <Image
+              src="/images/banner.png"
+              alt="배너 이미지"
+              fill
+              className={styles.bannerImage}
+              priority
+            />
+          </section>
+        )}
 
-      {/* ============================================
-          Gap Section
-          ============================================ */}
-      {showBanner && <div className={styles.gap}></div>}
+        {/* ============================================
+            Gap Section
+            ============================================ */}
+        {showBanner && <div className={styles.gap}></div>}
 
-      {/* ============================================
-          Navigation Section
-          ============================================ */}
-      {showNavigation && (
-        <nav className={styles.navigation}>
-          <div className={styles.tabContainer}>
-            <Link 
-              href={getTabNavigationPath('diaries')} 
-              className={`${styles.tab} ${activeTab === 'diaries' ? styles.activeTab : ''}`} 
-              data-testid="diaries-tab"
-            >
-              <span 
-                className={`${styles.tabText} ${
-                  activeTab === 'diaries' ? styles.tabTextActive : styles.tabTextInactive
-                }`}
-                data-testid="diaries-tab-text"
+        {/* ============================================
+            Navigation Section
+            ============================================ */}
+        {showNavigation && (
+          <nav className={styles.navigation}>
+            <div className={styles.tabContainer}>
+              <Link 
+                href={getTabNavigationPath('diaries')} 
+                className={`${styles.tab} ${activeTab === 'diaries' ? styles.activeTab : ''}`} 
+                data-testid="diaries-tab"
               >
-                일기보관함
-              </span>
-            </Link>
-            <Link 
-              href={getTabNavigationPath('pictures')} 
-              className={`${styles.tab} ${activeTab === 'pictures' ? styles.activeTab : ''}`} 
-              data-testid="pictures-tab"
-            >
-              <span 
-                className={`${styles.tabText} ${
-                  activeTab === 'pictures' ? styles.tabTextActive : styles.tabTextInactive
-                }`}
-                data-testid="pictures-tab-text"
+                <span 
+                  className={`${styles.tabText} ${
+                    activeTab === 'diaries' ? styles.tabTextActive : styles.tabTextInactive
+                  }`}
+                  data-testid="diaries-tab-text"
+                >
+                  일기보관함
+                </span>
+              </Link>
+              <Link 
+                href={getTabNavigationPath('pictures')} 
+                className={`${styles.tab} ${activeTab === 'pictures' ? styles.activeTab : ''}`} 
+                data-testid="pictures-tab"
               >
-                사진보관함
-              </span>
-            </Link>
-          </div>
-        </nav>
-      )}
+                <span 
+                  className={`${styles.tabText} ${
+                    activeTab === 'pictures' ? styles.tabTextActive : styles.tabTextInactive
+                  }`}
+                  data-testid="pictures-tab-text"
+                >
+                  사진보관함
+                </span>
+              </Link>
+            </div>
+          </nav>
+        )}
+
+        {/* ============================================
+            Children Content Section
+            ============================================ */}
+        <main className={styles.children}>{children}</main>
+      </div>
 
       {/* ============================================
-          Children Content Section
-          ============================================ */}
-      <main className={styles.children}>{children}</main>
-
-      {/* ============================================
-          Footer Section
+          Footer Section (Container 밖으로 분리)
           ============================================ */}
       {showFooter && (
         <footer className={styles.footer}>
@@ -120,6 +122,6 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </footer>
       )}
-    </div>
+    </>
   );
 }
