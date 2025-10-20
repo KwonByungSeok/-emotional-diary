@@ -7,7 +7,7 @@ import { Diaries } from "@/components/diaries";
 
 export default function DiariesPage() {
   return (
-    <main>
+    <main data-testid="diaries-page">
       <Diaries />
     </main>
   );

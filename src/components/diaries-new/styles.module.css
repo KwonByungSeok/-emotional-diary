@@ -24,10 +24,10 @@
 }
 
 .headerTitle {
-  font-size: var(--heading-h1-font-size);
-  line-height: var(--heading-h1-line-height);
-  font-weight: var(--heading-h1-font-weight);
-  letter-spacing: var(--heading-h1-letter-spacing);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.24px;
   color: var(--foreground-primary);
   margin: 0;
 }
@@ -48,10 +48,10 @@
 }
 
 .emotionTitle {
-  font-size: var(--heading-h3-font-size);
-  line-height: var(--heading-h3-line-height);
-  font-weight: var(--heading-h3-font-weight);
-  letter-spacing: var(--heading-h3-letter-spacing);
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
   color: var(--foreground-primary);
   margin: 0;
 }
@@ -100,9 +100,10 @@
 }
 
 .emotionRadioLabel {
-  font-size: var(--body-large-font-size);
-  line-height: var(--body-large-line-height);
-  font-weight: var(--body-large-font-weight);
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.18px;
   color: var(--foreground-secondary);
 }
 
@@ -137,9 +138,10 @@
 }
 
 .contentLabel {
-  font-size: var(--label-medium-font-size);
-  line-height: var(--label-medium-line-height);
-  font-weight: var(--label-medium-font-weight);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
   color: var(--foreground-secondary);
 }
 
@@ -152,8 +154,10 @@
   background-color: var(--background-elevated);
   color: var(--foreground-primary);
   font-family: var(--font-family-default);
-  font-size: var(--body-medium-font-size);
-  line-height: var(--body-medium-line-height);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
   resize: none;
   box-sizing: border-box;
 }
@@ -165,6 +169,10 @@
 
 .contentTextarea::placeholder {
   color: var(--foreground-tertiary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
 }
 
 /* Gap 4 - full * 40 */

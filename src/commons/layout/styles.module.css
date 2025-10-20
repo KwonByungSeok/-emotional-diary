@@ -21,6 +21,8 @@
   align-items: center;
   width: 120px;
   height: 40px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .logoText {
@@ -73,9 +75,10 @@
   width: 119px;
   height: 48px;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.tabActive {
+.activeTab {
   border-bottom: 2px solid var(--foreground-primary);
 }
 
@@ -87,14 +90,14 @@
   padding: 0 8px;
 }
 
-.tabActive .tabText {
+.tabTextActive {
   font-weight: 700; /* Bold */
-  color: #000000; /* 일기보관함: black */
+  color: #000000; /* 활성 상태: black */
 }
 
-.tabInactive {
+.tabTextInactive {
   font-weight: 500;
-  color: #ababab; /* 사진보관함: gray60 */
+  color: #ababab; /* 비활성 상태: gray60 */
 }
 
 /* Children Content */

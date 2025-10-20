@@ -63,7 +63,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
     <div className={containerClasses}>
       {/* Header */}
       <div className={styles.header}>
-        <h1 className={styles.headerTitle}>일기 쓰기</h1>
+        <span className={styles.headerTitle}>일기 쓰기</span>
       </div>
 
       {/* Gap 1 */}
@@ -71,7 +71,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
 
       {/* Emotion Box */}
       <div className={styles.emotionBox}>
-        <h2 className={styles.emotionTitle}>오늘 기분은 어땠나요?</h2>
+        <span className={styles.emotionTitle}>오늘 기분은 어땠나요?</span>
         <div className={styles.emotionRadioGroup}>
           {emotions.map((emotion) => (
             <label key={emotion.type} className={styles.emotionRadioItem}>
