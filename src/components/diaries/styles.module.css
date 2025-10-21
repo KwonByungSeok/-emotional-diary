@@ -126,6 +126,7 @@
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 /* 카드 이미지 영역 */

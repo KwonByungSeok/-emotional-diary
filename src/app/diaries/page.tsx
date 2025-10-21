@@ -6,9 +6,5 @@ import { Diaries } from "@/components/diaries";
 // ============================================
 
 export default function DiariesPage() {
-  return (
-    <main data-testid="diaries-page">
-      <Diaries />
-    </main>
-  );
+  return <Diaries data-testid="diaries-page" />;
 }

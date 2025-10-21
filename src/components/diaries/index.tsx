@@ -18,6 +18,7 @@ import {
 } from "@/commons/constants/enum";
 import { useDiaryModalLink } from "./hooks/index.link.modal.hook";
 import { useDiariesBinding } from "./hooks/index.binding.hook";
+import { useDiaryLinkRouting } from "./hooks/index.link.routing.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -27,14 +28,18 @@ import styles from "./styles.module.css";
 export interface DiariesProps {
   /** 추가 CSS 클래스명 */
   className?: string;
+  /** 테스트용 data-testid */
+  "data-testid"?: string;
 }
 
 interface DiaryCardProps {
+  id: number;
   emotion: EmotionType;
   title: string;
   date: string;
   imageUrl: string;
   onDelete?: () => void;
+  onClick?: () => void;
 }
 
 // ============================================
@@ -47,10 +52,15 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   date,
   imageUrl,
   onDelete,
+  onClick,
 }) => {
 
   return (
-    <div className={styles.diaryCard} data-testid="diary-card">
+    <div 
+      className={styles.diaryCard} 
+      data-testid="diary-card"
+      onClick={onClick}
+    >
       {/* 이미지 영역 */}
       <div className={styles.cardImage}>
         <Image 
@@ -62,7 +72,13 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           data-testid="diary-image"
         />
         {/* 삭제 버튼 */}
-        <button className={styles.deleteButton} onClick={onDelete}>
+        <button 
+          className={styles.deleteButton} 
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete?.();
+          }}
+        >
           <svg
             width="24"
             height="24"
@@ -105,10 +121,22 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
 };
 
 // ============================================
+// Date Formatting Utility
+// ============================================
+
+const formatDateToYYYYMMDD = (dateString: string): string => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+// ============================================
 // Diaries Component
 // ============================================
 
-export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
+export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid": dataTestId }) => {
   // 상태 관리
   const [searchValue, setSearchValue] = React.useState("");
   const [selectedFilter, setSelectedFilter] = React.useState("all");
@@ -119,6 +147,9 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
   
   // 바인딩 훅
   const { diaries, isLoading, error, refetch } = useDiariesBinding();
+
+  // 라우팅 훅
+  const { navigateToDiaryDetail } = useDiaryLinkRouting();
 
   // 페이지네이션 계산
   const itemsPerPage = 12; // 한 페이지당 12개 (3행 x 4개)
@@ -134,7 +165,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
     id: diary.id,
     emotion: diary.emotion,
     title: diary.title.length > 30 ? diary.title.substring(0, 30) + "..." : diary.title,
-    date: diary.createdAt,
+    date: formatDateToYYYYMMDD(diary.createdAt),
     imageUrl: getEmotionImage(diary.emotion, "medium"),
   }));
 
@@ -180,7 +211,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
     .join(" ");
 
   return (
-    <div className={containerClasses} data-testid="diaries-page">
+    <div className={containerClasses} data-testid={dataTestId}>
       {/* Gap 1 */}
       <div className={styles.gap}></div>
 
@@ -281,10 +312,12 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
                     {diaryCards.slice(rowIndex * 4, rowIndex * 4 + 2).map((card) => (
                       <DiaryCard
                         key={card.id}
+                        id={card.id}
                         emotion={card.emotion}
                         title={card.title}
                         date={card.date}
                         imageUrl={card.imageUrl}
+                        onClick={() => navigateToDiaryDetail(card.id)}
                       />
                     ))}
                   </div>
@@ -292,10 +325,12 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
                     {diaryCards.slice(rowIndex * 4 + 2, rowIndex * 4 + 4).map((card) => (
                       <DiaryCard
                         key={card.id}
+                        id={card.id}
                         emotion={card.emotion}
                         title={card.title}
                         date={card.date}
                         imageUrl={card.imageUrl}
+                        onClick={() => navigateToDiaryDetail(card.id)}
                       />
                     ))}
                   </div>
