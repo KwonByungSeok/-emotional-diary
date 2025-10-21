@@ -17,6 +17,7 @@ import {
   SearchbarTheme,
 } from "@/commons/constants/enum";
 import { useDiaryModalLink } from "./hooks/index.link.modal.hook";
+import { useDiariesBinding } from "./hooks/index.binding.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -49,7 +50,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
 }) => {
 
   return (
-    <div className={styles.diaryCard}>
+    <div className={styles.diaryCard} data-testid="diary-card">
       {/* 이미지 영역 */}
       <div className={styles.cardImage}>
         <Image 
@@ -58,6 +59,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           width={274}
           height={208}
           style={{ objectFit: 'cover' }}
+          data-testid="diary-image"
         />
         {/* 삭제 버튼 */}
         <button className={styles.deleteButton} onClick={onDelete}>
@@ -86,15 +88,16 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           <span
             className={styles.emotionLabel}
             style={{ color: getEmotionColor(emotion) }}
+            data-testid="diary-emotion"
           >
             {getEmotionLabel(emotion)}
           </span>
-          <span className={styles.dateLabel}>{date}</span>
+          <span className={styles.dateLabel} data-testid="diary-date">{date}</span>
         </div>
 
         {/* 제목 */}
         <div className={styles.cardTitle}>
-          <span className={styles.titleText}>{title}</span>
+          <span className={styles.titleText} data-testid="diary-title">{title}</span>
         </div>
       </div>
     </div>
@@ -110,101 +113,30 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
   const [searchValue, setSearchValue] = React.useState("");
   const [selectedFilter, setSelectedFilter] = React.useState("all");
   const [currentPage, setCurrentPage] = React.useState(1);
-  const totalPages = 10; // 임시값
 
   // 모달 링크 훅
   const { openDiaryWriteModal } = useDiaryModalLink();
+  
+  // 바인딩 훅
+  const { diaries, isLoading, error, refetch } = useDiariesBinding();
 
-  // Mock 데이터 생성 - 피그마 디자인 순서대로
-  const mockDiaries = [
-    // Row 1
-    {
-      id: 1,
-      emotion: EmotionType.SAD,
-      title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.SAD, "medium"),
-    },
-    {
-      id: 2,
-      emotion: EmotionType.SURPRISE,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.SURPRISE, "medium"),
-    },
-    {
-      id: 3,
-      emotion: EmotionType.ANGRY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.ANGRY, "medium"),
-    },
-    {
-      id: 4,
-      emotion: EmotionType.HAPPY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.HAPPY, "medium"),
-    },
-    // Row 2
-    {
-      id: 5,
-      emotion: EmotionType.ETC,
-      title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.ETC, "medium"),
-    },
-    {
-      id: 6,
-      emotion: EmotionType.SURPRISE,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.SURPRISE, "medium"),
-    },
-    {
-      id: 7,
-      emotion: EmotionType.ANGRY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.ANGRY, "medium"),
-    },
-    {
-      id: 8,
-      emotion: EmotionType.HAPPY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.HAPPY, "medium"),
-    },
-    // Row 3
-    {
-      id: 9,
-      emotion: EmotionType.SAD,
-      title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.SAD, "medium"),
-    },
-    {
-      id: 10,
-      emotion: EmotionType.SURPRISE,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.SURPRISE, "medium"),
-    },
-    {
-      id: 11,
-      emotion: EmotionType.ANGRY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.ANGRY, "medium"),
-    },
-    {
-      id: 12,
-      emotion: EmotionType.HAPPY,
-      title: "타이틀 영역 입니다.",
-      date: "2024. 03. 12",
-      imageUrl: getEmotionImage(EmotionType.HAPPY, "medium"),
-    },
-  ];
+  // 페이지네이션 계산
+  const itemsPerPage = 12; // 한 페이지당 12개 (3행 x 4개)
+  const totalPages = Math.ceil(diaries.length / itemsPerPage);
+  
+  // 현재 페이지에 해당하는 일기 데이터
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageDiaries = diaries.slice(startIndex, endIndex);
+  
+  // 일기 데이터를 카드 형태로 변환
+  const diaryCards = currentPageDiaries.map((diary) => ({
+    id: diary.id,
+    emotion: diary.emotion,
+    title: diary.title.length > 30 ? diary.title.substring(0, 30) + "..." : diary.title,
+    date: diary.createdAt,
+    imageUrl: getEmotionImage(diary.emotion, "medium"),
+  }));
 
   // 필터 옵션 생성
   const filterOptions = [
@@ -230,6 +162,10 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
   // 일기쓰기 버튼 핸들러
   const handleWriteDiary = () => {
     openDiaryWriteModal();
+    // 모달이 닫힌 후 데이터 새로고침을 위해 refetch 호출
+    setTimeout(() => {
+      refetch();
+    }, 1000);
   };
 
   // 페이지 변경 핸들러
@@ -310,104 +246,64 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "" }) => {
 
       {/* Main Content Section */}
       <div className={styles.mainSection}>
+        {/* 로딩 상태 */}
+        {isLoading && (
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingText}>일기를 불러오는 중...</div>
+          </div>
+        )}
+        
+        {/* 에러 상태 */}
+        {error && (
+          <div className={styles.errorContainer}>
+            <div className={styles.errorText} data-testid="error-message">{error}</div>
+            <button onClick={refetch} className={styles.retryButton}>
+              다시 시도
+            </button>
+          </div>
+        )}
+        
         {/* 일기 카드 그리드 */}
-        <div className={styles.diaryGrid}>
-          {/* Row 1 */}
-          <div className={styles.diaryRow}>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[0].emotion}
-                title={mockDiaries[0].title}
-                date={mockDiaries[0].date}
-                imageUrl={mockDiaries[0].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[1].emotion}
-                title={mockDiaries[1].title}
-                date={mockDiaries[1].date}
-                imageUrl={mockDiaries[1].imageUrl}
-              />
-            </div>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[2].emotion}
-                title={mockDiaries[2].title}
-                date={mockDiaries[2].date}
-                imageUrl={mockDiaries[2].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[3].emotion}
-                title={mockDiaries[3].title}
-                date={mockDiaries[3].date}
-                imageUrl={mockDiaries[3].imageUrl}
-              />
-            </div>
+        {!isLoading && !error && (
+          <div className={styles.diaryGrid}>
+            {diaryCards.length === 0 ? (
+              <div className={styles.emptyContainer} data-testid="empty-state">
+                <div className={styles.emptyText}>작성된 일기가 없습니다.</div>
+                <button onClick={handleWriteDiary} className={styles.writeFirstButton}>
+                  첫 번째 일기 작성하기
+                </button>
+              </div>
+            ) : (
+              // 일기 카드들을 행별로 렌더링
+              Array.from({ length: Math.ceil(diaryCards.length / 4) }, (_, rowIndex) => (
+                <div key={rowIndex} className={styles.diaryRow}>
+                  <div className={styles.diaryRowInner}>
+                    {diaryCards.slice(rowIndex * 4, rowIndex * 4 + 2).map((card) => (
+                      <DiaryCard
+                        key={card.id}
+                        emotion={card.emotion}
+                        title={card.title}
+                        date={card.date}
+                        imageUrl={card.imageUrl}
+                      />
+                    ))}
+                  </div>
+                  <div className={styles.diaryRowInner}>
+                    {diaryCards.slice(rowIndex * 4 + 2, rowIndex * 4 + 4).map((card) => (
+                      <DiaryCard
+                        key={card.id}
+                        emotion={card.emotion}
+                        title={card.title}
+                        date={card.date}
+                        imageUrl={card.imageUrl}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
-
-          {/* Row 2 */}
-          <div className={styles.diaryRow}>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[4].emotion}
-                title={mockDiaries[4].title}
-                date={mockDiaries[4].date}
-                imageUrl={mockDiaries[4].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[5].emotion}
-                title={mockDiaries[5].title}
-                date={mockDiaries[5].date}
-                imageUrl={mockDiaries[5].imageUrl}
-              />
-            </div>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[6].emotion}
-                title={mockDiaries[6].title}
-                date={mockDiaries[6].date}
-                imageUrl={mockDiaries[6].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[7].emotion}
-                title={mockDiaries[7].title}
-                date={mockDiaries[7].date}
-                imageUrl={mockDiaries[7].imageUrl}
-              />
-            </div>
-          </div>
-
-          {/* Row 3 */}
-          <div className={styles.diaryRow}>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[8].emotion}
-                title={mockDiaries[8].title}
-                date={mockDiaries[8].date}
-                imageUrl={mockDiaries[8].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[9].emotion}
-                title={mockDiaries[9].title}
-                date={mockDiaries[9].date}
-                imageUrl={mockDiaries[9].imageUrl}
-              />
-            </div>
-            <div className={styles.diaryRowInner}>
-              <DiaryCard
-                emotion={mockDiaries[10].emotion}
-                title={mockDiaries[10].title}
-                date={mockDiaries[10].date}
-                imageUrl={mockDiaries[10].imageUrl}
-              />
-              <DiaryCard
-                emotion={mockDiaries[11].emotion}
-                title={mockDiaries[11].title}
-                date={mockDiaries[11].date}
-                imageUrl={mockDiaries[11].imageUrl}
-              />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Gap 3 */}

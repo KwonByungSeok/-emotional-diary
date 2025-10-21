@@ -238,6 +238,95 @@
 }
 
 /* ============================================ */
+/* Loading, Error, Empty States */
+/* ============================================ */
+
+.loadingContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingText {
+  font-family: var(--font-family-default);
+  font-size: var(--body-large-font-size);
+  font-weight: var(--body-large-font-weight);
+  color: var(--foreground-secondary);
+}
+
+.errorContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.errorText {
+  font-family: var(--font-family-default);
+  font-size: var(--body-large-font-size);
+  font-weight: var(--body-large-font-weight);
+  color: var(--foreground-error);
+  text-align: center;
+}
+
+.retryButton {
+  padding: 8px 16px;
+  background-color: var(--background-primary);
+  color: var(--foreground-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  font-family: var(--font-family-default);
+  font-size: var(--body-medium-font-size);
+  font-weight: var(--body-medium-font-weight);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background-color: var(--background-secondary);
+}
+
+.emptyContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.emptyText {
+  font-family: var(--font-family-default);
+  font-size: var(--body-large-font-size);
+  font-weight: var(--body-large-font-weight);
+  color: var(--foreground-secondary);
+  text-align: center;
+}
+
+.writeFirstButton {
+  padding: 12px 24px;
+  background-color: var(--background-primary);
+  color: var(--foreground-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  font-family: var(--font-family-default);
+  font-size: var(--body-medium-font-size);
+  font-weight: var(--body-medium-font-weight);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.writeFirstButton:hover {
+  background-color: var(--background-secondary);
+}
+
+/* ============================================ */
 /* Responsive Adjustments */
 /* ============================================ */
 
