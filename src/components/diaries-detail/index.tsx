@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
-import { EmotionType, getEmotionData, getEmotionImage, getEmotionLabel } from "@/commons/constants/enum";
+import { getEmotionData, getEmotionImage, getEmotionLabel } from "@/commons/constants/enum";
+import { useDiaryBinding } from "./hooks/index.binding.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -18,15 +19,6 @@ export interface DiariesDetailProps {
   id?: string;
 }
 
-// Mock 데이터 인터페이스
-interface DiaryDetailData {
-  id: string;
-  title: string;
-  content: string;
-  emotion: EmotionType;
-  createdAt: string;
-  updatedAt: string;
-}
 
 // 회고 데이터 인터페이스
 interface RetrospectData {
@@ -36,33 +28,6 @@ interface RetrospectData {
 }
 
 // ============================================
-// Mock Data
-// ============================================
-
-const mockDiaryData: DiaryDetailData = {
-  id: "1",
-  title: "오늘은 정말 특별한 하루였어요",
-  content: "오늘은 정말 특별한 하루였어요. 아침에 일어나서 창문을 열었는데, 비가 그치고 맑은 하늘이 보였습니다. 그 순간 마음이 한결 가벼워지는 것을 느꼈어요. 오후에는 오랜만에 만난 친구와 함께 카페에서 이야기를 나누며 즐거운 시간을 보냈습니다. 이런 작은 행복들이 모여서 하루를 특별하게 만들어 주는 것 같아요. 앞으로도 이런 소중한 순간들을 놓치지 않고 기록하고 싶습니다.",
-  emotion: EmotionType.HAPPY,
-  createdAt: "2024. 07. 12",
-  updatedAt: "2024-07-12"
-};
-
-// Mock 회고 데이터
-const mockRetrospectData: RetrospectData[] = [
-  {
-    id: "1",
-    content: "3년이 지나고 다시 보니 이때가 그립다.",
-    createdAt: "2024. 09. 24"
-  },
-  {
-    id: "2", 
-    content: "3년이 지나고 다시 보니 이때가 그립다.",
-    createdAt: "2024. 09. 24"
-  }
-];
-
-// ============================================
 // DiariesDetail Component
 // ============================================
 
@@ -70,13 +35,43 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
   className,
   id,
 }) => {
-  // TODO: 향후 실제 데이터 fetching에서 id 사용
-  const diaryData = { ...mockDiaryData, id: id || mockDiaryData.id };
-  const emotionData = getEmotionData(diaryData.emotion);
+  // 실제 데이터 바인딩
+  const { diaryData, isLoading, error } = useDiaryBinding(id);
   
   // 회고 입력 상태 관리
   const [retrospectInput, setRetrospectInput] = useState("");
-  const [retrospectList, setRetrospectList] = useState<RetrospectData[]>(mockRetrospectData);
+  const [retrospectList, setRetrospectList] = useState<RetrospectData[]>([]);
+  
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className={`${styles.container} ${className || ""}`} data-testid="diary-detail-container">
+        <div className={styles.gap64}></div>
+        <div className={styles.detailTitle}>
+          <div className={styles.titleSection}>
+            <h1 className={styles.titleText}>로딩 중...</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  // 에러 상태 처리
+  if (error || !diaryData) {
+    return (
+      <div className={`${styles.container} ${className || ""}`} data-testid="diary-detail-container">
+        <div className={styles.gap64}></div>
+        <div className={styles.detailTitle}>
+          <div className={styles.titleSection}>
+            <h1 className={styles.titleText}>일기를 불러올 수 없습니다</h1>
+            <p data-testid="error-message">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  const emotionData = getEmotionData(diaryData.emotion);
   
   const handleCopyContent = () => {
     navigator.clipboard.writeText(diaryData.content);
@@ -109,15 +104,25 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
     }
   };
 
+  // 날짜 형식 변환 (ISO 문자열을 한국 형식으로)
+  const formatDate = (isoString: string): string => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).replace(/\./g, '. ').replace(/ /g, '').replace(/\.$/, '');
+  };
+
   return (
-    <div className={`${styles.container} ${className || ""}`}>
+    <div className={`${styles.container} ${className || ""}`} data-testid="diary-detail-container">
       {/* Gap: 1168 * 64 */}
       <div className={styles.gap64}></div>
       
       {/* Detail Title: 1168 * 84 */}
       <div className={styles.detailTitle}>
         <div className={styles.titleSection}>
-          <h1 className={styles.titleText}>{diaryData.title}</h1>
+          <h1 className={styles.titleText} data-testid="diary-title">{diaryData.title}</h1>
         </div>
         <div className={styles.emotionDateSection}>
           <div className={styles.emotionInfo}>
@@ -127,16 +132,18 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
               width={24}
               height={24}
               className={styles.emotionIcon}
+              data-testid="emotion-icon"
             />
             <span 
               className={styles.emotionText}
               style={{ color: emotionData.color }}
+              data-testid="emotion-text"
             >
               {getEmotionLabel(diaryData.emotion)}
             </span>
           </div>
           <div className={styles.dateInfo}>
-            <span className={styles.createdDate}>{diaryData.createdAt}</span>
+            <span className={styles.createdDate} data-testid="created-date">{formatDate(diaryData.createdAt)}</span>
             <span className={styles.dateLabel}>작성</span>
           </div>
         </div>
@@ -150,7 +157,7 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
         <div className={styles.contentHeader}>
           <h2 className={styles.contentTitle}>내용</h2>
         </div>
-        <div className={styles.contentText}>
+        <div className={styles.contentText} data-testid="diary-content">
           {diaryData.content}
         </div>
         <div className={styles.copySection}>
