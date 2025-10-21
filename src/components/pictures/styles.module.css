@@ -100,6 +100,76 @@
 }
 
 /* ============================================ */
+/* Loading Splash Screen Styles */
+/* ============================================ */
+
+.loadingItem {
+  width: 640px;
+  height: 640px;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.loadingSplash {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.8) 60%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: loadingSlide 1.2s infinite ease-in-out;
+  transform: skewX(-30deg);
+}
+
+@keyframes loadingSlide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ============================================ */
+/* Infinite Scroll Trigger */
+/* ============================================ */
+
+.scrollTrigger {
+  width: 100%;
+  height: 20px;
+  margin: 20px 0;
+}
+
+/* ============================================ */
+/* Error Container */
+/* ============================================ */
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ============================================ */
 /* Responsive Adjustments */
 /* ============================================ */
 
@@ -127,6 +197,12 @@
   }
 
   .pictureItem {
+    width: 100%;
+    height: 400px;
+    max-width: 640px;
+  }
+
+  .loadingItem {
     width: 100%;
     height: 400px;
     max-width: 640px;
@@ -164,6 +240,12 @@
   }
 
   .pictureItem {
+    width: 100%;
+    height: 300px;
+    border-radius: 16px;
+  }
+
+  .loadingItem {
     width: 100%;
     height: 300px;
     border-radius: 16px;
