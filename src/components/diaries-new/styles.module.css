@@ -190,3 +190,12 @@
   justify-content: center;
   gap: 16px;
 }
+
+/* Error Message */
+.errorMessage {
+  display: block;
+  color: #ea5757;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 400;
+}

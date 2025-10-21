@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
 import { EmotionType, getAllEmotions } from "@/commons/constants/enum";
-import { useModal } from "@/commons/providers/modal/modal.provider";
 import { useModalClose } from "./hooks/index.link.modal.close.hook";
+import { useDiaryForm } from "./hooks/index.form.hook";
 
 // ============================================
 // Types & Interfaces
@@ -22,13 +22,17 @@ export interface DiariesNewProps {
 // ============================================
 
 export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
-  // State 관리
-  const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  // 폼 훅
+  const {
+    register,
+    handleSubmit,
+    errors,
+    isFormValid,
+    watchedValues,
+    setEmotion,
+  } = useDiaryForm();
 
   // 모달 훅
-  const { closeModal } = useModal();
   const { openCancelModal } = useModalClose();
 
   // 감정 데이터
@@ -41,25 +45,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
 
   // 감정 선택 핸들러
   const handleEmotionSelect = (emotionType: EmotionType) => {
-    setSelectedEmotion(emotionType);
-  };
-
-  // 폼 제출 핸들러
-  const handleSubmit = () => {
-    if (!selectedEmotion || !title.trim() || !content.trim()) {
-      alert("모든 필드를 입력해주세요.");
-      return;
-    }
-    
-    // TODO: 실제 등록 로직 구현
-    console.log({
-      emotion: selectedEmotion,
-      title: title.trim(),
-      content: content.trim(),
-    });
-
-    // 등록 후 모달 닫기
-    closeModal();
+    setEmotion(emotionType);
   };
 
   // 닫기 핸들러
@@ -87,9 +73,10 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
                 type="radio"
                 name="emotion"
                 value={emotion.type}
-                checked={selectedEmotion === emotion.type}
+                checked={watchedValues.emotion === emotion.type}
                 onChange={() => handleEmotionSelect(emotion.type)}
                 className={styles.emotionRadioInput}
+                data-testid={`emotion-${emotion.type.toLowerCase()}`}
               />
               <span className={styles.emotionRadioLabel}>{emotion.label}</span>
             </label>
@@ -105,12 +92,17 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
         <Input
           label="제목"
           placeholder="제목을 입력합니다."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          {...register("title")}
           variant="primary"
           theme="light"
           size="medium"
+          data-testid="diary-title-input"
         />
+        {errors.title && (
+          <span className={styles.errorMessage} data-testid="title-error">
+            {errors.title.message}
+          </span>
+        )}
       </div>
 
       {/* Gap 3 */}
@@ -121,11 +113,16 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
         <label className={styles.contentLabel}>내용</label>
         <textarea
           placeholder="내용을 입력합니다."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          {...register("content")}
           className={styles.contentTextarea}
           rows={5}
+          data-testid="diary-content-textarea"
         />
+        {errors.content && (
+          <span className={styles.errorMessage} data-testid="content-error">
+            {errors.content.message}
+          </span>
+        )}
       </div>
 
       {/* Gap 4 */}
@@ -146,6 +143,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
           theme="light"
           size="large"
           onClick={handleSubmit}
+          disabled={!isFormValid}
           data-testid="diaries-submit-button"
         >
           등록하기
