@@ -12,10 +12,40 @@
   padding: 2rem 1rem;
   
   /* Background */
-  background: var(--background-primary);
+  background: #ffffff;
   
   /* Typography */
   font-family: var(--font-family-default);
+}
+
+/* ============================================ */
+/* Card Container                               */
+/* ============================================ */
+
+.card {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 28rem;
+  
+  /* Background */
+  background: var(--background-elevated);
+  
+  /* Border & Shadow */
+  border: 1px solid var(--border-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Padding */
+  padding: 2.5rem 2rem;
+  
+  /* Animation */
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* ============================================ */
@@ -24,8 +54,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 3rem;
-  max-width: 24rem;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
@@ -62,7 +91,6 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  max-width: 24rem;
 }
 
 .inputGroup {
@@ -92,8 +120,7 @@
 
 .footer {
   text-align: center;
-  margin-top: 2rem;
-  max-width: 24rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
@@ -142,19 +169,21 @@
     padding: 3rem 2rem;
   }
   
+  .card {
+    max-width: 32rem;
+    padding: 3rem 2.5rem;
+  }
+  
   .header {
-    margin-bottom: 4rem;
-    max-width: 28rem;
+    margin-bottom: 2.5rem;
   }
   
   .form {
-    max-width: 28rem;
     gap: 1.75rem;
   }
   
   .footer {
-    margin-top: 3rem;
-    max-width: 28rem;
+    margin-top: 2rem;
   }
 }
 
@@ -163,19 +192,21 @@
     padding: 4rem 2rem;
   }
   
+  .card {
+    max-width: 36rem;
+    padding: 3.5rem 3rem;
+  }
+  
   .header {
-    margin-bottom: 5rem;
-    max-width: 32rem;
+    margin-bottom: 3rem;
   }
   
   .form {
-    max-width: 32rem;
     gap: 2rem;
   }
   
   .footer {
-    margin-top: 4rem;
-    max-width: 32rem;
+    margin-top: 2.5rem;
   }
 }
 

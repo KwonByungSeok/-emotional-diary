@@ -23,16 +23,18 @@ export interface AuthSignupProps {
 export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
   return (
     <div className={`${styles.container} ${className}`}>
-      {/* Header */}
-      <div className={styles.header}>
-        <h1 className={styles.title}>회원가입</h1>
-        <p className={styles.subtitle}>
-          새로운 계정을 만들어 시작해보세요
-        </p>
-      </div>
+      {/* Card Container */}
+      <div className={styles.card}>
+        {/* Header */}
+        <div className={styles.header}>
+          <h1 className={styles.title}>회원가입</h1>
+          <p className={styles.subtitle}>
+            새로운 계정을 만들어 시작해보세요
+          </p>
+        </div>
 
-      {/* Form */}
-      <form className={styles.form}>
+        {/* Form */}
+        <form className={styles.form}>
         {/* Email Input */}
         <div className={styles.inputGroup}>
           <Input
@@ -101,16 +103,17 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
             회원가입
           </Button>
         </div>
-      </form>
+        </form>
 
-      {/* Footer */}
-      <div className={styles.footer}>
-        <p className={styles.footerText}>
-          이미 계정이 있으신가요?{" "}
-          <a href="/auth/login" className={styles.loginLink}>
-            로그인하기
-          </a>
-        </p>
+        {/* Footer */}
+        <div className={styles.footer}>
+          <p className={styles.footerText}>
+            이미 계정이 있으신가요?{" "}
+            <a href="/auth/login" className={styles.loginLink}>
+              로그인하기
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
