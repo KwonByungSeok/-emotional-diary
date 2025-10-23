@@ -3,6 +3,7 @@
 import React from "react";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
+import { useSignupForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -21,8 +22,10 @@ export interface AuthSignupProps {
 // ============================================
 
 export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
+  const { register, handleSubmit, errors, isButtonEnabled, isSubmitting } = useSignupForm();
+
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`} data-testid="auth-signup-container">
       {/* Card Container */}
       <div className={styles.card}>
         {/* Header */}
@@ -34,10 +37,11 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
         </div>
 
         {/* Form */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
         {/* Email Input */}
         <div className={styles.inputGroup}>
           <Input
+            {...register("email")}
             variant="primary"
             theme="light"
             size="medium"
@@ -46,12 +50,16 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
             type="email"
             required
             className={styles.input}
+            error={!!errors.email}
+            errorMessage={errors.email?.message}
+            data-testid="email-input"
           />
         </div>
 
         {/* Password Input */}
         <div className={styles.inputGroup}>
           <Input
+            {...register("password")}
             variant="primary"
             theme="light"
             size="medium"
@@ -60,12 +68,16 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
             type="password"
             required
             className={styles.input}
+            error={!!errors.password}
+            errorMessage={errors.password?.message}
+            data-testid="password-input"
           />
         </div>
 
         {/* Confirm Password Input */}
         <div className={styles.inputGroup}>
           <Input
+            {...register("passwordConfirm")}
             variant="primary"
             theme="light"
             size="medium"
@@ -74,12 +86,16 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
             type="password"
             required
             className={styles.input}
+            error={!!errors.passwordConfirm}
+            errorMessage={errors.passwordConfirm?.message}
+            data-testid="passwordConfirm-input"
           />
         </div>
 
         {/* Name Input */}
         <div className={styles.inputGroup}>
           <Input
+            {...register("name")}
             variant="primary"
             theme="light"
             size="medium"
@@ -88,19 +104,25 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = "" }) => {
             type="text"
             required
             className={styles.input}
+            error={!!errors.name}
+            errorMessage={errors.name?.message}
+            data-testid="name-input"
           />
         </div>
 
         {/* Submit Button */}
         <div className={styles.buttonGroup}>
           <Button
+            type="submit"
             variant="primary"
             theme="light"
             size="large"
             fullWidth
+            disabled={!isButtonEnabled}
             className={styles.submitButton}
+            data-testid="signup-submit-button"
           >
-            회원가입
+            {isSubmitting ? "가입 중..." : "회원가입"}
           </Button>
         </div>
         </form>
