@@ -172,21 +172,11 @@ export const useSignupForm = () => {
   });
 
   /**
-   * 이메일 중복 방지를 위한 timestamp 추가
-   */
-  const addTimestampToEmail = (email: string): string => {
-    const timestamp = Date.now();
-    return email.replace("@", `+${timestamp}@`);
-  };
-
-  /**
    * 폼 제출 핸들러
    */
   const onSubmit = (data: SignupFormData) => {
-    const emailWithTimestamp = addTimestampToEmail(data.email);
-    
     signupMutation.mutate({
-      email: emailWithTimestamp,
+      email: data.email,
       password: data.password,
       name: data.name,
     });
