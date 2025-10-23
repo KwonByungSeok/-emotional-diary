@@ -7,7 +7,7 @@ import { useSignupForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 // ============================================
-// Type Definitions
+// Types & Interfaces
 // ============================================
 
 export interface AuthSignupProps {

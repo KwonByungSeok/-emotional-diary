@@ -11,7 +11,7 @@ import { URL } from "@/commons/constants/url";
 import { useState } from "react";
 
 // ============================================
-// Schema Definitions
+// Types & Schema
 // ============================================
 
 /**
@@ -38,16 +38,18 @@ export const signupSchema = z.object({
 
 export type SignupFormData = z.infer<typeof signupSchema>;
 
-// ============================================
-// API Types
-// ============================================
-
+/**
+ * API 요청 데이터 타입
+ */
 interface CreateUserInput {
   email: string;
   password: string;
   name: string;
 }
 
+/**
+ * API 응답 데이터 타입
+ */
 interface CreateUserResponse {
   _id: string;
   email: string;
@@ -118,6 +120,10 @@ export const useSignupForm = () => {
 
   // 모든 필드 값 감시
   const watchedValues = watch();
+  
+  /**
+   * 모든 필드가 입력되었는지 확인
+   */
   const allFieldsFilled = 
     watchedValues.email && 
     watchedValues.password && 
@@ -165,11 +171,19 @@ export const useSignupForm = () => {
     },
   });
 
-  // 폼 제출 핸들러
-  const onSubmit = (data: SignupFormData) => {
-    // 이메일에 timestamp 추가하여 중복 방지
+  /**
+   * 이메일 중복 방지를 위한 timestamp 추가
+   */
+  const addTimestampToEmail = (email: string): string => {
     const timestamp = Date.now();
-    const emailWithTimestamp = data.email.replace("@", `+${timestamp}@`);
+    return email.replace("@", `+${timestamp}@`);
+  };
+
+  /**
+   * 폼 제출 핸들러
+   */
+  const onSubmit = (data: SignupFormData) => {
+    const emailWithTimestamp = addTimestampToEmail(data.email);
     
     signupMutation.mutate({
       email: emailWithTimestamp,
@@ -179,10 +193,13 @@ export const useSignupForm = () => {
   };
 
   return {
+    // Form 관련
     register,
     handleSubmit: handleSubmit(onSubmit),
     errors,
     isValid,
+    
+    // 상태
     isSubmitting: signupMutation.isPending,
     isButtonEnabled: allFieldsFilled && isValid && !signupMutation.isPending,
   };
