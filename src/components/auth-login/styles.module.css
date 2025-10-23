@@ -1,0 +1,236 @@
+/* ============================================ */
+/* AuthLogin Component Styles                  */
+/* ============================================ */
+
+.container {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  
+  /* Background */
+  background: #ffffff;
+  
+  /* Typography */
+  font-family: var(--font-family-default);
+}
+
+/* ============================================ */
+/* Card Container                               */
+/* ============================================ */
+
+.card {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 28rem;
+  
+  /* Background */
+  background: var(--background-elevated);
+  
+  /* Border & Shadow */
+  border: 1px solid var(--border-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Padding */
+  padding: 2.5rem 2rem;
+  
+  /* Animation */
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================ */
+/* Header Styles                                */
+/* ============================================ */
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.title {
+  /* Typography */
+  font-size: var(--heading-h1-font-size);
+  line-height: var(--heading-h1-line-height);
+  font-weight: var(--heading-h1-font-weight);
+  letter-spacing: var(--heading-h1-letter-spacing);
+  color: var(--foreground-primary);
+  
+  /* Spacing */
+  margin: 0 0 0.75rem 0;
+}
+
+.subtitle {
+  /* Typography */
+  font-size: var(--body-large-font-size);
+  line-height: var(--body-large-line-height);
+  font-weight: var(--body-large-font-weight);
+  letter-spacing: var(--body-large-letter-spacing);
+  color: var(--foreground-secondary);
+  
+  /* Spacing */
+  margin: 0;
+}
+
+/* ============================================ */
+/* Form Styles                                 */
+/* ============================================ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.submitButton {
+  width: 100%;
+}
+
+/* ============================================ */
+/* Footer Styles                               */
+/* ============================================ */
+
+.footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.footerText {
+  /* Typography */
+  font-size: var(--body-medium-font-size);
+  line-height: var(--body-medium-line-height);
+  font-weight: var(--body-medium-font-weight);
+  letter-spacing: var(--body-medium-letter-spacing);
+  color: var(--foreground-secondary);
+  
+  /* Spacing */
+  margin: 0;
+}
+
+.signupLink {
+  /* Typography */
+  font-size: var(--body-medium-font-size);
+  line-height: var(--body-medium-line-height);
+  font-weight: var(--body-medium-font-weight);
+  letter-spacing: var(--body-medium-letter-spacing);
+  color: var(--brand-primary);
+  text-decoration: none;
+  
+  /* Interactive */
+  transition: color 0.2s ease-in-out;
+}
+
+.signupLink:hover {
+  color: var(--brand-hover);
+  text-decoration: underline;
+}
+
+.signupLink:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* ============================================ */
+/* Responsive Design                            */
+/* ============================================ */
+
+@media (min-width: 768px) {
+  .container {
+    padding: 3rem 2rem;
+  }
+  
+  .card {
+    max-width: 32rem;
+    padding: 3rem 2.5rem;
+  }
+  
+  .header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .form {
+    gap: 1.75rem;
+  }
+  
+  .footer {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 4rem 2rem;
+  }
+  
+  .card {
+    max-width: 36rem;
+    padding: 3.5rem 3rem;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+  }
+  
+  .form {
+    gap: 2rem;
+  }
+  
+  .footer {
+    margin-top: 2.5rem;
+  }
+}
+
+/* ============================================ */
+/* Accessibility                               */
+/* ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .signupLink {
+    transition: none;
+  }
+}
+
+/* ============================================ */
+/* Print Styles                                */
+/* ============================================ */
+
+@media print {
+  .container {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .footer {
+    display: none;
+  }
+}
