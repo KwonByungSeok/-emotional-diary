@@ -158,6 +158,9 @@ export const useAuthLoginForm = () => {
           name: userResponse.name,
         }));
 
+        // 인증 상태 업데이트를 위한 커스텀 이벤트 dispatch
+        window.dispatchEvent(new Event("auth-storage-change"));
+
         // 성공 모달 표시
         openModal(
           <Modal
