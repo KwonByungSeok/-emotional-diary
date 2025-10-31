@@ -15,7 +15,7 @@
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 0;
 }
 
@@ -44,6 +44,26 @@
   line-height: 16px;
   letter-spacing: -0.18px;
   color: var(--foreground-primary);
+}
+
+/* Auth Status */
+.authStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userName {
+  font-family: var(--font-family-korean);
+  font-size: var(--body-medium-font-size);
+  font-weight: var(--body-medium-font-weight);
+  line-height: var(--body-medium-line-height);
+  letter-spacing: var(--body-medium-letter-spacing);
+  color: var(--foreground-primary);
+}
+
+.logoutButton {
+  width: auto;
 }
 
 /* Gap */

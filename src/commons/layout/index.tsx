@@ -6,6 +6,8 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { useLinkRouting } from "./hooks/index.link.routing.hook";
 import { useArea } from "./hooks/index.area.hook";
+import { useAuth } from "@/commons/providers/auth/auth.provider";
+import { Button } from "@/commons/components/button";
 
 // ============================================
 // Type Definitions
@@ -22,6 +24,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const { activeTab, getLogoNavigationPath, getTabNavigationPath } = useLinkRouting();
   const { showHeader, showLogo, showBanner, showNavigation, showFooter } = useArea();
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <>
@@ -35,6 +38,24 @@ export default function Layout({ children }: LayoutProps) {
               <Link href={getLogoNavigationPath()} className={styles.logo} data-testid="logo-link">
                 <span className={styles.logoText}>민지의 다이어리</span>
               </Link>
+            )}
+            {/* ============================================
+                Auth Status Section
+                ============================================ */}
+            {isLoggedIn && user && (
+              <div className={styles.authStatus}>
+                <span className={styles.userName}>{user.name}</span>
+                <Button
+                  variant="secondary"
+                  theme="light"
+                  size="medium"
+                  onClick={() => {}}
+                  className={styles.logoutButton}
+                  data-testid="logout-button"
+                >
+                  로그아웃
+                </Button>
+              </div>
             )}
           </header>
         )}
