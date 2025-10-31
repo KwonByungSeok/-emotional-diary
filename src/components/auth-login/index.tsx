@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { Controller } from "react-hook-form";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
+import { useAuthLoginForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -21,6 +23,14 @@ export interface AuthLoginProps {
 // ============================================
 
 export const AuthLogin: React.FC<AuthLoginProps> = ({ className = "" }) => {
+  const { 
+    control, 
+    errors, 
+    onSubmit, 
+    isFormFilled, 
+    isLoading 
+  } = useAuthLoginForm();
+
   return (
     <div className={`${styles.container} ${className}`} data-testid="auth-login-container">
       {/* Card Container */}
@@ -34,34 +44,52 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = "" }) => {
         </div>
 
         {/* Form */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
           {/* Email Input */}
           <div className={styles.inputGroup}>
-            <Input
-              variant="primary"
-              theme="light"
-              size="medium"
-              label="이메일"
-              placeholder="이메일을 입력해주세요"
-              type="email"
-              required
-              className={styles.input}
-              data-testid="email-input"
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  variant="primary"
+                  theme="light"
+                  size="medium"
+                  label="이메일"
+                  placeholder="이메일을 입력해주세요"
+                  type="email"
+                  required
+                  className={styles.input}
+                  data-testid="email-input"
+                  error={!!errors.email}
+                  errorMessage={errors.email?.message}
+                />
+              )}
             />
           </div>
 
           {/* Password Input */}
           <div className={styles.inputGroup}>
-            <Input
-              variant="primary"
-              theme="light"
-              size="medium"
-              label="비밀번호"
-              placeholder="비밀번호를 입력해주세요"
-              type="password"
-              required
-              className={styles.input}
-              data-testid="password-input"
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  variant="primary"
+                  theme="light"
+                  size="medium"
+                  label="비밀번호"
+                  placeholder="비밀번호를 입력해주세요"
+                  type="password"
+                  required
+                  className={styles.input}
+                  data-testid="password-input"
+                  error={!!errors.password}
+                  errorMessage={errors.password?.message}
+                />
+              )}
             />
           </div>
 
@@ -73,10 +101,11 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = "" }) => {
               theme="light"
               size="large"
               fullWidth
+              disabled={!isFormFilled || isLoading}
               className={styles.submitButton}
               data-testid="login-submit-button"
             >
-              로그인
+              {isLoading ? "로그인 중..." : "로그인"}
             </Button>
           </div>
         </form>
