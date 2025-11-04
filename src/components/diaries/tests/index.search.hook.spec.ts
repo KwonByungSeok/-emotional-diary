@@ -15,7 +15,7 @@ test.describe("일기 검색 기능", () => {
    */
   async function createRealDiaryData(page: Page, diaryData: { title: string; content: string; emotion: EmotionType }) {
     await page.waitForTimeout(200);
-    await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
+    await page.goto("/diaries");
     await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     await page.waitForTimeout(300);
@@ -37,7 +37,7 @@ test.describe("일기 검색 기능", () => {
     
     await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 499 });
     
-    await page.waitForTimeout(499);
+    await page.waitForTimeout(300);
   }
 
   /**

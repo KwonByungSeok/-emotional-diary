@@ -47,7 +47,7 @@ export const useDiaryBinding = (id?: string): DiaryBindingResult => {
   /**
    * 로컬스토리지에서 일기 데이터 가져오기
    */
-  const fetchDiaryData = useCallback(async (): Promise<void> => {
+  const fetchDiaryData = useCallback((): void => {
     try {
       setIsLoading(true);
       setError(null);

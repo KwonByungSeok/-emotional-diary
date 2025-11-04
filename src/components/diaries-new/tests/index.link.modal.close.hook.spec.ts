@@ -14,7 +14,7 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 2000ms)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
 
     // 일기쓰기 버튼 클릭
     await page.click('[data-testid="diary-write-button"]');
@@ -202,7 +202,7 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
 
     // 일기목록 페이지로 돌아왔는지 확인
     await expect(page).toHaveURL('/diaries');
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
 
     // 일기쓰기 버튼이 다시 보이는지 확인
     await expect(page.locator('[data-testid="diary-write-button"]')).toBeVisible();

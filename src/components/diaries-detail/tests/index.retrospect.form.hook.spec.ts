@@ -33,7 +33,7 @@ test.describe('회고 등록 폼 기능', () => {
     await page.goto('/diaries/1');
     
     // 페이지 로드 완료 대기 (data-testid 사용, timeout 500ms 미만)
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 회고 입력 필드 찾기
     const retrospectInput = page.locator('[data-testid="retrospect-input"]');
@@ -54,7 +54,7 @@ test.describe('회고 등록 폼 기능', () => {
     await page.goto('/diaries/1');
     
     // 페이지 로드 완료 대기
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 회고 입력 필드 찾기
     const retrospectInput = page.locator('[data-testid="retrospect-input"]');
@@ -77,7 +77,7 @@ test.describe('회고 등록 폼 기능', () => {
     await page.goto('/diaries/1');
     
     // 페이지 로드 완료 대기
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 회고 입력 및 등록
     const retrospectInput = page.locator('[data-testid="retrospect-input"]');
@@ -87,7 +87,7 @@ test.describe('회고 등록 폼 기능', () => {
     await submitButton.click();
     
     // 페이지 새로고침 대기 (새로고침 후 페이지 로드 확인)
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 로컬스토리지에서 데이터 확인
     const storedData = await page.evaluate(() => {
@@ -114,7 +114,7 @@ test.describe('회고 등록 폼 기능', () => {
   test.skip('등록하기 버튼 클릭 시 기존 retrospects에 push하고 id를 가장 큰 id+1로 설정한다 (기존 데이터 있음)', async ({ page }) => {
     // 기존 데이터 설정
     await page.goto('/diaries/1');
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     await page.evaluate(() => {
       const existingRetrospects = [
@@ -136,7 +136,7 @@ test.describe('회고 등록 폼 기능', () => {
     
     // 페이지 새로고침
     await page.reload();
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 새로운 회고 등록
     const retrospectInput = page.locator('[data-testid="retrospect-input"]');
@@ -146,7 +146,7 @@ test.describe('회고 등록 폼 기능', () => {
     await submitButton.click();
     
     // 페이지 새로고침 대기
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 로컬스토리지에서 데이터 확인
     const storedData = await page.evaluate(() => {
@@ -172,7 +172,7 @@ test.describe('회고 등록 폼 기능', () => {
     await page.goto('/diaries/1');
     
     // 페이지 로드 완료 대기
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 회고 등록
     const retrospectInput = page.locator('[data-testid="retrospect-input"]');
@@ -182,7 +182,7 @@ test.describe('회고 등록 폼 기능', () => {
     await submitButton.click();
     
     // 페이지 새로고침 후 로드 완료 대기
-    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
     
     // 입력 필드가 비워졌는지 확인 (새로고침 후 상태)
     const inputValue = await retrospectInput.inputValue();

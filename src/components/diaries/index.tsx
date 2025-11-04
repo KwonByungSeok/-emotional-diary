@@ -20,6 +20,7 @@ import { useDiaryModalLink } from "./hooks/index.link.modal.hook";
 import { useDiariesBinding } from "./hooks/index.binding.hook";
 import { useDiaryLinkRouting } from "./hooks/index.link.routing.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
+import { useDiariesFilter } from "./hooks/index.filter.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -150,7 +151,10 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   const { diaries, isLoading, error, refetch } = useDiariesBinding();
 
   // 검색 훅
-  const { filteredDiaries, executeSearch, clearSearch } = useDiariesSearch(diaries);
+  const { filteredDiaries: searchedDiaries, executeSearch, clearSearch } = useDiariesSearch(diaries);
+
+  // 필터 훅
+  const { filteredDiaries } = useDiariesFilter(searchedDiaries, selectedFilter);
 
   // 라우팅 훅
   const { navigateToDiaryDetail } = useDiaryLinkRouting();
@@ -192,7 +196,8 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   // 필터 변경 핸들러
   const handleFilterChange = (value: string) => {
     setSelectedFilter(value);
-    console.log("필터 변경:", value);
+    // 필터 변경 시 첫 페이지로 이동
+    setCurrentPage(1);
   };
 
   // 일기쓰기 버튼 핸들러
@@ -234,6 +239,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
             onChange={handleFilterChange}
             placeholder="전체"
             className={styles.filterSelect}
+            data-testid="diary-filter-select"
           />
 
           {/* Searchbar */}

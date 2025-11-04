@@ -30,7 +30,7 @@ async function performSuccessfulSignup(page: Page, userData: { email: string; pa
   await page.click('[data-testid="signup-submit-button"]');
 
   // 성공 모달 확인
-  await expect(page.locator('[data-testid="signup-success-modal"]')).toBeVisible({ timeout: 2000 });
+  await expect(page.locator('[data-testid="signup-success-modal"]')).toBeVisible({ timeout: 499 });
 }
 
 // ============================================
@@ -43,7 +43,7 @@ test.describe('Auth Signup Form Hook Tests', () => {
     await page.goto('/auth/signup');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 기반)
-    await page.waitForSelector('[data-testid="auth-signup-container"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="auth-signup-container"]', { timeout: 499 });
   });
 
   // ============================================
@@ -104,7 +104,7 @@ test.describe('Auth Signup Form Hook Tests', () => {
     await page.click('[data-testid="signup-submit-button"]');
 
     // 실패 모달이 나타나는지 확인
-    await expect(page.locator('[data-testid="signup-error-modal"]')).toBeVisible({ timeout: 2000 });
+    await expect(page.locator('[data-testid="signup-error-modal"]')).toBeVisible({ timeout: 499 });
 
     // 모달 내용 확인
     await expect(page.locator('[data-testid="signup-error-modal"]')).toContainText('회원가입 실패');

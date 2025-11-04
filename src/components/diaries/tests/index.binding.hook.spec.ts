@@ -12,8 +12,8 @@ import { EmotionType } from "@/commons/constants/enum";
 async function createRealDiaryData(page: Page, diaryData: { title: string; content: string; emotion: EmotionType }) {
   // 일기 목록 페이지로 이동 (네비게이션 안정화를 위한 대기 추가)
   await page.waitForTimeout(200); // 네비게이션 충돌 방지
-  await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 1000 });
+  await page.goto("/diaries");
+  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 페이지가 완전히 로드될 때까지 대기
   await page.waitForTimeout(300);
@@ -23,8 +23,8 @@ async function createRealDiaryData(page: Page, diaryData: { title: string; conte
   await expect(writeButton).toBeVisible();
   await writeButton.click();
   
-  // 모달이 열릴 때까지 대기 (타임아웃 증가)
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 1000 });
+  // 모달이 열릴 때까지 대기
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 499 });
   
   // 폼 입력
   await page.fill('[data-testid="diary-title-input"]', diaryData.title);
@@ -35,14 +35,14 @@ async function createRealDiaryData(page: Page, diaryData: { title: string; conte
   await page.click('[data-testid="diaries-submit-button"]');
   
   // 성공 모달 확인 후 닫기
-  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 1000 });
+  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
   await page.click('[data-testid="diary-success-modal"] button');
   
   // 모달이 닫힐 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 1000 });
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 499 });
   
   // 페이지가 안정화될 때까지 충분한 대기 (WebKit 안정화)
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(300);
 }
 
 /**
@@ -114,11 +114,11 @@ test.skip("일기 목록 페이지에서 실제 데이터가 올바르게 바인
   const createdDiary = realData[realData.length - 1]; // 가장 최근 생성된 일기
   
   // 일기 목록 페이지로 이동
-  await page.waitForTimeout(500); // 네비게이션 안정화를 위한 대기
+    await page.waitForTimeout(300); // 네비게이션 안정화를 위한 대기
   await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
   
   // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용)
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 일기 카드가 표시되는지 확인
   const cards = page.locator('[data-testid="diary-card"]');
@@ -143,7 +143,7 @@ test("여러 개의 일기 데이터가 올바르게 바인딩되는지 확인",
   await createRealDiaryData(page, diaryData1);
   
   // 첫 번째 일기 생성 후 추가 대기 (WebKit 안정화)
-  await page.waitForTimeout(500);
+    await page.waitForTimeout(300);
   
   // 두 번째 일기 데이터 생성
   const diaryData2 = {
@@ -155,7 +155,7 @@ test("여러 개의 일기 데이터가 올바르게 바인딩되는지 확인",
   await createRealDiaryData(page, diaryData2);
   
   // 두 번째 일기 생성 후 추가 대기 (WebKit 안정화)
-  await page.waitForTimeout(500);
+    await page.waitForTimeout(300);
   
   // 세 번째 일기 데이터 생성
   const diaryData3 = {
@@ -167,7 +167,7 @@ test("여러 개의 일기 데이터가 올바르게 바인딩되는지 확인",
   await createRealDiaryData(page, diaryData3);
   
   // 세 번째 일기 생성 후 추가 대기 (WebKit 안정화)
-  await page.waitForTimeout(500);
+    await page.waitForTimeout(300);
   
   // 생성된 일기 데이터 확인
   const realData = await getRealDiaryData(page);
@@ -177,7 +177,7 @@ test("여러 개의 일기 데이터가 올바르게 바인딩되는지 확인",
   await page.goto("/diaries");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 일기 카드들이 표시되는지 확인
   const cards = page.locator('[data-testid="diary-card"]');
@@ -213,7 +213,7 @@ test("긴 제목이 올바르게 처리되는지 확인", async ({ page }) => {
   await page.goto("/diaries");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 첫 번째 카드의 제목 확인
   const cards = page.locator('[data-testid="diary-card"]');
@@ -245,7 +245,7 @@ test("로컬스토리지에 데이터가 없을 때 빈 목록이 표시되는�
   await page.reload();
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 일기 카드가 없는지 확인
   const cards = page.locator('[data-testid="diary-card"]');
@@ -269,7 +269,7 @@ test("로컬스토리지 데이터가 잘못된 형식일 때 에러 처리 확�
   await createRealDiaryData(page, diaryData);
   
   // 잘못된 JSON 형식으로 로컬스토리지 설정
-  await page.waitForTimeout(500); // 네비게이션 안정화를 위한 대기
+    await page.waitForTimeout(300); // 네비게이션 안정화를 위한 대기
   await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => {
     localStorage.setItem("diaries", "invalid json");
@@ -279,7 +279,7 @@ test("로컬스토리지 데이터가 잘못된 형식일 때 에러 처리 확�
   await page.reload();
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 에러 상태 확인 (에러 메시지가 표시되는지)
   const errorMessage = page.locator('[data-testid="error-message"]');
@@ -303,7 +303,7 @@ test("로컬스토리지 데이터가 배열이 아닐 때 에러 처리 확인"
   await createRealDiaryData(page, diaryData);
   
   // 배열이 아닌 객체로 로컬스토리지 설정
-  await page.waitForTimeout(500); // 네비게이션 안정화를 위한 대기
+    await page.waitForTimeout(300); // 네비게이션 안정화를 위한 대기
   await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => {
     localStorage.setItem("diaries", JSON.stringify({ invalid: "data" }));
@@ -313,7 +313,7 @@ test("로컬스토리지 데이터가 배열이 아닐 때 에러 처리 확인"
   await page.reload();
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 에러 상태 확인
   const errorMessage = page.locator('[data-testid="error-message"]');
@@ -341,7 +341,7 @@ test("일부 데이터가 유효하지 않을 때 유효한 데이터만 표시�
   await createRealDiaryData(page, diaryData);
   
   // 유효한 데이터와 유효하지 않은 데이터를 섞어서 설정
-  await page.waitForTimeout(500); // 네비게이션 안정화를 위한 대기
+    await page.waitForTimeout(300); // 네비게이션 안정화를 위한 대기
   await page.goto("/diaries", { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => {
     const validData = [
@@ -374,7 +374,7 @@ test("일부 데이터가 유효하지 않을 때 유효한 데이터만 표시�
   await page.reload();
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 유효한 데이터만 표시되는지 확인 (2개)
   const cards = page.locator('[data-testid="diary-card"]');

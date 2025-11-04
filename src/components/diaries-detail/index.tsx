@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
 import { getEmotionData, getEmotionImage, getEmotionLabel } from "@/commons/constants/enum";
 import { useDiaryBinding } from "./hooks/index.binding.hook";
-import { useRetrospectForm, RetrospectData } from "./hooks/index.retrospect.form.hook";
+import { useRetrospectForm } from "./hooks/index.retrospect.form.hook";
+import { useRetrospectBinding } from "./hooks/index.retrospect.binding.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -34,41 +35,14 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
   // 회고 폼 훅
   const diaryId = diaryData?.id || (id ? parseInt(id, 10) : 0);
   
-  // 회고 리스트 상태 관리
-  const [retrospectList, setRetrospectList] = useState<RetrospectData[]>([]);
-  
-  // 로컬스토리지에서 회고 리스트 가져오기
-  const loadRetrospects = React.useCallback(() => {
-    if (!diaryId) return;
-    
-    try {
-      const storedData = localStorage.getItem("retrospects");
-      if (storedData) {
-        const allRetrospects: RetrospectData[] = JSON.parse(storedData);
-        // 현재 diaryId에 해당하는 회고만 필터링
-        const filteredRetrospects = allRetrospects.filter(
-          (retrospect) => retrospect.diaryId === diaryId
-        );
-        setRetrospectList(filteredRetrospects);
-      } else {
-        setRetrospectList([]);
-      }
-    } catch (error) {
-      console.error("로컬스토리지 데이터 읽기 실패:", error);
-      setRetrospectList([]);
-    }
-  }, [diaryId]);
+  // 회고 데이터 바인딩 훅
+  const { retrospectList, refetch: refetchRetrospects } = useRetrospectBinding(diaryId);
   
   const {
     register,
     handleSubmit,
     isFormValid,
-  } = useRetrospectForm(diaryId, loadRetrospects);
-  
-  // 컴포넌트 마운트 및 diaryId 변경 시 회고 리스트 로드
-  useEffect(() => {
-    loadRetrospects();
-  }, [loadRetrospects]);
+  } = useRetrospectForm(diaryId, refetchRetrospects);
   
   // 로딩 상태 처리
   if (isLoading) {
@@ -251,10 +225,10 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
       {/* Retrospect List: 1168 * 72 */}
       <div className={styles.retrospectList}>
         {retrospectList.map((retrospect, index) => (
-          <div key={retrospect.id}>
+          <div key={retrospect.id} data-testid="retrospect-item">
             <div className={styles.retrospectItem}>
-              <span className={styles.retrospectContent}>{retrospect.content}</span>
-              <span className={styles.retrospectDate}>[{formatDate(retrospect.createdAt)}]</span>
+              <span className={styles.retrospectContent} data-testid="retrospect-content">{retrospect.content}</span>
+              <span className={styles.retrospectDate} data-testid="retrospect-date">[{formatDate(retrospect.createdAt)}]</span>
             </div>
             {index < retrospectList.length - 1 && (
               <div className={styles.retrospectDivider}></div>

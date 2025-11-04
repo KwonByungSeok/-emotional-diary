@@ -5,11 +5,14 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     // /pictures 페이지로 이동
     await page.goto("/pictures");
     
-    // 페이지가 완전히 로드될 때까지 대기 (network 통신이 아닌 경우: 500ms 미만)
-    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 2000 });
+    // 페이지가 완전히 로드될 때까지 대기
+    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 499 });
     
-    // 사진이 로드될 때까지 대기 (network 통신인 경우: 2000ms 미만)
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 1999 });
+    // 사진이 로드될 때까지 대기
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    
+    // 필터가 렌더링될 때까지 추가 대기
+    await page.waitForSelector('[data-testid="pictures-filter"]', { timeout: 499 });
   });
 
   test.skip("필터 선택박스가 기본 옵션으로 초기화되어야 함", async ({ page }) => {
@@ -105,7 +108,9 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     
     // 가로형으로 변경
     const filterSelect = page.locator('[data-testid="pictures-filter"]');
-    await filterSelect.locator('[role="button"]').click();
+    const filterButton = filterSelect.locator('button[type="button"]');
+    await filterButton.click();
+    await page.waitForSelector('[role="option"]:has-text("가로형")', { timeout: 499 });
     await page.locator('[role="option"]:has-text("가로형")').click();
     await page.waitForTimeout(300);
     
@@ -127,7 +132,11 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
   test("필터 옵션 목록이 올바르게 표시되어야 함", async ({ page }) => {
     // 필터 선택박스 클릭
     const filterSelect = page.locator('[data-testid="pictures-filter"]');
-    await filterSelect.locator('[role="button"]').click();
+    const filterButton = filterSelect.locator('button[type="button"]');
+    await filterButton.click();
+    
+    // 드롭다운이 열릴 때까지 대기
+    await page.waitForSelector('[role="listbox"]', { timeout: 499 });
     
     // 옵션 목록 확인
     const options = page.locator('[role="option"]');
@@ -155,7 +164,9 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     
     // 2. 가로형 필터로 변경 (640x480)
     const filterSelect = page.locator('[data-testid="pictures-filter"]');
-    await filterSelect.locator('[role="button"]').click();
+    const filterButton = filterSelect.locator('button[type="button"]');
+    await filterButton.click();
+    await page.waitForSelector('[role="option"]:has-text("가로형")', { timeout: 499 });
     await page.locator('[role="option"]:has-text("가로형")').click();
     await page.waitForTimeout(300);
     
@@ -170,7 +181,8 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     expect(parseFloat(height)).toBeCloseTo(480, 0);
     
     // 3. 세로형 필터로 변경 (480x640)
-    await filterSelect.locator('[role="button"]').click();
+    await filterButton.click();
+    await page.waitForSelector('[role="option"]:has-text("세로형")', { timeout: 499 });
     await page.locator('[role="option"]:has-text("세로형")').click();
     await page.waitForTimeout(300);
     
@@ -185,7 +197,8 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     expect(parseFloat(height)).toBeCloseTo(640, 0);
     
     // 4. 다시 기본 필터로 변경 (640x640)
-    await filterSelect.locator('[role="button"]').click();
+    await filterButton.click();
+    await page.waitForSelector('[role="option"]:has-text("기본")', { timeout: 499 });
     await page.locator('[role="option"]:has-text("기본")').click();
     await page.waitForTimeout(300);
     

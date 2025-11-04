@@ -60,7 +60,7 @@ test.describe('Diaries Modal Link Functionality', () => {
       window.__TEST_BYPASS__ = false;
     });
     
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 설정이 제대로 적용되었는지 확인
     const bypassValue = await page.evaluate(() => {
@@ -72,7 +72,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.click('[data-testid="diary-write-button"]');
     
     // 3. 로그인요청모달 노출여부 확인
-    await expect(page.locator('[data-testid="auth-required-modal"]')).toBeVisible({ timeout: 1000 });
+    await expect(page.locator('[data-testid="auth-required-modal"]')).toBeVisible({ timeout: 499 });
     
     // 일기쓰기 모달은 노출되지 않아야 함
     await expect(page.locator('[data-testid="diaries-new-modal"]')).not.toBeVisible();
@@ -87,7 +87,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     
     // 1. /diaries에 접속하여 페이지 로드 확인
     await page.reload();
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 2. 일기쓰기버튼 클릭
     await page.click('[data-testid="diary-write-button"]');
@@ -108,7 +108,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭
     await page.click('[data-testid="diary-write-button"]');
@@ -126,7 +126,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -153,7 +153,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -166,10 +166,10 @@ test.describe('Diaries Modal Link Functionality', () => {
     await expect(submitButton).toBeVisible();
     
     // alert 이벤트 리스너 설정 (필수 필드 미입력으로 인한)
-    const dialogPromise = page.waitForEvent('dialog', { timeout: 5000 });
+    const dialogPromise = page.waitForEvent('dialog', { timeout: 499 });
     
     // 등록하기 버튼 클릭 (필수 필드 미입력으로 alert 발생 예상)
-    await submitButton.click({ force: true, timeout: 2000 });
+    await submitButton.click({ force: true, timeout: 499 });
     
     // alert 확인 및 처리
     const dialog = await dialogPromise;
@@ -189,7 +189,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -213,7 +213,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');

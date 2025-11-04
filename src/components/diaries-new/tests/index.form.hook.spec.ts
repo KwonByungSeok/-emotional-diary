@@ -9,13 +9,13 @@ test.describe('DiariesNew Form Hook Tests', () => {
     });
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 기반)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
     
     // 모달이 열릴 때까지 대기
-    await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 499 });
   });
 
   test('should validate required fields', async ({ page }) => {
@@ -48,7 +48,7 @@ test.describe('DiariesNew Form Hook Tests', () => {
     await page.click('[data-testid="diaries-submit-button"]');
 
     // 성공 모달이 나타나는지 확인
-    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
 
     // 로컬스토리지에 데이터가 저장되었는지 확인
     const storageData = await page.evaluate(() => {
@@ -98,7 +98,7 @@ test.describe('DiariesNew Form Hook Tests', () => {
     await page.click('[data-testid="diaries-submit-button"]');
 
     // 성공 모달이 나타나는지 확인
-    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
 
     // 로컬스토리지에 데이터가 추가되었는지 확인
     const storageData = await page.evaluate(() => {
@@ -128,7 +128,7 @@ test.describe('DiariesNew Form Hook Tests', () => {
     await page.click('[data-testid="diaries-submit-button"]');
 
     // 성공 모달이 나타나는지 확인
-    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
     
     // 모달 내용 확인
     await expect(page.locator('[data-testid="diary-success-modal"]')).toContainText('등록 완료');
@@ -138,7 +138,7 @@ test.describe('DiariesNew Form Hook Tests', () => {
     await page.click('[data-testid="diary-success-modal-confirm"]');
 
     // 상세페이지로 이동했는지 확인
-    await page.waitForURL('/diaries/1', { timeout: 2000 });
+    await page.waitForURL('/diaries/1', { timeout: 499 });
     
     // 모든 모달이 닫혔는지 확인
     await expect(page.locator('[data-testid="diary-success-modal"]')).not.toBeVisible();
@@ -171,16 +171,15 @@ test.describe('DiariesNew Form Hook Tests', () => {
     await page.click('[data-testid="diaries-submit-button"]');
 
     // 성공 모달에서 확인 클릭
-    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
     await page.click('[data-testid="diary-success-modal-confirm"]');
 
     // 다시 일기쓰기 모달 열기
-    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(100); // Firefox 네비게이션 안정화
     await page.goto('/diaries');
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
     await page.click('[data-testid="diary-write-button"]');
-    await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 2000 });
+    await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 499 });
 
     // 폼이 초기화되었는지 확인
     await expect(page.locator('[data-testid="diary-title-input"]')).toHaveValue('');

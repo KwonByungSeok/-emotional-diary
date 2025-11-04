@@ -12,11 +12,11 @@ import { EmotionType } from "@/commons/constants/enum";
 async function createRealDiaryData(page: Page, diaryData: { title: string; content: string; emotion: EmotionType }) {
   // 일기 목록 페이지로 이동
   await page.goto("/diaries");
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 일기쓰기 버튼 클릭
   await page.click('[data-testid="diary-write-button"]');
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 499 });
   
   // 폼 입력
   await page.fill('[data-testid="diary-title-input"]', diaryData.title);
@@ -27,14 +27,14 @@ async function createRealDiaryData(page: Page, diaryData: { title: string; conte
   await page.click('[data-testid="diaries-submit-button"]');
   
   // 성공 모달 확인 후 닫기
-  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
   await page.click('[data-testid="diary-success-modal"] button');
   
   // 모달이 닫힐 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 499 });
   
   // 페이지가 안정화될 때까지 대기
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(300);
 }
 
 /**
@@ -78,11 +78,11 @@ test.skip("일기 상세 페이지에서 실제 데이터가 올바르게 바인
   const diaryId = createdDiary.id;
   
   // 일기 상세 페이지로 이동 (네비게이션 안정화를 위해 대기)
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(300);
   await page.goto(`/diaries/${diaryId}`, { waitUntil: 'domcontentloaded' });
   
   // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용)
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 제목 확인
   await expect(page.locator('[data-testid="diary-title"]')).toHaveText(diaryData.title);
@@ -119,11 +119,11 @@ test.skip("다른 ID의 일기 데이터가 올바르게 바인딩되는지 확�
   const diaryId = createdDiary.id;
   
   // 일기 상세 페이지로 이동 (네비게이션 안정화를 위해 대기)
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(300);
   await page.goto(`/diaries/${diaryId}`, { waitUntil: 'domcontentloaded' });
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 제목 확인
   await expect(page.locator('[data-testid="diary-title"]')).toHaveText(diaryData.title);
@@ -153,11 +153,11 @@ test("세 번째 ID의 일기 데이터가 올바르게 바인딩되는지 확�
   const diaryId = createdDiary.id;
   
   // 일기 상세 페이지로 이동 (네비게이션 안정화를 위해 대기)
-  await page.waitForTimeout(500);
-  await page.goto(`/diaries/${diaryId}`, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(300);
+  await page.goto(`/diaries/${diaryId}`);
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 제목 확인
   await expect(page.locator('[data-testid="diary-title"]')).toHaveText(diaryData.title);
@@ -187,7 +187,7 @@ test("존재하지 않는 ID로 접근 시 에러 처리 확인", async ({ page 
   await page.goto("/diaries/99999");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 에러 메시지 확인
   await expect(page.locator('[data-testid="error-message"]')).toContainText("ID 99999에 해당하는 일기를 찾을 수 없습니다");
@@ -204,7 +204,7 @@ test("로컬스토리지에 데이터가 없을 때 에러 처리 확인", async
   await page.goto("/diaries/1");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 에러 메시지 확인
   await expect(page.locator('[data-testid="error-message"]')).toContainText("저장된 일기 데이터가 없습니다");
@@ -224,7 +224,7 @@ test("잘못된 ID 형식으로 접근 시 에러 처리 확인", async ({ page 
   await page.goto("/diaries/invalid");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 에러 메시지 확인 (NaN 처리)
   await expect(page.locator('[data-testid="error-message"]')).toContainText("ID invalid에 해당하는 일기를 찾을 수 없습니다");
@@ -257,7 +257,7 @@ test("로컬스토리지 데이터가 잘못된 형식일 때 에러 처리 확�
   await page.goto("/diaries/1");
   
   // 페이지가 완전히 로드될 때까지 대기
-  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-detail-container"]', { timeout: 499 });
   
   // 에러 메시지 확인
   await expect(page.locator('[data-testid="error-message"]')).toContainText("일기 데이터를 불러오는 중 오류가 발생했습니다");

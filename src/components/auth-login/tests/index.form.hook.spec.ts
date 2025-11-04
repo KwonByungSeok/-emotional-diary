@@ -74,7 +74,7 @@ test.describe('AuthLogin Form Hook Tests', () => {
     // 성공 모달이나 에러 모달 중 하나가 나타날 때까지 대기 (2000ms 미만)
     try {
       await page.waitForSelector('[data-testid="login-success-modal"]', { 
-        timeout: 2000 
+        timeout: 499 
       });
       
       // 성공 모달의 내용 확인
@@ -87,7 +87,7 @@ test.describe('AuthLogin Form Hook Tests', () => {
       await page.click('[data-testid="login-success-modal-confirm"]');
 
       // 일기 목록 페이지로 이동 확인
-      await page.waitForURL('/diaries', { timeout: 2000 });
+      await page.waitForURL('/diaries', { timeout: 499 });
       expect(page.url()).toContain('/diaries');
 
       // 로컬 스토리지에 토큰과 사용자 정보가 저장되었는지 확인
@@ -163,7 +163,7 @@ test.describe('AuthLogin Form Hook Tests', () => {
 
     // 실패 모달이 나타날 때까지 대기
     await page.waitForSelector('[data-testid="login-error-modal"]', { 
-      timeout: 2000 
+      timeout: 499 
     });
 
     // 실패 모달의 내용 확인
@@ -226,7 +226,7 @@ test.describe('AuthLogin Form Hook Tests', () => {
 
     // 실패 모달이 나타날 때까지 대기
     await page.waitForSelector('[data-testid="login-error-modal"]', { 
-      timeout: 2000 
+      timeout: 499 
     });
 
     // 실패 모달의 내용 확인

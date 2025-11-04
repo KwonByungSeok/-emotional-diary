@@ -12,11 +12,11 @@ import { EmotionType } from "@/commons/constants/enum";
 async function createRealDiaryData(page: Page, diaryData: { title: string; content: string; emotion: EmotionType }) {
   // 일기 목록 페이지로 이동
   await page.goto("/diaries");
-  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
   
   // 일기쓰기 버튼 클릭
   await page.click('[data-testid="diary-write-button"]');
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { timeout: 499 });
   
   // 폼 입력
   await page.fill('[data-testid="diary-title-input"]', diaryData.title);
@@ -27,11 +27,11 @@ async function createRealDiaryData(page: Page, diaryData: { title: string; conte
   await page.click('[data-testid="diaries-submit-button"]');
   
   // 성공 모달 확인 후 닫기
-  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 500 });
+  await page.waitForSelector('[data-testid="diary-success-modal"]', { timeout: 499 });
   await page.click('[data-testid="diary-success-modal"] button');
   
   // 모달이 닫힐 때까지 대기
-  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 500 });
+  await page.waitForSelector('[data-testid="diaries-new-modal"]', { state: 'hidden', timeout: 499 });
   
   // 페이지가 안정화될 때까지 대기
   await page.waitForTimeout(100);
@@ -77,7 +77,7 @@ test.describe('Diaries Link Routing', () => {
     
     // 일기 목록 페이지로 이동
     await page.goto('/diaries');
-    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 499 });
     
     // 첫 번째 일기 카드 클릭
     const firstDiaryCard = page.locator('[data-testid="diary-card"]').first();
@@ -112,7 +112,7 @@ test.describe('Diaries Link Routing', () => {
     
     // 일기 목록 페이지로 이동
     await page.goto('/diaries');
-    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 499 });
     
     // 카드 개수 확인
     const diaryCards = page.locator('[data-testid="diary-card"]');
@@ -127,7 +127,7 @@ test.describe('Diaries Link Routing', () => {
     
     // 이전 페이지로 돌아가기
     await page.goBack();
-    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 499 });
     
     // 두 번째 카드 클릭
     await diaryCards.nth(1).click();
@@ -148,7 +148,7 @@ test.describe('Diaries Link Routing', () => {
     
     // 일기 목록 페이지로 이동
     await page.goto('/diaries');
-    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 499 });
     
     // 삭제 버튼 클릭 - SVG 아이콘이 있는 버튼 찾기
     const deleteButton = page.locator('button').filter({ has: page.locator('svg') }).first();
@@ -170,7 +170,7 @@ test.describe('Diaries Link Routing', () => {
     
     // 일기 목록 페이지로 이동
     await page.goto('/diaries');
-    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="diary-card"]', { timeout: 499 });
     
     // 일기 카드의 CSS 스타일 확인
     const diaryCard = page.locator('[data-testid="diary-card"]').first();
@@ -186,7 +186,7 @@ test.describe('Diaries Link Routing', () => {
     await page.goto('/diaries');
     
     // 빈 상태 확인
-    await page.waitForSelector('[data-testid="empty-state"]', { timeout: 500 });
+    await page.waitForSelector('[data-testid="empty-state"]', { timeout: 499 });
     
     // 빈 상태에서는 일기 카드가 없으므로 클릭할 수 없음
     const diaryCards = page.locator('[data-testid="diary-card"]');
