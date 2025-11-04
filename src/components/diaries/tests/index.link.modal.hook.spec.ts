@@ -1,10 +1,103 @@
 import { test, expect } from '@playwright/test';
 
 // ============================================
+// Type Definitions
+// ============================================
+
+/**
+ * Window 인터페이스 확장 (테스트 환경 변수 추가)
+ */
+declare global {
+  interface Window {
+    /**
+     * 테스트 환경에서 로그인 검사 패스 여부
+     * - true 또는 undefined: 로그인 검사 패스
+     * - false: 로그인 검사 수행
+     */
+    __TEST_BYPASS__?: boolean;
+  }
+}
+
+// ============================================
 // Diaries Modal Link Functionality Tests
 // ============================================
 
 test.describe('Diaries Modal Link Functionality', () => {
+
+  // ============================================
+  // Test Setup
+  // ============================================
+
+  test.beforeEach(async ({ page }) => {
+    // 각 테스트 전에 window.__TEST_BYPASS__ 초기화
+    // 기본값은 "로그인 유저"로 설정 (05-func.role.mdc 규칙 준수)
+    await page.goto('/diaries');
+    await page.evaluate(() => {
+      // 기본값: 로그인 유저 (undefined 또는 true)
+      window.__TEST_BYPASS__ = true;
+    });
+  });
+
+  // ============================================
+  // Auth Guard Tests (비로그인 유저 시나리오)
+  // ============================================
+
+  test('비로그인 유저: 일기쓰기 버튼 클릭 시 로그인 요청 모달이 표시되어야 합니다', async ({ page }) => {
+    // 비로그인 유저로 설정 (window.__TEST_BYPASS__ = false)
+    // localStorage에서 accessToken도 제거하여 isLoggedIn이 false가 되도록 함
+    await page.evaluate(() => {
+      window.__TEST_BYPASS__ = false;
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
+    });
+
+    // 1. /diaries에 접속하여 페이지 로드 확인
+    // 페이지를 다시 로드하여 설정 적용
+    await page.reload();
+    
+    // page.reload() 후에는 window.__TEST_BYPASS__가 초기화되므로 다시 설정
+    await page.evaluate(() => {
+      window.__TEST_BYPASS__ = false;
+    });
+    
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    
+    // 설정이 제대로 적용되었는지 확인
+    const bypassValue = await page.evaluate(() => {
+      return window.__TEST_BYPASS__;
+    });
+    expect(bypassValue).toBe(false);
+    
+    // 2. 일기쓰기버튼 클릭
+    await page.click('[data-testid="diary-write-button"]');
+    
+    // 3. 로그인요청모달 노출여부 확인
+    await expect(page.locator('[data-testid="auth-required-modal"]')).toBeVisible({ timeout: 1000 });
+    
+    // 일기쓰기 모달은 노출되지 않아야 함
+    await expect(page.locator('[data-testid="diaries-new-modal"]')).not.toBeVisible();
+  });
+
+  // ============================================
+  // Auth Guard Tests (로그인 유저 시나리오)
+  // ============================================
+
+  test('로그인 유저: 일기쓰기 버튼 클릭 시 일기쓰기 모달이 표시되어야 합니다', async ({ page }) => {
+    // 로그인 유저는 기본값이므로 별도 설정 불필요 (beforeEach에서 이미 설정됨)
+    
+    // 1. /diaries에 접속하여 페이지 로드 확인
+    await page.reload();
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 500 });
+    
+    // 2. 일기쓰기버튼 클릭
+    await page.click('[data-testid="diary-write-button"]');
+    
+    // 3. 일기쓰기 페이지 모달 노출여부 확인
+    await expect(page.locator('[data-testid="diaries-new-modal"]')).toBeVisible();
+    
+    // 로그인 요청 모달은 노출되지 않아야 함
+    await expect(page.locator('[data-testid="auth-required-modal"]')).not.toBeVisible();
+  });
 
   // ============================================
   // Modal Open Tests
