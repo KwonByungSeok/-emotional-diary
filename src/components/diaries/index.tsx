@@ -19,6 +19,7 @@ import {
 import { useDiaryModalLink } from "./hooks/index.link.modal.hook";
 import { useDiariesBinding } from "./hooks/index.binding.hook";
 import { useDiaryLinkRouting } from "./hooks/index.link.routing.hook";
+import { useDiariesSearch } from "./hooks/index.search.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -148,17 +149,20 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   // 바인딩 훅
   const { diaries, isLoading, error, refetch } = useDiariesBinding();
 
+  // 검색 훅
+  const { filteredDiaries, executeSearch, clearSearch } = useDiariesSearch(diaries);
+
   // 라우팅 훅
   const { navigateToDiaryDetail } = useDiaryLinkRouting();
 
-  // 페이지네이션 계산
+  // 페이지네이션 계산 (필터링된 일기 목록 기준)
   const itemsPerPage = 12; // 한 페이지당 12개 (3행 x 4개)
-  const totalPages = Math.ceil(diaries.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredDiaries.length / itemsPerPage);
   
   // 현재 페이지에 해당하는 일기 데이터
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentPageDiaries = diaries.slice(startIndex, endIndex);
+  const currentPageDiaries = filteredDiaries.slice(startIndex, endIndex);
   
   // 일기 데이터를 카드 형태로 변환
   const diaryCards = currentPageDiaries.map((diary) => ({
@@ -180,8 +184,9 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
 
   // 검색 핸들러
   const handleSearch = (value: string) => {
-    setSearchValue(value);
-    console.log("검색어:", value);
+    executeSearch(value);
+    // 검색 실행 시 첫 페이지로 이동
+    setCurrentPage(1);
   };
 
   // 필터 변경 핸들러
@@ -240,6 +245,11 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
             onSearch={handleSearch}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            onClear={() => {
+              setSearchValue("");
+              clearSearch();
+              setCurrentPage(1);
+            }}
             className={styles.searchInput}
           />
         </div>

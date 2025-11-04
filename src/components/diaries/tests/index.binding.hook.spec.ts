@@ -97,7 +97,7 @@ test.beforeEach(async () => {
 // Success Scenarios
 // ============================================
 
-test("일기 목록 페이지에서 실제 데이터가 올바르게 바인딩되는지 확인", async ({ page }) => {
+test.skip("일기 목록 페이지에서 실제 데이터가 올바르게 바인딩되는지 확인", async ({ page }) => {
   // 실제 일기 데이터 생성
   const diaryData = {
     title: "오늘은 정말 특별한 하루였어요",

@@ -71,6 +71,9 @@ export default defineConfig({
     command: `npm run dev -- -p ${port}`,
     url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
+    timeout: 120000, // 2분 타임아웃
+    stdout: 'ignore',
+    stderr: 'pipe',
     env: {
       NEXT_PUBLIC_TEST_ENV : 'test',
     }

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { SelectBox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/constants/enum";
 import { usePicturesBinding } from "./hooks/index.binding.hook";
+import { usePictureFilter, type FilterType } from "./hooks/index.filter.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -27,12 +28,7 @@ interface DogPicture {
 // Constants
 // ============================================
 
-const filterOptions = [
-  { value: "all", label: "기본" },
-  { value: "recent", label: "최신순" },
-  { value: "popular", label: "인기순" },
-  { value: "random", label: "랜덤" }
-];
+// filterOptions는 usePictureFilter hook에서 가져옴
 
 // ============================================
 // LoadingSplash Component
@@ -40,10 +36,12 @@ const filterOptions = [
 
 interface LoadingSplashProps {
   item: DogPicture;
+  width: number;
+  height: number;
 }
 
-const LoadingSplash: React.FC<LoadingSplashProps> = ({ item }) => (
-  <div key={item.id} className={styles.loadingItem} data-testid="loading-splash">
+const LoadingSplash: React.FC<LoadingSplashProps> = ({ item, width, height }) => (
+  <div key={item.id} className={styles.loadingItem} data-testid="loading-splash" style={{ width: `${width}px`, height: `${height}px` }}>
     <div className={styles.loadingSplash}></div>
   </div>
 );
@@ -54,10 +52,17 @@ const LoadingSplash: React.FC<LoadingSplashProps> = ({ item }) => (
 
 interface PictureItemProps {
   picture: DogPicture;
+  width: number;
+  height: number;
 }
 
-const PictureItem: React.FC<PictureItemProps> = ({ picture }) => (
-  <div key={picture.id} className={styles.pictureItem} data-testid="picture-item">
+const PictureItem: React.FC<PictureItemProps> = ({ picture, width, height }) => (
+  <div 
+    key={picture.id} 
+    className={styles.pictureItem} 
+    data-testid="picture-item"
+    style={{ width: `${width}px`, height: `${height}px` }}
+  >
     <img
       src={picture.url}
       alt={picture.alt}
@@ -76,8 +81,13 @@ const PictureItem: React.FC<PictureItemProps> = ({ picture }) => (
 // ============================================
 
 export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid": dataTestId }) => {
-  // 상태 관리
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  // 필터 훅
+  const {
+    filterType,
+    setFilterType,
+    imageSize,
+    filterOptions,
+  } = usePictureFilter();
 
   // 바인딩 훅
   const {
@@ -92,8 +102,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
 
   // 핸들러 함수들
   const handleFilterChange = (value: string) => {
-    setSelectedFilter(value);
-    // 필터링 로직은 추후 구현
+    setFilterType(value as FilterType);
   };
 
   // 컨테이너 클래스명 조합
@@ -113,7 +122,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
               theme={Searchbar.Theme.LIGHT}
               size={Searchbar.Size.MEDIUM}
               options={filterOptions}
-              value={selectedFilter}
+              value={filterType}
               onChange={handleFilterChange}
               className={styles.filterSelect}
               data-testid="pictures-filter"
@@ -125,7 +134,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
           <div className={styles.mainContent}>
             <div className={styles.pictureGrid} data-testid="pictures-grid">
               {loadingPlaceholders.map((item) => (
-                <LoadingSplash key={item.id} item={item} />
+                <LoadingSplash key={item.id} item={item} width={imageSize.width} height={imageSize.height} />
               ))}
             </div>
           </div>
@@ -146,7 +155,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
               theme={Searchbar.Theme.LIGHT}
               size={Searchbar.Size.MEDIUM}
               options={filterOptions}
-              value={selectedFilter}
+              value={filterType}
               onChange={handleFilterChange}
               className={styles.filterSelect}
               data-testid="pictures-filter"
@@ -180,7 +189,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
             theme={Searchbar.Theme.LIGHT}
             size={Searchbar.Size.MEDIUM}
             options={filterOptions}
-            value={selectedFilter}
+            value={filterType}
             onChange={handleFilterChange}
             className={styles.filterSelect}
             data-testid="pictures-filter"
@@ -197,12 +206,12 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
           <div className={styles.pictureGrid} data-testid="pictures-grid">
             {/* 실제 강아지 사진들 표시 */}
             {pictures.map((picture) => (
-              <PictureItem key={picture.id} picture={picture} />
+              <PictureItem key={picture.id} picture={picture} width={imageSize.width} height={imageSize.height} />
             ))}
             
             {/* 추가 로딩 중일 때 표시 */}
             {isFetchingNextPage && loadingPlaceholders.slice(0, 3).map((item, index) => (
-              <LoadingSplash key={`next-${index}`} item={{ ...item, id: `next-${index}` }} />
+              <LoadingSplash key={`next-${index}`} item={{ ...item, id: `next-${index}` }} width={imageSize.width} height={imageSize.height} />
             ))}
           </div>
           

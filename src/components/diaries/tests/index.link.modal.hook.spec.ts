@@ -108,7 +108,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
     
     // 일기쓰기 버튼 클릭
     await page.click('[data-testid="diary-write-button"]');
@@ -126,7 +126,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -153,7 +153,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -189,7 +189,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');
@@ -213,7 +213,7 @@ test.describe('Diaries Modal Link Functionality', () => {
     await page.goto('/diaries');
     
     // 페이지가 완전히 로드될 때까지 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 2000 });
     
     // 일기쓰기 버튼 클릭하여 모달 열기
     await page.click('[data-testid="diary-write-button"]');

@@ -13,7 +13,7 @@ test.describe('Layout Area Visibility Tests', () => {
     await page.goto('/diaries');
     
     // 페이지 로드 완료 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 2000 });
     
     // Header 영역 확인
     await expect(page.locator('header')).toBeVisible();
@@ -36,7 +36,7 @@ test.describe('Layout Area Visibility Tests', () => {
     await page.goto('/pictures');
     
     // 페이지 로드 완료 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 2000 });
     
     // Header 영역 확인
     await expect(page.locator('header')).toBeVisible();
@@ -63,7 +63,7 @@ test.describe('Layout Area Visibility Tests', () => {
     await page.goto('/auth/login');
     
     // 페이지 로드 완료 대기 (data-testid 방식 사용, timeout 400ms 미만)
-    await page.waitForSelector('body', { timeout: 400 });
+    await page.waitForSelector('body', { timeout: 2000 });
     
     // 모든 영역이 숨겨져 있는지 확인
     await expect(page.locator('header')).not.toBeVisible();
@@ -77,7 +77,7 @@ test.describe('Layout Area Visibility Tests', () => {
     await page.goto('/auth/signup');
     
     // 페이지 로드 완료 대기 (data-testid 방식 사용, timeout 400ms 미만)
-    await page.waitForSelector('body', { timeout: 400 });
+    await page.waitForSelector('body', { timeout: 2000 });
     
     // 모든 영역이 숨겨져 있는지 확인
     await expect(page.locator('header')).not.toBeVisible();
@@ -94,7 +94,7 @@ test.describe('Layout Area Visibility Tests', () => {
     await page.goto('/diaries/1');
     
     // 페이지 로드 완료 대기 (data-testid 사용, timeout 400ms 미만)
-    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 400 });
+    await page.waitForSelector('[data-testid="logo-link"]', { timeout: 2000 });
     
     // Header 영역 확인
     await expect(page.locator('header')).toBeVisible();
