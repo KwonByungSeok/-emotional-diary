@@ -6,7 +6,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { useLinkRouting } from "./hooks/index.link.routing.hook";
 import { useArea } from "./hooks/index.area.hook";
-import { useAuth } from "@/commons/providers/auth/auth.provider";
+import { useAuthHook } from "./hooks/index.auth.hook";
 import { Button } from "@/commons/components/button";
 
 // ============================================
@@ -24,7 +24,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const { activeTab, getLogoNavigationPath, getTabNavigationPath } = useLinkRouting();
   const { showHeader, showLogo, showBanner, showNavigation, showFooter } = useArea();
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, handleLogin, handleLogout } = useAuthHook();
 
   return (
     <>
@@ -44,18 +44,30 @@ export default function Layout({ children }: LayoutProps) {
                 ============================================ */}
             {isLoggedIn && user && (
               <div className={styles.authStatus}>
-                <span className={styles.userName}>{user.name}</span>
+                <span className={styles.userName} data-testid="user-name">{user.name}</span>
                 <Button
                   variant="secondary"
                   theme="light"
                   size="medium"
-                  onClick={() => {}}
+                  onClick={handleLogout}
                   className={styles.logoutButton}
                   data-testid="logout-button"
                 >
                   로그아웃
                 </Button>
               </div>
+            )}
+            {!isLoggedIn && (
+              <Button
+                variant="secondary"
+                theme="light"
+                size="medium"
+                onClick={handleLogin}
+                className={styles.loginButton}
+                data-testid="login-button"
+              >
+                로그인
+              </Button>
             )}
           </header>
         )}

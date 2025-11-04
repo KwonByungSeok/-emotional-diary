@@ -66,6 +66,10 @@
   width: auto;
 }
 
+.loginButton {
+  width: auto;
+}
+
 /* Gap */
 .gap {
   height: 24px;
