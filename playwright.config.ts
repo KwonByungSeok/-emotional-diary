@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// 병렬 테스트용 에이전트 인덱스에 따라 포트를 계산합니다.
+const agentIndex = process.env.AGENT_INDEX ? Number(process.env.AGENT_INDEX) : 0;
+const port = 3000 + agentIndex;
+
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -18,7 +22,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:3000',
+    baseURL: `http://localhost:${port}`,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: 'on-first-retry',
@@ -64,8 +68,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'PORT=3000 npm run dev',
-    url: 'http://localhost:3000',
+    command: `npm run dev -- -p ${port}`,
+    url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
     env: {
       NEXT_PUBLIC_TEST_ENV : 'test',
