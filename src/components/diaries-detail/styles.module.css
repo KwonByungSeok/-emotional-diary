@@ -5,8 +5,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 1168px; /* 요구사항: 1168px width */
+  width: 100%; /* 반응형: 가로가 자동으로 축소되도록 width: 100% 사용 */
+  max-width: 1168px; /* 최대 너비는 1168px로 제한 */
   margin: 0 auto;
+  padding: 0 16px; /* 좌우 여백 추가 */
+  box-sizing: border-box;
 }
 
 /* ============================================
@@ -445,38 +448,199 @@
 }
 
 /* ============================================
-   Responsive Design
+   Responsive Design - 비율기반 반응형
    ============================================ */
 
+/* 태블릿 사이즈 (768px ~ 1168px) */
+@media (max-width: 1168px) and (min-width: 769px) {
+  .container {
+    padding: 0 24px; /* 태블릿에서 좌우 여백 증가 */
+  }
+  
+  /* Gap 비율 유지 */
+  .gap64 {
+    height: calc(64px * 0.8); /* 80% 비율 적용 */
+  }
+  
+  .gap24 {
+    height: calc(24px * 0.8);
+  }
+  
+  .gap16 {
+    height: calc(16px * 0.8);
+  }
+  
+  /* Detail Title 비율 유지 */
+  .detailTitle {
+    height: calc(84px * 0.8);
+  }
+  
+  /* Content 최소 높이 비율 유지 */
+  .detailContent {
+    min-height: calc(169px * 0.8);
+  }
+  
+  .contentText {
+    min-height: calc(100px * 0.8);
+  }
+  
+  /* Footer 높이 비율 유지 */
+  .detailFooter {
+    height: calc(56px * 0.8);
+  }
+  
+  /* Retrospect Input 높이 비율 유지 */
+  .retrospectInput {
+    height: calc(85px * 0.8);
+  }
+  
+  /* Retrospect List 최소 높이 비율 유지 */
+  .retrospectList {
+    min-height: calc(72px * 0.8);
+  }
+}
+
+/* 모바일 사이즈 (768px 이하) */
 @media (max-width: 768px) {
   .container {
-    padding: 0 12px;
+    padding: 0 16px; /* 모바일에서 좌우 여백 */
   }
   
-  .detailTitle h1 {
-    font-size: 20px;
+  /* Gap 비율 유지 - 모바일에서는 60% 비율 */
+  .gap64 {
+    height: calc(64px * 0.6);
   }
   
-  .detailContent p {
-    font-size: 14px;
+  .gap24 {
+    height: calc(24px * 0.6);
   }
   
-  .footerContent {
+  .gap16 {
+    height: calc(16px * 0.6);
+  }
+  
+  /* Detail Title 비율 유지 */
+  .detailTitle {
+    height: calc(84px * 0.6);
+  }
+  
+  .titleText {
+    font-size: calc(var(--heading-h2-font-size) * 0.8); /* 폰트 크기도 비율 적용 */
+  }
+  
+  /* Content 최소 높이 비율 유지 */
+  .detailContent {
+    min-height: calc(169px * 0.6);
+  }
+  
+  .contentText {
+    min-height: calc(100px * 0.6);
+    font-size: calc(var(--body-large-font-size) * 0.9);
+  }
+  
+  /* Footer 높이 비율 유지 */
+  .detailFooter {
+    height: calc(56px * 0.6);
+  }
+  
+  .buttonGroup {
+    gap: 8px; /* 모바일에서 버튼 간격 축소 */
+  }
+  
+  /* Retrospect Input 높이 비율 유지 */
+  .retrospectInput {
+    height: calc(85px * 0.6);
+  }
+  
+  .retrospectInputContainer {
+    height: calc(48px * 0.8);
     flex-direction: column;
     gap: 8px;
+    align-items: stretch;
   }
   
-  .footerContent span {
-    font-size: 12px;
+  /* Retrospect List 최소 높이 비율 유지 */
+  .retrospectList {
+    min-height: calc(72px * 0.6);
   }
   
   .retrospectItem {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
   }
   
   .retrospectDate {
-    min-width: auto;
+    font-size: calc(16px * 0.9);
+  }
+  
+  .retrospectContent {
+    font-size: calc(16px * 0.9);
+  }
+  
+  /* Edit Mode 반응형 */
+  .editEmotionRadioGroup {
+    gap: 12px;
+    justify-content: center;
+  }
+  
+  .editButtonGroup {
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .editButtonGroup button {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* 작은 모바일 사이즈 (480px 이하) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  /* 더 작은 비율 적용 (50%) */
+  .gap64 {
+    height: calc(64px * 0.5);
+  }
+  
+  .gap24 {
+    height: calc(24px * 0.5);
+  }
+  
+  .gap16 {
+    height: calc(16px * 0.5);
+  }
+  
+  .detailTitle {
+    height: calc(84px * 0.5);
+  }
+  
+  .detailContent {
+    min-height: calc(169px * 0.5);
+  }
+  
+  .detailFooter {
+    height: calc(56px * 0.5);
+  }
+  
+  .retrospectInput {
+    height: calc(85px * 0.5);
+  }
+  
+  .retrospectList {
+    min-height: calc(72px * 0.5);
+  }
+  
+  .titleText {
+    font-size: calc(var(--heading-h2-font-size) * 0.7);
+  }
+  
+  .contentText {
+    font-size: calc(var(--body-large-font-size) * 0.8);
   }
 }

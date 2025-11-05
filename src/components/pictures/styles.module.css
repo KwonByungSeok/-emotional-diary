@@ -5,7 +5,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 1168px;
+  width: 100%; /* 비율기반 반응형: 전체 가로가 자동으로 축소되도록 */
+  max-width: 1168px;
   margin: 0 auto;
   overflow: hidden; /* 추가적인 오버플로우 방지 */
 }
@@ -32,10 +33,10 @@
 /* Content Sections - 정확한 수치값 적용 */
 /* ============================================ */
 
-/* Filter Section: 1168 * 48 */
+/* Filter Section: 1168 * 48 - 비율기반 반응형 적용 */
 .filter {
-  width: 100%;
-  height: 48px;
+  width: 100%; /* 비율기반: 가로가 자동으로 축소 */
+  height: 48px; /* 높이는 고정값 유지 */
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -51,15 +52,15 @@
 }
 
 .filterSelect {
-  width: 120px;
+  width: 120px; /* 개별 아이템은 고정값 유지 */
   min-width: 120px;
   max-width: 120px;
 }
 
-/* Main Section: 1168 * auto */
+/* Main Section: 1168 * auto - 비율기반 반응형 적용 */
 .main {
-  width: 100%;
-  height: auto;
+  width: 100%; /* 비율기반: 가로가 자동으로 축소 */
+  height: auto; /* 높이는 auto로 유지 */
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -82,7 +83,7 @@
 }
 
 .pictureItem {
-  /* width와 height는 inline style로 동적 설정 */
+  /* width와 height는 inline style로 동적 설정 - 개별 아이템은 고정값 유지 */
   border-radius: 24px;
   overflow: hidden;
   background-color: var(--background-secondary);
@@ -103,7 +104,7 @@
 /* ============================================ */
 
 .loadingItem {
-  /* width와 height는 inline style로 동적 설정 */
+  /* width와 height는 inline style로 동적 설정 - 개별 아이템은 고정값 유지 */
   border-radius: 24px;
   overflow: hidden;
   background-color: #e5e5e5;
@@ -173,7 +174,7 @@
 
 @media (max-width: 1200px) {
   .container {
-    width: 1168px;
+    width: 100%; /* 비율기반: 전체 가로가 자동으로 축소 */
     padding: 0 16px;
   }
 
@@ -181,12 +182,12 @@
   .gapSecond,
   .filter,
   .main {
-    width: 100%;
+    width: 100%; /* 비율기반: 가로가 자동으로 축소 */
   }
 
   .filter {
-    height: auto;
-    padding: 12px 0;
+    height: 48px; /* 높이는 고정값 유지 */
+    padding: 0;
   }
 
   .pictureGrid {
@@ -196,38 +197,38 @@
 
   .pictureItem {
     width: 100%;
-    height: 400px;
+    height: 400px; /* 개별 아이템 높이는 고정값 유지 */
     max-width: 640px;
   }
 
   .loadingItem {
     width: 100%;
-    height: 400px;
+    height: 400px; /* 개별 아이템 높이는 고정값 유지 */
     max-width: 640px;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    width: 1168px;
+    width: 100%; /* 비율기반: 전체 가로가 자동으로 축소 */
     padding: 0 12px;
   }
 
   .gap {
-    height: 24px;
+    height: 32px; /* 높이는 고정값 유지 */
   }
 
   .gapSecond {
-    height: 32px;
+    height: 42px; /* 높이는 고정값 유지 */
   }
 
   .filter {
-    height: auto;
-    padding: 8px 0;
+    height: 48px; /* 높이는 고정값 유지 */
+    padding: 0;
   }
 
   .filterSelect {
-    width: 100px;
+    width: 100px; /* 개별 아이템은 고정값 유지 */
     min-width: 100px;
     max-width: 100px;
   }
@@ -239,13 +240,13 @@
 
   .pictureItem {
     width: 100%;
-    height: 300px;
+    height: 300px; /* 개별 아이템 높이는 고정값 유지 */
     border-radius: 16px;
   }
 
   .loadingItem {
     width: 100%;
-    height: 300px;
+    height: 300px; /* 개별 아이템 높이는 고정값 유지 */
     border-radius: 16px;
   }
 

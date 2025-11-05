@@ -347,40 +347,19 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
                 </button>
               </div>
             ) : (
-              // 일기 카드들을 행별로 렌더링
-              Array.from({ length: Math.ceil(diaryCards.length / 4) }, (_, rowIndex) => (
-                <div key={rowIndex} className={styles.diaryRow}>
-                  <div className={styles.diaryRowInner}>
-                    {diaryCards.slice(rowIndex * 4, rowIndex * 4 + 2).map((card) => (
-                      <DiaryCard
-                        key={card.id}
-                        id={card.id}
-                        emotion={card.emotion}
-                        title={card.title}
-                        date={card.date}
-                        imageUrl={card.imageUrl}
-                        onClick={() => navigateToDiaryDetail(card.id)}
-                        onDelete={() => deleteDiary(card.id)}
-                        showDeleteButton={shouldShowDeleteButton()}
-                      />
-                    ))}
-                  </div>
-                  <div className={styles.diaryRowInner}>
-                    {diaryCards.slice(rowIndex * 4 + 2, rowIndex * 4 + 4).map((card) => (
-                      <DiaryCard
-                        key={card.id}
-                        id={card.id}
-                        emotion={card.emotion}
-                        title={card.title}
-                        date={card.date}
-                        imageUrl={card.imageUrl}
-                        onClick={() => navigateToDiaryDetail(card.id)}
-                        onDelete={() => deleteDiary(card.id)}
-                        showDeleteButton={shouldShowDeleteButton()}
-                      />
-                    ))}
-                  </div>
-                </div>
+              // 일기 카드들을 개별적으로 렌더링 - flex-wrap으로 하나씩 아래로 떨어뜨리기
+              diaryCards.map((card) => (
+                <DiaryCard
+                  key={card.id}
+                  id={card.id}
+                  emotion={card.emotion}
+                  title={card.title}
+                  date={card.date}
+                  imageUrl={card.imageUrl}
+                  onClick={() => navigateToDiaryDetail(card.id)}
+                  onDelete={() => deleteDiary(card.id)}
+                  showDeleteButton={shouldShowDeleteButton()}
+                />
               ))
             )}
           </div>

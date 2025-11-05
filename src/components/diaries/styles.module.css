@@ -47,7 +47,7 @@
 /* Content Sections - 정확한 수치값 적용 */
 /* ============================================ */
 
-/* Search Section: 1168 * 48 */
+/* Search Section: 비율 기반 반응형 디자인 적용 */
 .searchSection {
   width: 100%;
   height: 48px;
@@ -55,13 +55,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
-/* Left Group: Filter + Search */
+/* Left Group: Filter + Search - 비율 기반 반응형 디자인 적용 */
 .leftGroup {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex: 1;
+  min-width: 0;
 }
 
 /* Filter SelectBox - width만 허용 */
@@ -69,9 +72,11 @@
   width: 120px;
 }
 
-/* Search Input - width만 허용 */
+/* Search Input - 비율 기반 반응형 디자인 적용 */
 .searchInput {
-  width: 320px;
+  width: 100%;
+  flex: 1;
+  min-width: 200px;
 }
 
 /* Write Button - width만 허용 */
@@ -79,53 +84,40 @@
   width: 110px;
 }
 
-/* Main Content Section: 1168 * 936 */
+/* Main Content Section: 비율기반 반응형 디자인 적용 */
 .mainSection {
   width: 100%;
-  height: 936px;
+  /* height: 936px; 고정 높이 제거 - 요구사항에 따라 */
   flex-shrink: 0;
   overflow: hidden; /* 자식 요소들이 영역을 벗어나지 않도록 */
   position: relative; /* 자식 요소들의 절대 위치 기준점 제공 */
 }
 
-/* 일기 그리드 컨테이너 */
+/* 일기 그리드 컨테이너 - 비율기반 반응형 디자인 적용 */
 .diaryGrid {
   width: 100%;
-  height: 100%;
+  /* height: 100%; 고정 높이 제거 - 요구사항에 따라 */
   display: flex;
-  flex-direction: column;
-  gap: 24px; /* 행 간격 */
+  flex-direction: row; /* 가로 방향으로 배치 */
+  flex-wrap: wrap; /* flex-wrap 추가 - 개별 카드가 하나씩 아래로 떨어뜨리기 */
+  gap: 24px; /* 카드 간격 */
   overflow: hidden; /* 추가 오버플로우 방지 */
   box-sizing: border-box;
+  justify-content: flex-start; /* 왼쪽 정렬 */
 }
 
-/* 각 행 */
-.diaryRow {
-  width: 100%;
-  height: 296px;
-  display: flex;
-  gap: 24px; /* 좌우 그룹 간격 */
-  flex-shrink: 0;
-  overflow: hidden; /* 행별 오버플로우 방지 */
-}
+/* 더 이상 사용하지 않는 스타일들 - TSX 구조 단순화로 제거됨 */
+/* .diaryRow와 .diaryRowInner는 개별 카드 렌더링 방식으로 변경되어 불필요 */
 
-/* 행 내부 그룹 (2개 카드씩) */
-.diaryRowInner {
-  flex: 1;
-  display: flex;
-  gap: 24px; /* 카드 간격 */
-  overflow: hidden; /* 그룹별 오버플로우 방지 */
-}
-
-/* 일기 카드 */
+/* 일기 카드 - 비율기반 반응형 디자인 적용 */
 .diaryCard {
-  width: 274px;
-  height: 296px;
+  width: 274px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
+  height: 296px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
   background-color: var(--background-elevated);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  flex-shrink: 0;
+  flex-shrink: 0; /* 카드 사이즈 변경 방지 */
   cursor: pointer;
 }
 
@@ -365,6 +357,7 @@
   }
 
   .searchInput {
+    width: 100%;
     flex: 1;
     min-width: 200px;
   }
@@ -374,38 +367,32 @@
   }
 
   .mainSection {
-    min-height: 400px;
-    height: auto;
+    /* min-height: 400px; 고정 높이 제거 - 요구사항에 따라 */
+    /* height: auto; 이미 기본값이므로 제거 */
   }
 
-  /* 반응형 그리드 조정 */
+  /* 반응형 그리드 조정 - 비율기반 반응형 디자인 적용 */
   .diaryGrid {
     gap: 16px;
-  }
-
-  .diaryRow {
-    height: auto;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .diaryRowInner {
-    gap: 16px;
+    justify-content: center; /* 중앙 정렬로 변경 */
+    /* flex-wrap은 이미 적용되어 있음 - 개별 카드가 하나씩 아래로 떨어짐 */
   }
 
   .diaryCard {
-    width: 100%;
-    max-width: 274px;
-    margin: 0 auto;
+    width: 274px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
+    height: 296px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
+    flex-shrink: 0; /* 카드 사이즈 변경 방지 */
   }
 }
 
 @media (max-width: 768px) {
-  .diaryRowInner {
-    flex-direction: column;
+  .diaryGrid {
+    justify-content: center; /* 중앙 정렬 */
   }
 
   .diaryCard {
-    max-width: 100%;
+    width: 274px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
+    height: 296px; /* 고정 사이즈 유지 - 자식 컴포넌트 사이즈 변경 없이 */
+    flex-shrink: 0; /* 카드 사이즈 변경 방지 */
   }
 }

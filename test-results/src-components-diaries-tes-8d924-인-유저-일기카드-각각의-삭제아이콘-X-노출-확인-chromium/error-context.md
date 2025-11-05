@@ -1,0 +1,73 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link "민지의 다이어리" [ref=e5] [cursor=pointer]:
+        - /url: /diaries
+        - generic [ref=e6]: 민지의 다이어리
+      - button "로그인" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: 로그인
+    - generic [ref=e10]:
+      - img "배너 이미지"
+    - navigation [ref=e12]:
+      - generic [ref=e13]:
+        - link "일기보관함" [ref=e14] [cursor=pointer]:
+          - /url: /diaries
+          - generic [ref=e15]: 일기보관함
+        - link "사진보관함" [ref=e16] [cursor=pointer]:
+          - /url: /pictures
+          - generic [ref=e17]: 사진보관함
+    - main [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - button "전체" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: 전체
+            - generic [ref=e29]:
+              - button "검색" [ref=e30] [cursor=pointer]:
+                - img "검색" [ref=e31]
+              - textbox "검색어를 입력해 주세요." [ref=e32]
+          - button "일기쓰기" [ref=e33] [cursor=pointer]:
+            - img [ref=e35]
+            - generic [ref=e37]: 일기쓰기
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43] [cursor=pointer]:
+              - generic [ref=e44]:
+                - img "행복한 하루" [ref=e45]
+                - button [ref=e46]:
+                  - img [ref=e47]
+              - generic [ref=e49]:
+                - generic [ref=e50]:
+                  - generic [ref=e51]: 행복해요
+                  - generic [ref=e52]: 2025-11-03
+                - generic [ref=e53]: 행복한 하루
+            - generic [ref=e54] [cursor=pointer]:
+              - generic [ref=e55]:
+                - img "슬픈 하루" [ref=e56]
+                - button [ref=e57]:
+                  - img [ref=e58]
+              - generic [ref=e60]:
+                - generic [ref=e61]:
+                  - generic [ref=e62]: 슬퍼요
+                  - generic [ref=e63]: 2025-11-04
+                - generic [ref=e64]: 슬픈 하루
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]:
+              - img "화난 하루" [ref=e68]
+              - button [ref=e69]:
+                - img [ref=e70]
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]: 화나요
+                - generic [ref=e75]: 2025-11-05
+              - generic [ref=e76]: 화난 하루
+  - contentinfo [ref=e80]:
+    - generic [ref=e81]:
+      - heading "민지의 다이어리" [level=3] [ref=e82]
+      - paragraph [ref=e83]: "대표 : {name}"
+      - paragraph [ref=e84]: "Copyright © 2024. {name} Co., Ltd."
+```

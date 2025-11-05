@@ -2,12 +2,20 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 1168px;
+  width: 100%; /* 비율기반 반응형: 가로가 자동으로 축소되도록 */
+  max-width: 1168px; /* 최대 너비 제한 */
   margin: 0 auto;
   min-height: 100vh;
-  max-width: 100vw; /* 뷰포트 너비를 초과하지 않도록 */
   box-sizing: border-box;
   position: relative;
+  padding: 0 20px; /* max-width보다 작을 때 좌/우 조건부 패딩 */
+}
+
+/* 큰 화면에서는 패딩 제거 */
+@media (min-width: 1208px) { /* 1168px + 20px*2 = 1208px */
+  .container {
+    padding: 0;
+  }
 }
 
 /* Header */
@@ -79,7 +87,7 @@
 .banner {
   position: relative;
   height: 240px;
-  width: 1168px;
+  width: 100%; /* 비율기반 반응형: 가로가 자동으로 축소되도록 */
   border-radius: 24px;
   overflow: hidden;
   background-color: #d9d9d9;
@@ -188,10 +196,20 @@
 }
 
 .footerContent {
-  width: 1168px;
+  width: 100%; /* 비율기반 반응형: 가로가 자동으로 축소되도록 */
+  max-width: 1168px; /* 최대 너비 제한 */
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 0 20px; /* max-width보다 작을 때 좌/우 조건부 패딩 */
+  box-sizing: border-box;
+}
+
+/* 큰 화면에서는 푸터 콘텐츠 패딩 제거 */
+@media (min-width: 1208px) { /* 1168px + 20px*2 = 1208px */
+  .footerContent {
+    padding: 0;
+  }
 }
 
 .footerTitle {
