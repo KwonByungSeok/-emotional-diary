@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
+import { Modal } from "@/commons/components/modal";
+import { useModal } from "@/commons/providers/modal/modal.provider";
 import { EmotionType, getAllEmotions, getEmotionData, getEmotionImage, getEmotionLabel } from "@/commons/constants/enum";
 import { useDiaryBinding } from "./hooks/index.binding.hook";
 import { useRetrospectForm } from "./hooks/index.retrospect.form.hook";
 import { useRetrospectBinding } from "./hooks/index.retrospect.binding.hook";
 import { useDiaryUpdateForm } from "./hooks/index.update.hook";
+import { useDiaryDelete } from "./hooks/index.delete.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -60,6 +63,12 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
     handleSubmit,
     isFormValid,
   } = useRetrospectForm(diaryId, refetchRetrospects);
+  
+  // 일기 삭제 훅
+  const { deleteDiary } = useDiaryDelete();
+  
+  // 모달 훅
+  const { openModal, closeModal } = useModal();
   
   // 감정 데이터
   const emotions = getAllEmotions();
@@ -113,8 +122,30 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
   };
 
   const handleDelete = () => {
-    // TODO: 삭제 기능 구현
-    console.log("삭제 버튼 클릭");
+    if (!diaryData) return;
+    
+    const deleteModalContent = (
+      <Modal
+        variant="danger"
+        actions="dual"
+        title="일기를 삭제하시겠습니까?"
+        content="삭제된 일기는 복구할 수 없습니다."
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={() => {
+          // 일기 삭제 및 페이지 이동
+          deleteDiary(diaryData.id);
+          closeModal();
+        }}
+        onCancel={() => {
+          // 모달만 닫기
+          closeModal();
+        }}
+        data-testid="diary-delete-modal"
+      />
+    );
+    
+    openModal(deleteModalContent);
   };
 
   // 날짜 형식 변환 (ISO 문자열을 한국 형식으로)

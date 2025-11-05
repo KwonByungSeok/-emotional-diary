@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { DiaryData } from "./index.binding.hook";
+import { DiaryData } from "@/commons/types/diary";
 
 // ============================================
 // Types & Interfaces

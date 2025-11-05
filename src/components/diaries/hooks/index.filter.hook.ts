@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { DiaryData } from "./index.binding.hook";
+import { DiaryData } from "@/commons/types/diary";
 import { EmotionType } from "@/commons/constants/enum";
 
 // ============================================

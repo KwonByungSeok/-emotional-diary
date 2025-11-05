@@ -22,6 +22,8 @@ import { useDiaryLinkRouting } from "./hooks/index.link.routing.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
 import { useDiariesFilter } from "./hooks/index.filter.hook";
 import { useDiariesPagination } from "./hooks/index.pagination.hook";
+import { useDiariesDelete } from "./hooks/index.delete.hook";
+import { useAuth } from "@/commons/providers/auth/auth.provider";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -43,6 +45,7 @@ interface DiaryCardProps {
   imageUrl: string;
   onDelete?: () => void;
   onClick?: () => void;
+  showDeleteButton?: boolean;
 }
 
 // ============================================
@@ -56,6 +59,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   imageUrl,
   onDelete,
   onClick,
+  showDeleteButton = false,
 }) => {
 
   return (
@@ -74,30 +78,33 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           style={{ objectFit: 'cover' }}
           data-testid="diary-image"
         />
-        {/* 삭제 버튼 */}
-        <button 
-          className={styles.deleteButton} 
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete?.();
-          }}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {/* 삭제 버튼 - 권한이 있을 때만 표시 */}
+        {showDeleteButton && (
+          <button 
+            className={styles.deleteButton} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
+            data-testid="diary-delete-button"
           >
-            <path
-              d="M18 6L6 18M6 6L18 18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* 콘텐츠 영역 */}
@@ -144,11 +151,17 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   const [searchValue, setSearchValue] = React.useState("");
   const [selectedFilter, setSelectedFilter] = React.useState("all");
 
+  // 인증 상태
+  const { isLoggedIn } = useAuth();
+
   // 모달 링크 훅
   const { openDiaryWriteModal } = useDiaryModalLink();
   
   // 바인딩 훅
   const { diaries, isLoading, error, refetch } = useDiariesBinding();
+
+  // 삭제 훅
+  const { deleteDiary } = useDiariesDelete();
 
   // 검색 훅
   const { filteredDiaries: searchedDiaries, executeSearch, clearSearch } = useDiariesSearch(diaries);
@@ -167,6 +180,22 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
 
   // 라우팅 훅
   const { navigateToDiaryDetail } = useDiaryLinkRouting();
+
+  // 권한 검사 함수
+  const shouldShowDeleteButton = (): boolean => {
+    // 테스트 환경에서 바이패스 체크
+    if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_TEST_ENV === "test") {
+      if (window.__TEST_BYPASS__ === false) {
+        return false; // 비로그인 상태로 테스트
+      }
+      if (window.__TEST_BYPASS__ === true || window.__TEST_BYPASS__ === undefined) {
+        return true; // 로그인 상태로 테스트
+      }
+    }
+    
+    // 실제 환경에서는 로그인 상태 확인
+    return isLoggedIn;
+  };
   
   // 일기 데이터를 카드 형태로 변환
   const diaryCards = currentPageDiaries.map((diary) => ({
@@ -222,7 +251,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
     .join(" ");
 
   return (
-    <div className={containerClasses} data-testid={dataTestId}>
+    <div className={containerClasses} data-testid={dataTestId || "diaries-container"}>
       {/* Gap 1 */}
       <div className={styles.gap}></div>
 
@@ -331,6 +360,8 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
                         date={card.date}
                         imageUrl={card.imageUrl}
                         onClick={() => navigateToDiaryDetail(card.id)}
+                        onDelete={() => deleteDiary(card.id)}
+                        showDeleteButton={shouldShowDeleteButton()}
                       />
                     ))}
                   </div>
@@ -344,6 +375,8 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
                         date={card.date}
                         imageUrl={card.imageUrl}
                         onClick={() => navigateToDiaryDetail(card.id)}
+                        onDelete={() => deleteDiary(card.id)}
+                        showDeleteButton={shouldShowDeleteButton()}
                       />
                     ))}
                   </div>
