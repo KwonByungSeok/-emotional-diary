@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
@@ -22,6 +22,22 @@ export interface DiariesNewProps {
 // ============================================
 
 export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
+  // 반응형 상태 관리
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+
   // 폼 훅
   const {
     register,
@@ -91,11 +107,12 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
       <div className={styles.inputTitle}>
         <Input
           label="제목"
-          placeholder="제목을 입력합니다."
+          placeholder={isMobile ? "제목을 입력해 주세요." : "제목을 입력합니다."}
           {...register("title")}
           variant="primary"
           theme="light"
           size="medium"
+          fullWidth={isMobile}
           data-testid="diary-title-input"
         />
         {errors.title && (
@@ -112,7 +129,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
       <div className={styles.inputContent}>
         <label className={styles.contentLabel}>내용</label>
         <textarea
-          placeholder="내용을 입력합니다."
+          placeholder={isMobile ? "내용을 입력해 주세요." : "내용을 입력합니다."}
           {...register("content")}
           className={styles.contentTextarea}
           rows={5}
@@ -135,6 +152,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
           theme="light"
           size="large"
           onClick={handleClose}
+          fullWidth={isMobile}
         >
           닫기
         </Button>
@@ -145,6 +163,7 @@ export const DiariesNew: React.FC<DiariesNewProps> = ({ className = "" }) => {
           onClick={handleSubmit}
           disabled={!isFormValid}
           data-testid="diaries-submit-button"
+          fullWidth={isMobile}
         >
           등록하기
         </Button>

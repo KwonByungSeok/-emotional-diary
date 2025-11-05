@@ -1,14 +1,25 @@
 /* ============================================ */
-/* Pictures Component Styles */
+/* Pictures Component Styles - 피그마 기반 반응형 디자인 */
 /* ============================================ */
 
 .container {
   display: flex;
   flex-direction: column;
-  width: 100%; /* 비율기반 반응형: 전체 가로가 자동으로 축소되도록 */
-  max-width: 1168px;
+  width: 100%;
   margin: 0 auto;
-  overflow: hidden; /* 추가적인 오버플로우 방지 */
+  overflow: hidden;
+}
+
+/* 데스크톱 스타일 (767px 초과) */
+.desktop {
+  max-width: 1200px; /* 데스크톱에서는 더 큰 사이즈 */
+  padding: 0 20px; /* 좌우 여백 */
+}
+
+/* 모바일 스타일 (767px 이하) */
+.mobile {
+  max-width: 360px; /* 모바일에서는 피그마 프레임 너비 유지 */
+  padding: 0 40px; /* 좌우 여백 유지 */
 }
 
 /* ============================================ */
@@ -73,23 +84,27 @@
   flex-direction: column;
 }
 
-/* Picture Grid */
+/* Picture Grid - 피그마 디자인 기준 */
 .pictureGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-items: center;
+  align-items: center;
 }
 
 .pictureItem {
-  /* width와 height는 inline style로 동적 설정 - 개별 아이템은 고정값 유지 */
+  /* width와 height는 inline style로 동적 설정 */
   border-radius: 24px;
   overflow: hidden;
-  background-color: var(--background-secondary);
+  background-color: #d9d9d9; /* 피그마 배경색 */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 24px; /* 피그마 간격 */
+}
+
+.pictureItem:last-child {
+  margin-bottom: 0;
 }
 
 .pictureImage {
@@ -104,14 +119,19 @@
 /* ============================================ */
 
 .loadingItem {
-  /* width와 height는 inline style로 동적 설정 - 개별 아이템은 고정값 유지 */
+  /* width와 height는 inline style로 동적 설정 */
   border-radius: 24px;
   overflow: hidden;
-  background-color: #e5e5e5;
+  background-color: #d9d9d9; /* 피그마 배경색과 동일 */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 24px; /* 피그마 간격 */
+}
+
+.loadingItem:last-child {
+  margin-bottom: 0;
 }
 
 .loadingSplash {
@@ -169,88 +189,97 @@
 }
 
 /* ============================================ */
-/* Responsive Adjustments */
+/* 브레이크포인트 767px 기반 반응형 디자인 */
 /* ============================================ */
 
-@media (max-width: 1200px) {
-  .container {
-    width: 100%; /* 비율기반: 전체 가로가 자동으로 축소 */
-    padding: 0 16px;
-  }
-
-  .gap,
-  .gapSecond,
-  .filter,
-  .main {
-    width: 100%; /* 비율기반: 가로가 자동으로 축소 */
-  }
-
-  .filter {
-    height: 48px; /* 높이는 고정값 유지 */
-    padding: 0;
-  }
-
-  .pictureGrid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .pictureItem {
-    width: 100%;
-    height: 400px; /* 개별 아이템 높이는 고정값 유지 */
-    max-width: 640px;
-  }
-
-  .loadingItem {
-    width: 100%;
-    height: 400px; /* 개별 아이템 높이는 고정값 유지 */
-    max-width: 640px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 100%; /* 비율기반: 전체 가로가 자동으로 축소 */
-    padding: 0 12px;
+/* 767px 이하 (모바일) - 피그마 디자인과 동일하게 유지 */
+@media (max-width: 767px) {
+  .mobile {
+    max-width: 360px;
+    padding: 0 40px;
   }
 
   .gap {
-    height: 32px; /* 높이는 고정값 유지 */
+    height: 32px;
   }
 
   .gapSecond {
-    height: 42px; /* 높이는 고정값 유지 */
+    height: 42px;
   }
 
   .filter {
-    height: 48px; /* 높이는 고정값 유지 */
-    padding: 0;
+    height: 48px;
   }
 
   .filterSelect {
-    width: 100px; /* 개별 아이템은 고정값 유지 */
-    min-width: 100px;
-    max-width: 100px;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
   }
 
   .pictureGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .pictureItem {
-    width: 100%;
-    height: 300px; /* 개별 아이템 높이는 고정값 유지 */
-    border-radius: 16px;
+    border-radius: 24px;
+    margin-bottom: 24px;
   }
 
   .loadingItem {
-    width: 100%;
-    height: 300px; /* 개별 아이템 높이는 고정값 유지 */
-    border-radius: 16px;
+    border-radius: 24px;
+    margin-bottom: 24px;
   }
 
   .pictureImage {
-    border-radius: 16px;
+    border-radius: 24px;
+  }
+}
+
+/* 767px 초과 (데스크톱) - 더 큰 사이즈로 표시 */
+@media (min-width: 768px) {
+  .desktop {
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+
+  .gap {
+    height: 32px;
+  }
+
+  .gapSecond {
+    height: 42px;
+  }
+
+  .filter {
+    height: 48px;
+  }
+
+  .filterSelect {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+  }
+
+  .pictureGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pictureItem {
+    border-radius: 24px;
+    margin-bottom: 40px; /* 데스크톱에서는 더 큰 간격 */
+  }
+
+  .loadingItem {
+    border-radius: 24px;
+    margin-bottom: 40px; /* 데스크톱에서는 더 큰 간격 */
+  }
+
+  .pictureImage {
+    border-radius: 24px;
   }
 }

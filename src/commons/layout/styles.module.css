@@ -168,10 +168,10 @@
   flex: 1;
   min-height: 200px;
   background-color: #ffffff; /* body와 일치하는 배경 색상 */
-  overflow: hidden; /* 자식 요소들이 컨테이너를 벗어나지 않도록 */
+  overflow: visible; /* 자식 요소들이 정상적으로 표시되도록 */
   display: flex;
   flex-direction: column;
-  align-items: center; /* diaries 컴포넌트를 중앙 정렬 */
+  align-items: stretch; /* 자식 요소들이 전체 너비를 사용하도록 */
 }
 
 /* Footer */

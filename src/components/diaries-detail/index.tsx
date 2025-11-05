@@ -195,8 +195,8 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
             </div>
           </div>
           
-          {/* Gap: 1168 * 24 */}
-          <div className={styles.gap24}></div>
+          {/* Gap: 1168 * 48 */}
+          <div className={styles.gap48}></div>
           
           {/* Detail Content: 1168 * 169 */}
           <div className={styles.detailContent}>
@@ -368,7 +368,7 @@ export const DiariesDetail: React.FC<DiariesDetailProps> = ({
             theme="light"
             type="submit"
             disabled={!isFormValid || isEditMode}
-            className="w-[51px]"
+            className={styles.retrospectSubmitButton}
             data-testid="retrospect-submit-button"
           >
             입력

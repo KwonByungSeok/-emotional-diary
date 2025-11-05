@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SelectBox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/constants/enum";
 import { usePicturesBinding } from "./hooks/index.binding.hook";
@@ -81,13 +81,31 @@ const PictureItem: React.FC<PictureItemProps> = ({ picture, width, height }) => 
 // ============================================
 
 export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid": dataTestId }) => {
+  // 반응형 상태 관리
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 브레이크포인트 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // 필터 훅
   const {
     filterType,
     setFilterType,
     imageSize,
     filterOptions,
+    getImageSize,
   } = usePictureFilter();
+
+  // 반응형 이미지 사이즈 계산
+  const currentImageSize = getImageSize(isMobile);
 
   // 바인딩 훅
   const {
@@ -106,9 +124,11 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
   };
 
   // 컨테이너 클래스명 조합
-  const containerClasses = [styles.container, className]
-    .filter(Boolean)
-    .join(" ");
+  const containerClasses = [
+    styles.container, 
+    isMobile ? styles.mobile : styles.desktop,
+    className
+  ].filter(Boolean).join(" ");
 
   // 로딩 상태 처리
   if (isLoading) {
@@ -134,7 +154,7 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
           <div className={styles.mainContent}>
             <div className={styles.pictureGrid} data-testid="pictures-grid">
               {loadingPlaceholders.map((item) => (
-                <LoadingSplash key={item.id} item={item} width={imageSize.width} height={imageSize.height} />
+                <LoadingSplash key={item.id} item={item} width={currentImageSize.width} height={currentImageSize.height} />
               ))}
             </div>
           </div>
@@ -206,12 +226,12 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
           <div className={styles.pictureGrid} data-testid="pictures-grid">
             {/* 실제 강아지 사진들 표시 */}
             {pictures.map((picture) => (
-              <PictureItem key={picture.id} picture={picture} width={imageSize.width} height={imageSize.height} />
+              <PictureItem key={picture.id} picture={picture} width={currentImageSize.width} height={currentImageSize.height} />
             ))}
             
             {/* 추가 로딩 중일 때 표시 */}
             {isFetchingNextPage && loadingPlaceholders.slice(0, 3).map((item, index) => (
-              <LoadingSplash key={`next-${index}`} item={{ ...item, id: `next-${index}` }} width={imageSize.width} height={imageSize.height} />
+              <LoadingSplash key={`next-${index}`} item={{ ...item, id: `next-${index}` }} width={currentImageSize.width} height={currentImageSize.height} />
             ))}
           </div>
           

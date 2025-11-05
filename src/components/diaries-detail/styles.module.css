@@ -8,8 +8,10 @@
   width: 100%; /* 반응형: 가로가 자동으로 축소되도록 width: 100% 사용 */
   max-width: 1168px; /* 최대 너비는 1168px로 제한 */
   margin: 0 auto;
-  padding: 0 16px; /* 좌우 여백 추가 */
+  padding: 0; /* Layout에서 이미 패딩을 처리하므로 제거 */
   box-sizing: border-box;
+  overflow: visible; /* 회고 영역이 보이도록 변경 */
+  min-height: 100vh; /* 최소 높이를 화면 높이로 설정 */
 }
 
 /* ============================================
@@ -18,14 +20,22 @@
 
 .gap64 {
   height: 64px; /* 1168(width) * 64(height) - 높이만 적용 */
+  flex-shrink: 0; /* 간격이 줄어들지 않도록 */
 }
 
 .gap24 {
   height: 24px; /* 1168(width) * 24(height) - 높이만 적용 */
+  flex-shrink: 0; /* 간격이 줄어들지 않도록 */
+}
+
+.gap48 {
+  height: 48px; /* 감정/날짜 섹션과 내용 섹션 사이 간격용 - 더 큰 간격 */
+  flex-shrink: 0; /* 간격이 줄어들지 않도록 */
 }
 
 .gap16 {
   height: 16px; /* 1168(width) * 16(height) - 높이만 적용 */
+  flex-shrink: 0; /* 간격이 줄어들지 않도록 */
 }
 
 /* ============================================
@@ -33,18 +43,20 @@
    ============================================ */
 
 .detailTitle {
-  height: 84px; /* 1168(width) * 84(height) - 높이만 적용 */
+  height: 88px; /* 84px에서 88px로 증가 (titleSection 높이 증가에 맞춤) */
   display: flex;
   flex-direction: column;
   background-color: var(--background-elevated);
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
 }
 
 .titleSection {
-  height: 36px;
+  height: 40px; /* 36px에서 40px로 증가하여 제목과 밑줄 사이 간격 확보 */
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-bottom: 2px solid var(--foreground-primary);
+  padding-bottom: 4px; /* 제목 텍스트와 밑줄 사이에 추가 간격 */
 }
 
 .titleText {
@@ -64,12 +76,16 @@
   justify-content: space-between;
   width: 100%;
   padding-top: 16px;
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+  min-width: 0; /* flex 아이템이 축소될 수 있도록 */
 }
 
 .emotionInfo {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 1; /* 필요시 축소 가능 */
+  min-width: 0; /* 축소 허용 */
 }
 
 .emotionIcon {
@@ -83,12 +99,17 @@
   font-weight: var(--heading-h3-font-weight);
   line-height: var(--heading-h3-line-height);
   letter-spacing: var(--heading-h3-letter-spacing);
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 말줄임표 표시 */
 }
 
 .dateInfo {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0; /* 날짜 정보는 축소되지 않도록 */
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 .createdDate {
@@ -98,6 +119,7 @@
   line-height: var(--caption-large-line-height);
   letter-spacing: var(--caption-large-letter-spacing);
   color: var(--foreground-tertiary);
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 .dateLabel {
@@ -107,6 +129,7 @@
   line-height: var(--caption-large-line-height);
   letter-spacing: var(--caption-large-letter-spacing);
   color: var(--foreground-tertiary);
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 /* ============================================
@@ -114,12 +137,13 @@
    ============================================ */
 
 .detailContent {
-  min-height: 169px; /* 최소 높이만 설정 */
+  min-height: 169px; /* 최소 높이만 설정하여 내용에 따라 확장 가능 */
   display: flex;
   flex-direction: column;
   background-color: var(--background-elevated);
   border-radius: 8px;
-  overflow: visible; /* 내용이 짤리지 않도록 */
+  overflow: visible; /* 내용이 모두 보이도록 변경 */
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
 }
 
 .contentHeader {
@@ -148,7 +172,7 @@
   line-height: var(--body-large-line-height);
   letter-spacing: var(--body-large-letter-spacing);
   color: var(--foreground-secondary);
-  overflow: visible; /* 내용이 짤리지 않도록 */
+  overflow: visible; /* 스크롤 제거하고 모든 내용 표시 */
   white-space: pre-wrap;
 }
 
@@ -196,6 +220,7 @@
   justify-content: flex-end;
   background-color: var(--background-elevated);
   border-bottom: 1px solid var(--foreground-primary); /* 핵심요구사항: border-bottom 추가 */
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
 }
 
 .buttonGroup {
@@ -219,6 +244,7 @@
   display: flex;
   flex-direction: column;
   gap: 13px; /* 라벨과 입력 영역 사이 간격 */
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
 }
 
 .retrospectLabel {
@@ -238,6 +264,12 @@
   gap: 16px; /* Input과 Button 사이 간격 */
 }
 
+.retrospectSubmitButton {
+  min-width: 60px; /* 최소 너비 설정 */
+  width: auto; /* 자동 너비 */
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
+}
+
 /* ============================================
    Retrospect List (1168 기준 비율)
    ============================================ */
@@ -248,7 +280,8 @@
   flex-direction: column;
   border-radius: 16px;
   padding: 0;
-  overflow: visible;
+  overflow: visible; /* 회고 내용이 모두 보이도록 */
+  flex-shrink: 0; /* 크기가 줄어들지 않도록 */
 }
 
 .retrospectItem {
@@ -454,12 +487,16 @@
 /* 태블릿 사이즈 (768px ~ 1168px) */
 @media (max-width: 1168px) and (min-width: 769px) {
   .container {
-    padding: 0 24px; /* 태블릿에서 좌우 여백 증가 */
+    padding: 0; /* Layout에서 패딩을 처리하므로 제거 */
   }
   
   /* Gap 비율 유지 */
   .gap64 {
     height: calc(64px * 0.8); /* 80% 비율 적용 */
+  }
+  
+  .gap48 {
+    height: calc(48px * 0.8);
   }
   
   .gap24 {
@@ -472,16 +509,12 @@
   
   /* Detail Title 비율 유지 */
   .detailTitle {
-    height: calc(84px * 0.8);
+    height: calc(88px * 0.8); /* 88px로 업데이트 */
   }
   
   /* Content 최소 높이 비율 유지 */
   .detailContent {
-    min-height: calc(169px * 0.8);
-  }
-  
-  .contentText {
-    min-height: calc(100px * 0.8);
+    min-height: calc(169px * 0.8); /* 최소 높이로 변경 */
   }
   
   /* Footer 높이 비율 유지 */
@@ -503,12 +536,16 @@
 /* 모바일 사이즈 (768px 이하) */
 @media (max-width: 768px) {
   .container {
-    padding: 0 16px; /* 모바일에서 좌우 여백 */
+    padding: 0; /* Layout에서 패딩을 처리하므로 제거 */
   }
   
   /* Gap 비율 유지 - 모바일에서는 60% 비율 */
   .gap64 {
     height: calc(64px * 0.6);
+  }
+  
+  .gap48 {
+    height: calc(48px * 0.6);
   }
   
   .gap24 {
@@ -521,20 +558,23 @@
   
   /* Detail Title 비율 유지 */
   .detailTitle {
-    height: calc(84px * 0.6);
+    height: calc(88px * 0.6); /* 88px로 업데이트 */
   }
   
   .titleText {
     font-size: calc(var(--heading-h2-font-size) * 0.8); /* 폰트 크기도 비율 적용 */
   }
   
+  .emotionText {
+    font-size: calc(var(--heading-h3-font-size) * 0.9); /* 모바일에서 감정 텍스트 크기 조정 */
+  }
+  
   /* Content 최소 높이 비율 유지 */
   .detailContent {
-    min-height: calc(169px * 0.6);
+    min-height: calc(169px * 0.6); /* 최소 높이로 변경 */
   }
   
   .contentText {
-    min-height: calc(100px * 0.6);
     font-size: calc(var(--body-large-font-size) * 0.9);
   }
   
@@ -549,14 +589,21 @@
   
   /* Retrospect Input 높이 비율 유지 */
   .retrospectInput {
-    height: calc(85px * 0.6);
+    height: auto; /* 모바일에서는 자동 높이 */
+    min-height: calc(85px * 0.6);
   }
   
   .retrospectInputContainer {
-    height: calc(48px * 0.8);
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
+    height: auto; /* 모바일에서는 자동 높이 */
+    min-height: calc(48px * 0.8);
+    flex-direction: row; /* 모바일에서도 가로 배치 유지 */
+    gap: 12px; /* 간격 조정 */
+    align-items: center;
+  }
+  
+  .retrospectSubmitButton {
+    min-width: 50px; /* 모바일에서 최소 너비 조정 */
+    flex-shrink: 0;
   }
   
   /* Retrospect List 최소 높이 비율 유지 */
@@ -600,12 +647,16 @@
 /* 작은 모바일 사이즈 (480px 이하) */
 @media (max-width: 480px) {
   .container {
-    padding: 0 12px;
+    padding: 0; /* Layout에서 패딩을 처리하므로 제거 */
   }
   
   /* 더 작은 비율 적용 (50%) */
   .gap64 {
     height: calc(64px * 0.5);
+  }
+  
+  .gap48 {
+    height: calc(48px * 0.5);
   }
   
   .gap24 {
@@ -617,11 +668,11 @@
   }
   
   .detailTitle {
-    height: calc(84px * 0.5);
+    height: calc(88px * 0.5); /* 88px로 업데이트 */
   }
   
   .detailContent {
-    min-height: calc(169px * 0.5);
+    min-height: calc(169px * 0.5); /* 최소 높이로 변경 */
   }
   
   .detailFooter {
@@ -629,7 +680,21 @@
   }
   
   .retrospectInput {
-    height: calc(85px * 0.5);
+    height: auto; /* 작은 모바일에서도 자동 높이 */
+    min-height: calc(85px * 0.5);
+  }
+  
+  .retrospectInputContainer {
+    height: auto;
+    min-height: calc(48px * 0.7);
+    flex-direction: row; /* 가로 배치 유지 */
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .retrospectSubmitButton {
+    min-width: 45px; /* 작은 모바일에서 최소 너비 조정 */
+    flex-shrink: 0;
   }
   
   .retrospectList {
@@ -638,6 +703,10 @@
   
   .titleText {
     font-size: calc(var(--heading-h2-font-size) * 0.7);
+  }
+  
+  .emotionText {
+    font-size: calc(var(--heading-h3-font-size) * 0.8); /* 작은 모바일에서 감정 텍스트 크기 조정 */
   }
   
   .contentText {

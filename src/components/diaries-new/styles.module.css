@@ -2,7 +2,7 @@
 /* DiariesNew UI Styles */
 /* ============================================ */
 
-/* Wrapper - 640 * 560 */
+/* Wrapper - 640 * 560 (Desktop) / 320 * 620 (Mobile) */
 .wrapper {
   width: 640px;
   height: 560px;
@@ -12,6 +12,14 @@
   border-radius: 24px;
   padding: 24px;
   box-sizing: border-box;
+}
+
+/* Mobile Responsive - 767px breakpoint */
+@media (max-width: 767px) {
+  .wrapper {
+    width: 320px;
+    height: 620px;
+  }
 }
 
 /* Header - full * 24 */
@@ -32,19 +40,33 @@
   margin: 0;
 }
 
+@media (max-width: 767px) {
+  .headerTitle {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
 /* Gap 1 - full * 40 */
 .gap1 {
   width: 100%;
   height: 40px;
 }
 
-/* Emotion Box - full * 64 */
+/* Emotion Box - full * 64 (Desktop) / full * 204 (Mobile) */
 .emotionBox {
   width: 100%;
   height: 64px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .emotionBox {
+    height: 204px;
+  }
 }
 
 .emotionTitle {
@@ -56,10 +78,26 @@
   margin: 0;
 }
 
+@media (max-width: 767px) {
+  .emotionTitle {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.16px;
+  }
+}
+
 .emotionRadioGroup {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+@media (max-width: 767px) {
+  .emotionRadioGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
 
 .emotionRadioItem {
@@ -107,18 +145,32 @@
   color: var(--foreground-secondary);
 }
 
+@media (max-width: 767px) {
+  .emotionRadioLabel {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.16px;
+  }
+}
+
 /* Gap 2 - full * 40 */
 .gap2 {
   width: 100%;
   height: 40px;
 }
 
-/* Input Title - full * 76 */
+/* Input Title - full * 76 (Desktop) / full * 64 (Mobile) */
 .inputTitle {
   width: 100%;
   height: 76px;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  .inputTitle {
+    height: 64px;
+  }
 }
 
 
@@ -128,7 +180,7 @@
   height: 24px;
 }
 
-/* Input Content - full * 156 */
+/* Input Content - full * 156 (Desktop) / full * 152 (Mobile) */
 .inputContent {
   width: 100%;
   height: 156px;
@@ -137,12 +189,26 @@
   gap: 8px;
 }
 
+@media (max-width: 767px) {
+  .inputContent {
+    height: 152px;
+  }
+}
+
 .contentLabel {
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
   letter-spacing: -0.14px;
   color: var(--foreground-secondary);
+}
+
+@media (max-width: 767px) {
+  .contentLabel {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.12px;
+  }
 }
 
 .contentTextarea {
@@ -175,13 +241,21 @@
   letter-spacing: -0.16px;
 }
 
+@media (max-width: 767px) {
+  .contentTextarea::placeholder {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.14px;
+  }
+}
+
 /* Gap 4 - full * 40 */
 .gap4 {
   width: 100%;
   height: 40px;
 }
 
-/* Footer - full * 48 */
+/* Footer - full * 48 (Desktop) / full * 40 (Mobile) */
 .footer {
   width: 100%;
   height: 48px;
@@ -189,6 +263,14 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    height: 40px;
+    flex-direction: row;
+    gap: 16px;
+  }
 }
 
 /* Error Message */

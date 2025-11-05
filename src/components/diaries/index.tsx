@@ -73,8 +73,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         <Image 
           src={imageUrl} 
           alt={title}
-          width={274}
-          height={208}
+          fill
           style={{ objectFit: 'cover' }}
           data-testid="diary-image"
         />
@@ -257,9 +256,68 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
 
       {/* Search Section */}
       <div className={styles.searchSection}>
-        {/* Left Group: Filter + Search */}
-        <div className={styles.leftGroup}>
-          {/* Filter SelectBox */}
+        {/* Desktop Layout (768px 이상) */}
+        <div className={styles.desktopLayout}>
+          {/* Left Group: Filter + Search */}
+          <div className={styles.leftGroup}>
+            {/* Filter SelectBox */}
+            <SelectBox
+              variant="primary"
+              size="medium"
+              theme="light"
+              options={filterOptions}
+              value={selectedFilter}
+              onChange={handleFilterChange}
+              placeholder="전체"
+              className={styles.filterSelect}
+              data-testid="diary-filter-select"
+            />
+
+            {/* Searchbar */}
+            <Searchbar
+              variant={SearchbarVariant.PRIMARY}
+              size={SearchbarSize.MEDIUM}
+              theme={SearchbarTheme.LIGHT}
+              placeholder="검색어를 입력해 주세요."
+              onSearch={handleSearch}
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onClear={handleClearSearch}
+              className={styles.searchInput}
+            />
+          </div>
+
+          {/* Right Group: Write Button */}
+          <Button
+            variant="primary"
+            size="large"
+            theme="light"
+            onClick={handleWriteDiary}
+            className={styles.writeButton}
+            data-testid="diary-write-button"
+            icon={
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 13H6C5.71667 13 5.47917 12.9042 5.2875 12.7125C5.09583 12.5208 5 12.2833 5 12C5 11.7167 5.09583 11.4792 5.2875 11.2875C5.47917 11.0958 5.71667 11 6 11H11V6C11 5.71667 11.0958 5.47917 11.2875 5.2875C11.4792 5.09583 11.7167 5 12 5C12.2833 5 12.5208 5.09583 12.7125 5.2875C12.9042 5.47917 13 5.71667 13 6V11H18C18.2833 11 18.5208 11.0958 18.7125 11.2875C18.9042 11.4792 19 11.7167 19 12C19 12.2833 18.9042 12.5208 18.7125 12.7125C18.5208 12.9042 18.2833 13 18 13H13V18C13 18.2833 12.9042 18.5208 12.7125 18.7125C12.5208 18.9042 12.2833 19 12 19C11.7167 19 11.4792 18.9042 11.2875 18.7125C11.0958 18.5208 11 18.2833 11 18V13Z"
+                  fill="currentColor"
+                />
+              </svg>
+            }
+            iconPosition="left"
+          >
+            일기쓰기
+          </Button>
+        </div>
+
+        {/* Mobile Layout (767px 이하) */}
+        <div className={styles.mobileLayout}>
+          {/* Filter SelectBox - 전체 너비 */}
           <SelectBox
             variant="primary"
             size="medium"
@@ -268,11 +326,12 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
             value={selectedFilter}
             onChange={handleFilterChange}
             placeholder="전체"
-            className={styles.filterSelect}
-            data-testid="diary-filter-select"
+            className={styles.filterSelectMobile}
+            fullWidth={true}
+            data-testid="diary-filter-select-mobile"
           />
 
-          {/* Searchbar */}
+          {/* Searchbar - 전체 너비 */}
           <Searchbar
             variant={SearchbarVariant.PRIMARY}
             size={SearchbarSize.MEDIUM}
@@ -282,36 +341,38 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             onClear={handleClearSearch}
-            className={styles.searchInput}
+            className={styles.searchInputMobile}
+            fullWidth={true}
           />
-        </div>
 
-        {/* Right Group: Write Button */}
-        <Button
-          variant="primary"
-          size="large"
-          theme="light"
-          onClick={handleWriteDiary}
-          className={styles.writeButton}
-          data-testid="diary-write-button"
-          icon={
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11 13H6C5.71667 13 5.47917 12.9042 5.2875 12.7125C5.09583 12.5208 5 12.2833 5 12C5 11.7167 5.09583 11.4792 5.2875 11.2875C5.47917 11.0958 5.71667 11 6 11H11V6C11 5.71667 11.0958 5.47917 11.2875 5.2875C11.4792 5.09583 11.7167 5 12 5C12.2833 5 12.5208 5.09583 12.7125 5.2875C12.9042 5.47917 13 5.71667 13 6V11H18C18.2833 11 18.5208 11.0958 18.7125 11.2875C18.9042 11.4792 19 11.7167 19 12C19 12.2833 18.9042 12.5208 18.7125 12.7125C18.5208 12.9042 18.2833 13 18 13H13V18C13 18.2833 12.9042 18.5208 12.7125 18.7125C12.5208 18.9042 12.2833 19 12 19C11.7167 19 11.4792 18.9042 11.2875 18.7125C11.0958 18.5208 11 18.2833 11 18V13Z"
-                fill="currentColor"
-              />
-            </svg>
-          }
-          iconPosition="left"
-        >
-          일기쓰기
-        </Button>
+          {/* Write Button - 전체 너비 */}
+          <Button
+            variant="primary"
+            size="large"
+            theme="light"
+            onClick={handleWriteDiary}
+            className={styles.writeButtonMobile}
+            fullWidth={true}
+            data-testid="diary-write-button-mobile"
+            icon={
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 13H6C5.71667 13 5.47917 12.9042 5.2875 12.7125C5.09583 12.5208 5 12.2833 5 12C5 11.7167 5.09583 11.4792 5.2875 11.2875C5.47917 11.0958 5.71667 11 6 11H11V6C11 5.71667 11.0958 5.47917 11.2875 5.2875C11.4792 5.09583 11.7167 5 12 5C12.2833 5 12.5208 5.09583 12.7125 5.2875C12.9042 5.47917 13 5.71667 13 6V11H18C18.2833 11 18.5208 11.0958 18.7125 11.2875C18.9042 11.4792 19 11.7167 19 12C19 12.2833 18.9042 12.5208 18.7125 12.7125C18.5208 12.9042 18.2833 13 18 13H13V18C13 18.2833 12.9042 18.5208 12.7125 18.7125C12.5208 18.9042 12.2833 19 12 19C11.7167 19 11.4792 18.9042 11.2875 18.7125C11.0958 18.5208 11 18.2833 11 18V13Z"
+                  fill="currentColor"
+                />
+              </svg>
+            }
+            iconPosition="left"
+          >
+            일기쓰기
+          </Button>
+        </div>
       </div>
 
       {/* Gap 2 */}
