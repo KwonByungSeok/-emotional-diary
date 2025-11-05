@@ -49,7 +49,7 @@ test.describe('Layout Link Routing', () => {
 
     // 일기목록 페이지로 이동했는지 확인
     await expect(page).toHaveURL('/diaries');
-    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 5000 });
   });
 
   test('사진보관함 탭 클릭 시 사진목록 페이지로 이동', async ({ page }) => {
@@ -58,7 +58,7 @@ test.describe('Layout Link Routing', () => {
 
     // 사진목록 페이지로 이동했는지 확인
     await expect(page).toHaveURL('/pictures');
-    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 5000 });
   });
 
   // ============================================

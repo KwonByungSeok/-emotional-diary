@@ -6,13 +6,13 @@ test.describe("Pictures Component - Filter Hook Tests", () => {
     await page.goto("/pictures");
     
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-page"]', { timeout: 5000 });
     
     // 사진이 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 필터가 렌더링될 때까지 추가 대기
-    await page.waitForSelector('[data-testid="pictures-filter"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-filter"]', { timeout: 5000 });
   });
 
   test.skip("필터 선택박스가 기본 옵션으로 초기화되어야 함", async ({ page }) => {

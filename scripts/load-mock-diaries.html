@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일기 Mock 데이터 생성</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .button-group {
+      margin: 20px 0;
+    }
+    button {
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background-color: #0051cc;
+    }
+    button.secondary {
+      background-color: #6c757d;
+    }
+    button.secondary:hover {
+      background-color: #5a6268;
+    }
+    .info {
+      background-color: #e7f3ff;
+      border-left: 4px solid #0070f3;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .success {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      display: none;
+    }
+    .error {
+      background-color: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      display: none;
+    }
+    input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 100px;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 일기 Mock 데이터 생성</h1>
+    
+    <div class="info">
+      <strong>사용법:</strong><br>
+      아래 버튼을 클릭하여 일기 mock 데이터를 생성하고 로컬스토리지에 저장합니다.<br>
+      페이지네이션 테스트를 위해 여러 개의 일기를 생성할 수 있습니다.
+    </div>
+
+    <div class="button-group">
+      <label>
+        생성할 일기 개수: 
+        <input type="number" id="diaryCount" value="25" min="1" max="100">
+      </label>
+      <button onclick="generateDiaries()">일기 데이터 생성</button>
+      <button class="secondary" onclick="clearDiaries()">로컬스토리지 초기화</button>
+    </div>
+
+    <div id="successMessage" class="success"></div>
+    <div id="errorMessage" class="error"></div>
+
+    <div class="info">
+      <strong>참고:</strong><br>
+      - 기본값은 25개입니다 (페이지당 12개이므로 약 3페이지 분량)<br>
+      - 생성된 데이터는 브라우저의 로컬스토리지에 저장됩니다<br>
+      - 애플리케이션을 새로고침하면 생성된 데이터를 확인할 수 있습니다
+    </div>
+  </div>
+
+  <script>
+    // 감정 타입 정의
+    const EmotionType = {
+      HAPPY: "HAPPY",
+      SAD: "SAD",
+      ANGRY: "ANGRY",
+      SURPRISE: "SURPRISE",
+      ETC: "ETC",
+    };
+
+    // 일기 제목 템플릿
+    const titleTemplates = [
+      "오늘의 하루",
+      "특별한 하루",
+      "기억에 남는 날",
+      "새로운 경험",
+      "좋은 하루",
+      "힘든 하루",
+      "즐거운 하루",
+      "평범한 하루",
+      "감동적인 하루",
+      "배움의 하루",
+      "여행의 하루",
+      "친구들과의 하루",
+      "가족과의 하루",
+      "혼자만의 하루",
+      "도전의 하루",
+      "성취의 하루",
+      "휴식의 하루",
+      "활동적인 하루",
+      "조용한 하루",
+      "바쁜 하루",
+    ];
+
+    // 일기 내용 템플릿
+    const contentTemplates = [
+      "오늘은 정말 특별한 하루였어요. 많은 일들이 있었지만, 그 중에서도 가장 기억에 남는 순간은...",
+      "하루 종일 다양한 경험을 했습니다. 아침에는 일찍 일어나서 산책을 다녔고, 오후에는 친구들을 만났어요.",
+      "오늘 하루는 평소와는 다른 느낌이었습니다. 새로운 것을 배우고 경험하는 시간이었어요.",
+      "오늘은 정말 많은 일이 있었습니다. 좋은 일도 있고, 힘든 일도 있었지만 모두 의미 있는 시간이었어요.",
+      "하루 종일 집에서 쉬었습니다. 책을 읽고, 음악을 들으며 여유롭게 시간을 보냈어요.",
+      "오늘은 친구들과 함께 시간을 보냈습니다. 맛있는 음식을 먹고, 이야기를 나누며 즐거운 하루를 보냈어요.",
+      "새로운 곳을 탐험하는 하루였습니다. 예상치 못한 발견들이 많아서 재미있었어요.",
+      "오늘은 조금 힘든 하루였지만, 그럼에도 불구하고 의미 있는 시간이었습니다.",
+      "하루 종일 바쁘게 보냈지만, 모든 일을 마무리하고 나니 뿌듯한 느낌이 들었어요.",
+      "오늘은 정말 감동적인 하루였습니다. 예상치 못한 선물을 받아서 기뻤어요.",
+    ];
+
+    function getRandomEmotion() {
+      const emotions = Object.values(EmotionType);
+      return emotions[Math.floor(Math.random() * emotions.length)];
+    }
+
+    function generateDate(daysAgo) {
+      const date = new Date();
+      date.setDate(date.getDate() - daysAgo);
+      return date.toISOString();
+    }
+
+    function generateDiary(id, daysAgo) {
+      const titleIndex = Math.floor(Math.random() * titleTemplates.length);
+      const contentIndex = Math.floor(Math.random() * contentTemplates.length);
+      
+      const title = `${titleTemplates[titleIndex]} ${id}`;
+      const content = `${contentTemplates[contentIndex]} 오늘은 ${daysAgo}일 전이었고, 이 순간을 기록하고 싶었어요.`;
+      
+      return {
+        id: id,
+        title: title,
+        content: content,
+        emotion: getRandomEmotion(),
+        createdAt: generateDate(daysAgo),
+      };
+    }
+
+    function generateDiaries() {
+      const countInput = document.getElementById('diaryCount');
+      const count = parseInt(countInput.value) || 25;
+      
+      if (count < 1 || count > 100) {
+        showError('일기 개수는 1개 이상 100개 이하로 입력해주세요.');
+        return;
+      }
+
+      try {
+        const diaries = [];
+        
+        // 기존 데이터 확인
+        const existingData = localStorage.getItem('diaries');
+        let startId = 1;
+        if (existingData) {
+          try {
+            const existingDiaries = JSON.parse(existingData);
+            if (Array.isArray(existingDiaries) && existingDiaries.length > 0) {
+              startId = Math.max(...existingDiaries.map(d => d.id)) + 1;
+            }
+          } catch (e) {
+            // 기존 데이터가 잘못된 경우 새로 시작
+          }
+        }
+
+        // 일기 데이터 생성
+        for (let i = 0; i < count; i++) {
+          const daysAgo = count - i - 1;
+          diaries.push(generateDiary(startId + i, daysAgo));
+        }
+
+        // 기존 데이터와 병합
+        let allDiaries = [];
+        if (existingData) {
+          try {
+            const existingDiaries = JSON.parse(existingData);
+            if (Array.isArray(existingDiaries)) {
+              allDiaries = existingDiaries;
+            }
+          } catch (e) {
+            // 기존 데이터가 잘못된 경우 무시
+          }
+        }
+
+        allDiaries = [...allDiaries, ...diaries];
+        
+        // 로컬스토리지에 저장
+        localStorage.setItem('diaries', JSON.stringify(allDiaries));
+        
+        showSuccess(`✅ ${count}개의 일기 데이터가 생성되어 로컬스토리지에 저장되었습니다. (총 ${allDiaries.length}개)`);
+        
+        console.log('생성된 일기 데이터:', diaries);
+      } catch (error) {
+        showError('데이터 생성 중 오류가 발생했습니다: ' + error.message);
+        console.error(error);
+      }
+    }
+
+    function clearDiaries() {
+      if (confirm('로컬스토리지의 모든 일기 데이터를 삭제하시겠습니까?')) {
+        localStorage.removeItem('diaries');
+        showSuccess('✅ 로컬스토리지가 초기화되었습니다.');
+      }
+    }
+
+    function showSuccess(message) {
+      const successDiv = document.getElementById('successMessage');
+      const errorDiv = document.getElementById('errorMessage');
+      successDiv.textContent = message;
+      successDiv.style.display = 'block';
+      errorDiv.style.display = 'none';
+    }
+
+    function showError(message) {
+      const successDiv = document.getElementById('successMessage');
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
+    }
+
+    // 페이지 로드 시 기존 데이터 확인
+    window.addEventListener('load', () => {
+      const existingData = localStorage.getItem('diaries');
+      if (existingData) {
+        try {
+          const diaries = JSON.parse(existingData);
+          if (Array.isArray(diaries) && diaries.length > 0) {
+            showSuccess(`현재 로컬스토리지에 ${diaries.length}개의 일기가 저장되어 있습니다.`);
+          }
+        } catch (e) {
+          // 무시
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

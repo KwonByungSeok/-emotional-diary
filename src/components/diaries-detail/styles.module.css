@@ -202,9 +202,9 @@
 
 /* 피그마 디자인에 맞게 버튼 스타일 오버라이드 */
 .buttonGroup button {
-  background-color: #ffffff !important; /* 흰색 배경 */
-  border-color: #d4d3d3 !important; /* 회색 테두리 */
-  color: #1c1c1c !important; /* 검은색 텍스트 */
+  background-color: #ffffff; /* 흰색 배경 */
+  border-color: #d4d3d3; /* 회색 테두리 */
+  color: #1c1c1c; /* 검은색 텍스트 */
 }
 
 /* ============================================
@@ -282,6 +282,166 @@
   height: 1px;
   background-color: var(--border-secondary);
   margin: 12px 16px;
+}
+
+/* ============================================
+   Edit Mode Styles
+   ============================================ */
+
+/* Edit Emotion Section */
+.editEmotionSection {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editEmotionTitle {
+  font-family: var(--font-family-korean);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: var(--foreground-primary);
+  margin: 0;
+}
+
+.editEmotionRadioGroup {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.editEmotionRadioItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.editEmotionRadioInput {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-primary);
+  background-color: var(--background-elevated);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.editEmotionRadioInput:checked {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-primary);
+}
+
+.editEmotionRadioInput:checked::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--background-elevated);
+  display: block;
+}
+
+.editEmotionRadioLabel {
+  font-family: var(--font-family-korean);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.18px;
+  color: var(--foreground-secondary);
+}
+
+/* Edit Title Section */
+.editTitleSection {
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editLabel {
+  font-family: var(--font-family-korean);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.14px;
+  color: var(--foreground-secondary);
+}
+
+.editTitleInput {
+  width: 100%;
+}
+
+/* Edit Content Section */
+.editContentSection {
+  width: 100%;
+  min-height: 156px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editContentTextarea {
+  width: 100%;
+  min-height: 128px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background-color: var(--background-elevated);
+  color: var(--foreground-primary);
+  font-family: var(--font-family-korean);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.editContentTextarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+.editContentTextarea::placeholder {
+  color: var(--foreground-tertiary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+}
+
+/* Edit Footer */
+.editFooter {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editButtonGroup {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Error Message */
+.errorMessage {
+  display: block;
+  color: #ea5757;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 400;
 }
 
 /* ============================================

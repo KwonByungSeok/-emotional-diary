@@ -21,6 +21,7 @@ import { useDiariesBinding } from "./hooks/index.binding.hook";
 import { useDiaryLinkRouting } from "./hooks/index.link.routing.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
 import { useDiariesFilter } from "./hooks/index.filter.hook";
+import { useDiariesPagination } from "./hooks/index.pagination.hook";
 import styles from "./styles.module.css";
 
 // ============================================
@@ -142,7 +143,6 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   // 상태 관리
   const [searchValue, setSearchValue] = React.useState("");
   const [selectedFilter, setSelectedFilter] = React.useState("all");
-  const [currentPage, setCurrentPage] = React.useState(1);
 
   // 모달 링크 훅
   const { openDiaryWriteModal } = useDiaryModalLink();
@@ -156,17 +156,17 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   // 필터 훅
   const { filteredDiaries } = useDiariesFilter(searchedDiaries, selectedFilter);
 
+  // 페이지네이션 훅
+  const { 
+    currentPage, 
+    totalPages, 
+    currentPageDiaries, 
+    handlePageChange, 
+    resetToFirstPage 
+  } = useDiariesPagination(filteredDiaries, 12);
+
   // 라우팅 훅
   const { navigateToDiaryDetail } = useDiaryLinkRouting();
-
-  // 페이지네이션 계산 (필터링된 일기 목록 기준)
-  const itemsPerPage = 12; // 한 페이지당 12개 (3행 x 4개)
-  const totalPages = Math.ceil(filteredDiaries.length / itemsPerPage);
-  
-  // 현재 페이지에 해당하는 일기 데이터
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentPageDiaries = filteredDiaries.slice(startIndex, endIndex);
   
   // 일기 데이터를 카드 형태로 변환
   const diaryCards = currentPageDiaries.map((diary) => ({
@@ -190,14 +190,14 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
   const handleSearch = (value: string) => {
     executeSearch(value);
     // 검색 실행 시 첫 페이지로 이동
-    setCurrentPage(1);
+    resetToFirstPage();
   };
 
   // 필터 변경 핸들러
   const handleFilterChange = (value: string) => {
     setSelectedFilter(value);
     // 필터 변경 시 첫 페이지로 이동
-    setCurrentPage(1);
+    resetToFirstPage();
   };
 
   // 일기쓰기 버튼 핸들러
@@ -209,10 +209,11 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
     }, 1000);
   };
 
-  // 페이지 변경 핸들러
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    console.log("페이지 변경:", page);
+  // 검색 초기화 핸들러
+  const handleClearSearch = () => {
+    setSearchValue("");
+    clearSearch();
+    resetToFirstPage();
   };
 
   // 컨테이너 클래스명 조합
@@ -251,11 +252,7 @@ export const Diaries: React.FC<DiariesProps> = ({ className = "", "data-testid":
             onSearch={handleSearch}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            onClear={() => {
-              setSearchValue("");
-              clearSearch();
-              setCurrentPage(1);
-            }}
+            onClear={handleClearSearch}
             className={styles.searchInput}
           />
         </div>

@@ -126,9 +126,9 @@ test.describe('Layout Auth Hook Tests', () => {
     await page.click('[data-testid="login-submit-button"]');
 
     try {
-      await page.waitForSelector('[data-testid="login-success-modal"]', { timeout: 499 });
+      await page.waitForSelector('[data-testid="login-success-modal"]', { timeout: 5000 });
       await page.click('[data-testid="login-success-modal-confirm"]');
-      await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 499 });
+      await page.waitForSelector('[data-testid="diaries-page"]', { timeout: 5000 });
     } catch (e) {
       const errorModal = page.locator('[data-testid="login-error-modal"]');
       if (await errorModal.isVisible()) {

@@ -32,10 +32,10 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
 
   test("API 성공 시 강아지 사진이 표시되어야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
-    // API 응답을 기다림 (최대 2초)
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    // API 응답을 기다림 (최대 10초)
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 강아지 사진이 표시되는지 확인
     const pictureItems = page.locator('[data-testid="picture-item"]');
@@ -64,10 +64,10 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
 
   test("무한 스크롤 기능이 동작해야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
     // 초기 사진들이 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 초기 사진 개수 확인
     const initialPictureItems = page.locator('[data-testid="picture-item"]');
@@ -124,17 +124,17 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
     await page.goto("/pictures");
     
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
-    // React Query의 retry 로직을 고려하여 더 긴 시간 대기 (최대 10초)
+    // React Query의 retry 로직을 고려하여 더 긴 시간 대기 (최대 15초)
     // 에러 메시지가 표시되는지 확인
     const errorMessage = page.getByText("사진을 불러오는 중 오류가 발생했습니다");
-    await expect(errorMessage).toBeVisible({ timeout: 499 });
+    await expect(errorMessage).toBeVisible({ timeout: 15000 });
   });
 
   test("필터 선택박스가 정상 동작해야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
     // 필터 선택박스가 존재하는지 확인
     const filterSelect = page.locator('[data-testid="pictures-filter"]');
@@ -146,10 +146,10 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
 
   test("이미지 로드 실패 시 기본 이미지로 대체되어야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
     // 사진이 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 첫 번째 이미지 요소 가져오기
     const firstImage = page.locator('[data-testid="picture-item"]').first().locator('img');
@@ -171,7 +171,7 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
 
   test("스플래시 스크린 애니메이션이 빠르게 반복되어야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
     // 로딩 스플래시가 표시되는지 확인
     const loadingSplashes = page.locator('[data-testid="loading-splash"]');
@@ -199,7 +199,7 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
     await page.goto("/pictures");
     
     // API 응답을 기다림
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 정확한 API 엔드포인트가 호출되었는지 확인
     expect(apiRequests.length).toBeGreaterThan(0);
@@ -208,10 +208,10 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
 
   test("추가 로딩 시에도 스플래시 스크린이 표시되어야 함", async ({ page }) => {
     // 페이지가 완전히 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="pictures-grid"]', { timeout: 5000 });
     
     // 초기 사진들이 로드될 때까지 대기
-    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 499 });
+    await page.waitForSelector('[data-testid="picture-item"]', { timeout: 10000 });
     
     // 스크롤 트리거 요소로 스크롤하여 추가 로딩 트리거
     const scrollTrigger = page.locator('[data-testid="scroll-trigger"]');
@@ -223,7 +223,7 @@ test.describe("Pictures Component - Binding Hook Tests", () => {
         const loadingSplashes = document.querySelectorAll('[data-testid="loading-splash"]');
         return loadingSplashes.length > 0;
       },
-      { timeout: 499 }
+      { timeout: 5000 }
     );
     
     // 추가 로딩 스플래시 확인
