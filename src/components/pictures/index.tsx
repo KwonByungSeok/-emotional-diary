@@ -99,7 +99,6 @@ export const Pictures: React.FC<PicturesProps> = ({ className = "", "data-testid
   const {
     filterType,
     setFilterType,
-    imageSize,
     filterOptions,
     getImageSize,
   } = usePictureFilter();
